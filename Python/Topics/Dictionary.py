@@ -116,7 +116,7 @@ d2 = dict.fromkeys(d1.values()); print(d2) # Creates a new dictionary named "d2"
 
 d2 = dict.fromkeys(d1, 0); print(d2) # This follows "dict.fromkeys(iterable, value=None)" format. The value is set to 0.
 
- ############------------------ Complete unique updarion without tamperingthe original
+ ############------------------ Complete unique updation without tampering the original
 
 # Swapping Keys and Values
 print(d1.items()) # For reference

@@ -37,29 +37,36 @@ avg = lambda av: sum(av)/len(av); print(avg(num)) # In this method, argument 'av
 # Find Keywords
 l1 = ['a', 'b']
 l2 = ['a']
-check = lambda chk: all(x in l1 for x in chk); print(check(l2)) # all() returns True if all elements of 'l2' are present in 'l1', else False. In this, 'x' is iterating through each element in l1 and checking if the passed argument exist in l1 or not.
+check = lambda chk: all(x in chk for x in l2); print(check(l2)) # all() returns True if all elements of 'l2' are present in 'l1', else False. In this, 'x' is iterating through each element in l1 and checking if the passed argument exist in l1 or not.
+
+check = lambda chk: any(x in chk for x in l2); print(check(l1)) # In this case, 'any()' returns True if any element of 'l2' is present in 'l1', else False. In this, 'x' is iterating through each element in l1 and checking if the passed argument exist in l1 or not.
 
 # Check a String in a List
 string1 = "string"
 find = lambda f: True if f in string1 else False; print(find("s")) # True # 'f' checks if the element passed in the print statement exists in 'string1'
 
 # Handle Undefined Number of Arguments
+
+add = [1,2,3,4,5,6,7,8,9,10]
+add_el = lambda *nd: sum(nd); print(add_el(*add)) # *nd is used to handle undefined number of arguments. '*add' unpacks the values inside 'add' and passes them to 'nd'. 'nd' stores the values inside 'add' and 'sum' adds them up.
+
 add_el = lambda *args: sum(args); print(add_el(1,2,3,4,5)) # Output: 15 # *args is used to handle undefined number of arguments
 
 # Count Occurrences
 from collections import Counter
 l1 = ['a', 'b', 'a', 'a']
 l2 = ['a']
-cnt = Counter()
+l1_count = Counter(l1) # Counter({'a': 3, 'b': 1})
 check = lambda chk: {
     item: l1_count[item] for item in chk if item in l1_count # { key_expr : value_expr  for  var  in  iterable  [if  condition] }
 }
-l1_count = Counter(l1); print(check(l2))
+print(check(l2))
 # l1_count => {'a': 3, 'b': 1}
 # for item in chk => 'l2' is passed to the chk variable. 'item' stoes the value inside 'l2'
-# item: l1_count[item] => 'item' stores the value of 'l2' and 'l1_count[item]' looks up the count of that item from 'l1_count' Counter
 # if item in l1_count => 'a' in {'a': 3, 'b': 1} => True
+# item: l1_count[item] => 'a': {'a': 3, 'b': 1}['a'] => 'a': 3
 # Output: {'a': 3}
+
 
 # Operations on List
 # ------------------
@@ -80,11 +87,15 @@ servers.sort(key = lambda r: r[1]); print(servers) # 'r' iterates through the fi
 devices = ["UK-01", "US-01", "UK-02", "IN-05"]
 s = filter(lambda x: x.startswith("UK"), devices); print(list(s)) # 'x' checks if the element starts with "UK" and filters them accordingly
 
+# Filter List (Case Insensitive)
+s = filter(lambda x: x.lower().startswith("uk"), devices); print(list(s)) # 'x' checks if the element starts with "uk" and filters them accordingly ignoring case sensitivity
+
 # Adding all elements in a list and Return a Single Value
 from functools import reduce # The 'reduce' is applied to the items of an iterable to reduce the entire sequence into a single accumulated value.
 num = [1,2,3,4,5]
 total = reduce(lambda x,y: x+y, num) # 'x' stores the first element of 'num' and 'y' stores the second element of 'num'. 'x+y' adds the first and second element of 'num' and stores it in 'x'. This process is repeated until all elements are added.
 print(total)
+
 # Adding <any_number> to a list
 from functools import reduce
 num = [1,2,3,4,5]
@@ -96,7 +107,6 @@ num = [1,2,3,4,5]
 total = reduce(lambda x,y: x*y, num)
 print(total)
 # Multiplying all elements in a list
-from functools import reduce
 num = [1,2,3,4,5]
 mul = map(lambda x: x**4, num); print(list(mul))
 # The result can be printed using 'list' or 'tuple' or 'set'. For 'set', use sorted() to print the elements in an ordered manner.
