@@ -406,6 +406,9 @@
 # num = [1,2,3,4]
 # sq = list(map(lambda x: x**2, num)); print(sq)
 
+# n = [10,11,12,13,14,15]
+# s = lambda x: x**2; print(tuple(map(s,n)))
+
 # from functools import reduce
 # num = [1,2,3,4]
 # sum = reduce(lambda x,y: x+y, num); print(sum)
@@ -472,14 +475,59 @@
 # print(" ".join(d1.values()))
 # print(list(d1.values()))
 
-d1 = {
-    "key3": "longest",
-    "key1": "long",
-    "key2": "longer"
-}
-
-d2 = dict.fromkeys(['a', 'b'], [1,2,3])
-
+# d1 = {
+#     "key3": "longest",
+#     "key1": "long",
+#     "key2": "longer"
+# }
+# d2 = dict.fromkeys(['a', 'b'], [1,2,3])
 # d2['a'].append(4)
+# print(d2)
 
-print(d2)
+# l1 = ['a', 'b']
+# l2 = ['a']
+# check = lambda chk: all(x in chk for x in l2); print(check(l1))
+
+# l1 = ['a', 'b']
+# l2 = ['a', 'c']
+# check = lambda chk: any(x in chk for x in l2); print(check(l1))
+
+# string1 = "string"
+# find = lambda f: "Present" if f in string1 else "Absent"; print(find("rin"))
+
+# add = [1,2,3,4,5,6,7,8,9,10]
+# add_el = lambda *nd: sum(nd); print(add_el(*add))
+
+# from collections import Counter
+# l1 = ['a', 'b', 'a', 'a']
+# l2 = ['a']
+# l1_count = Counter(l1) # Counter({'a': 3, 'b': 1})
+# check = lambda chk: {
+#     item: l1_count[item] for item in chk if item in l1_count # { key_expr : value_expr  for  var  in  iterable  [if  condition] }
+# }
+# print(check(l2))
+
+# names = ["Bob", "Alice", "Cassandra"]
+# ls = sorted(names, key = lambda l: len(l), reverse=False); print(ls)
+
+# name_id = ['003-Charlie', '002-Bob', '001-Alice']
+# id_sort = sorted(name_id, key = lambda id: id[:4]); print(id_sort)
+
+# servers = [("Web-01", 16), ("DB-01", 64), ("App-01", 32)]
+# ram_sort = sorted(servers, key = lambda ram: ram[1]); print(ram_sort)
+
+# devices = ["UK-01", "US-04", "UK-06", "IN-05"]
+# devices_sort = sorted(devices, key = lambda us: us.startswith('UK'))
+# devices_filter = filter(lambda filt: filt.lower().startswith('uk'), devices)
+# print(list(devices_filter))
+
+# num = [1,2,3,4,5]
+# from functools import reduce
+# sum = reduce((lambda x,y: x+y), num); print(sum)
+# add_num = map(lambda a: a+5, num); print(list(add_num))
+# mult = reduce((lambda x,y: x*y), num); print(mult)
+# mult = map(lambda m: m*2, num); print(reduce(lambda x,y: x*y, mult))
+# num = [1,2,3,4,5]
+# mul = map(lambda x: x**4, num); print(list(mul))
+# set_num = set(map(lambda x: x**2, num)); print(sorted(set_num, reverse=True))
+
