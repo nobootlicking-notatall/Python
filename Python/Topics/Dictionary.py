@@ -96,8 +96,8 @@ for i in d1:
 # Sorting
 # -------
 
-print(min(d1)) # Sorts the keys in alphabetical order
-print(max(d1)) # Sorts the keys in alphabetical order
+print(min(d1)) # Sorts the keys according to their length
+print(max(d1)) # Sorts the keys according to their length
 print(sorted(d1)) # Sorts the keys in alphabetical order
 
 # Sorting Methods
@@ -116,9 +116,46 @@ d2 = dict.fromkeys(d1.values()); print(d2) # Creates a new dictionary named "d2"
 
 d2 = dict.fromkeys(d1, 0); print(d2) # This follows "dict.fromkeys(iterable, value=None)" format. The value is set to 0.
 
- ############------------------ Complete unique updation without tampering the original
+
+# Dictionary Comprehension
+# ------------------------
 
 # Swapping Keys and Values
-print(d1.items()) # For reference
+print(d1.items()) # IMPORTANT: For reference
 d3 = {value: key for key, value in d1.items()} # Swapping keys and values
-print(sorted(d3)) # Printing the dictionary in a sorted manner
+
+
+# DefaultDict
+# -----------
+
+from collections import defaultdict
+
+def default_value():
+    return "Default Value"
+d1 = defaultdict(default_value)
+d1['a'] = 1 # Passed key "a" and value "1"
+d1['x'] # Passed key "x" but NO value. Hence default_value() is passed as the value. Value= "Default Value"
+print(dict(d1)) # Output: {'a': 1, 'x': 'Default Value'}
+
+raw_logs = [
+    {"ip": "192.168.1.1", "status": 200, "path": "/home"},
+    {"ip": "10.0.0.5", "status": 404, "path": "/admin"},
+    {"ip": "192.168.1.1", "status": 200, "path": "/login"},
+    {"ip": "10.0.0.5", "status": 404, "path": "/config"},
+]
+ip_address = defaultdict(list) # Initializes 'ip_address' as a defaultdict with a list as the default value
+for ip_entry in raw_logs: # "ip_entry" iterates over the list in "raw_logs"
+    ip_address[ip_entry['ip']].append(ip_entry['path']) # Appends the value of "path" to the list associated with the key "ip"
+for ip,p in ip_address.items():
+    print(f"{p} is currently accessed in {ip}") # Prints the list associated with the key "ip"
+
+transactions = [
+    {"category": "Electronics", "price": 499.99},
+    {"category": "Books", "price": 15.50},
+    {"category": "Electronics", "price": 25.00},
+    {"category": "Books", "price": 10.00}
+]
+sum = defaultdict(float) # Initializes 'sum' as a defaultdict with a float as the default value
+for i in transactions: # "i" iterates over the dictionary in "transactions"
+    sum[i["category"]] += i["price"] # Adds the value of "price" to the float associated with the key "category". "category" gets added as a key first and the values associated with it gets added later on, without creating a second entry for the same element in "category".
+print(dict(sum)) # Output: {'Electronics': 524.99, 'Books': 25.5}
