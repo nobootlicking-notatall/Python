@@ -1086,7 +1086,7 @@ print("Hi 'Dhruv'")
 # for index,item in enumerate(items):
 #     dict1[item] += 1
 #     print(f"Found {item} at index {index},\ncount: {dict1[item]}")
-# print(dict1)
+# print(dict(dict1))
 # for k,v in dict1.items():
 #     print(f"{k} printed {v} times")
 
@@ -1096,6 +1096,7 @@ print("Hi 'Dhruv'")
 # d["key1"].append(2)
 # print(d)
 # print(d["key"])
+# print(d.items())
 # for k,v in d.items():
 #     print(type(d.values()))
 #     print(type(v))
@@ -1488,7 +1489,7 @@ print("Hi 'Dhruv'")
 # l1 = [1,2,3]
 # print(isinstance(l1, list))
 # print(isinstance(l1, tuple))
-# l2 = ['x', 'y', 'z']
+# l2 = ('x', 'y', 'z')
 # print(isinstance(l2, list))
 # print(isinstance(l2, tuple))
 # l3 = 3.4j

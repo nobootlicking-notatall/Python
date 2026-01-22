@@ -531,3 +531,190 @@
 # mul = map(lambda x: x**4, num); print(list(mul))
 # set_num = set(map(lambda x: x**2, num)); print(sorted(set_num, reverse=True))
 
+# import subprocess
+# def pwsh_script(script_path = "D:/Dhruv/Python/PwshToPy.ps1"):
+#     try:
+#         result = subprocess.run(
+#             ["powershell.exe", "-ExecutionPolicy", "Unrestricted", "-File", script_path],
+#             capture_output=True, # Catches the output in a variable instead of printing it directly
+#             text=True, # Displays the data in a readable text rather than 0 or 1
+#             check=True # Raises 'CalledProcessError' if the command returns a non-zero exit code
+#         )
+#         print(result.stdout) # Displays the output
+#     except subprocess.CalledProcessError as e:
+#         print(f"Error occurred while running script: {e}")
+#         print(f"Error output: {e.stderr}")
+#     except FileNotFoundError:
+#         print("PowerShell is not installed or the script path is incorrect.")
+# pwsh_script()
+
+# n = (1,2,3,4,5)
+# from functools import reduce
+# gr8 = reduce((lambda x,y: x if x > y else y), n); print(gr8)
+
+# d1 = {
+#     "key1": "value-1",
+#     "key2": ["value-01", {"i": {"k1":"v1"}}]
+# }
+# d2 = {
+#     "key2": "value-2",
+#     "key3": "value-3"
+# }
+# merged1 = {**d1, **d2}; print(merged1)
+# merged2 = d1 | d2; print(merged2)
+# s = sorted(d1, key = lambda l: len(d1[l])); print(s)
+
+# import json
+# json_output = json.dumps(d1, indent=4); print(json_output)
+
+# d1['key2'] = 'value01'
+# d1.update(key2 = 'value02')
+# print(d1)
+
+# d1 = {
+#     "key1": "value-1",
+#     "key2": {"x": 11, "y": 22}
+# }
+# d1["key2"]["x"] = "eleven"
+# d1.update(key2 = {"x": "XI"})
+# d1['key3'] = {"key03":"value-3-2", 'key003': {"test1"}}
+# d1.pop('key2')
+# d1.popitem()
+# del d1['key1']
+# d1.clear()
+# d1 = {}
+# del d1['key3']['key03']
+# print(d1)
+
+# d1 = {
+#     "key1": "9",
+#     "key2": "12222",
+#     "key0": "1"
+# }
+# for i in d1:
+#     print(i, d1[i])
+# print(min(d1))
+# print(max(d1))
+# print(sorted(d1))
+# print(len(d1['key2']))
+# s = sorted(d1, key = lambda e: d1[e]); print(s)
+# s = sorted(d1.values(), key = lambda e: e); print(s)
+
+# d2 = dict.fromkeys(d1.values()); print(d2)
+# d2 = dict.fromkeys(d1.values(), 0); print(d2)
+# d2 = dict.fromkeys(d1.values(), 0); d1.update(d2); print(d1, d2)
+
+# d1 = {
+#     "key1": "9",
+#     "key2": "12222",
+#     "key0": "1"
+# }
+# print(d1.items())
+# d3 = {value:key for key,value in d1.items()}; print(d3)
+# d4 = {key:value for key,value in d1.items() if value.startswith('1')}; print(d4)
+
+# from collections import defaultdict
+# groups = defaultdict(int)
+# data = [("fruit", "apple"), ("vegetable", "carrot"), ("fruit", "banana")]
+# for category, name in data:
+#     groups[category] += 1; print(groups)
+
+# from collections import defaultdict
+# letters = defaultdict(int)
+# for letter in "Mississippi":
+#     letters[letter] += 1
+# print(dict(letters))
+
+# from collections import Counter,defaultdict
+# items = ("test1", "test2", "test1", "test1")
+# i = defaultdict(int)
+# for it in items:
+#     i[it] += 1
+# print(dict(i))
+# print(Counter(items))
+
+# from collections import defaultdict
+# my_word = "Mississippi"
+# d1 = defaultdict(list)
+# for index, word in enumerate(my_word):
+#     if word == 'i':
+#         d1[word].append(index)
+# print(dict(d1))
+
+# from collections import defaultdict
+# def default_value():
+#     return "Default Value"
+# d1 = defaultdict(default_value)
+# d1['a'] = 1
+# d1['x']
+# print(dict(d1))
+
+# from collections import Counter
+# words = ["apple", "orange", "apple", "pear", "orange", "apple"]
+# print(Counter(words).most_common(1))
+
+# numbers = {"a": 1, "b": 2, "c": 3, "d": 4}
+# even = {v*2 for v in numbers.values() if v % 2 == 0}; print(sorted(even))
+
+# dict_a = {"x": 1, "y": 2}
+# dict_b = {"y": 3, "z": 4}
+# print(dict_a | dict_b)
+# print({**dict_a, **dict_b})
+
+# from collections import defaultdict
+# raw_logs = [
+#     {"ip": "192.168.1.1", "status": 200, "path": "/home"},
+#     {"ip": "10.0.0.5", "status": 404, "path": "/admin"},
+#     {"ip": "192.168.1.1", "status": 200, "path": "/login"},
+#     {"ip": "10.0.0.5", "status": 404, "path": "/config"},
+# ]
+# ip_address = defaultdict(list) # Initializes 'ip_address' as a defaultdict with a list as the default value
+# for ip_entry in raw_logs:
+#     ip_address[ip_entry['ip']].append(ip_entry['path'])
+# for ip,p in ip_address.items():
+#     print(f"{p} is currently accessed in {ip}")
+
+# from collections import defaultdict
+# transactions = [
+#     {"category": "Electronics", "price": 499.99},
+#     {"category": "Books", "price": 15.50},
+#     {"category": "Electronics", "price": 25.00},
+#     {"category": "Books", "price": 10.00}
+# ]
+# sum = defaultdict(float)
+# for i in transactions:
+#     sum[i["category"]] += i["price"]
+# print(dict(sum))
+# print(type(transactions[0]))
+
+# from collections import defaultdict
+# def tree(): # Tree structure
+#     return defaultdict(tree)
+# products = tree()
+# products['store']['product']['shoes']['nike'] = "In Stock"
+# products['blog']['posts']['videos'] = "Published"
+# print(products)
+# import json
+# print(json.dumps(products, indent=4))
+
+# from collections import deque # deque stands for double-ended queue, that allows to remove elements from both ends. This makes it useful in applications like task scheduling, sliding window problems and real-time data processing.
+# queue = deque(["Ticket1", "Ticket2"])
+# print(queue)
+# queue.append("Ticket3") # Enqueue
+# print(queue)
+# print(queue.popleft())  # Dequeue -> Output: "Ticket1"
+# print(queue)
+
+def binary(array, target):
+    left, right = 0, len(array) - 1 # left = 0, right = 4
+    print(left, right)
+    while left <= right: # 0 <= 4
+        mid = (left + right) // 2 # mid = (0 + 4) // 2 = 2
+        if array[mid] == target: # if array[2] == 40 # False
+            return mid
+        elif array[mid] < target: # if array[2] < 40 # True
+            left = mid + 1 # left = 2 + 1 = 3
+        else:
+            right = mid - 1
+    return -1
+print(binary(array = [10,20,30,40,50], target = 50))
