@@ -705,16 +705,173 @@
 # print(queue.popleft())  # Dequeue -> Output: "Ticket1"
 # print(queue)
 
-def binary(array, target):
-    left, right = 0, len(array) - 1 # left = 0, right = 4
-    print(left, right)
-    while left <= right: # 0 <= 4
-        mid = (left + right) // 2 # mid = (0 + 4) // 2 = 2
-        if array[mid] == target: # if array[2] == 40 # False
-            return mid
-        elif array[mid] < target: # if array[2] < 40 # True
-            left = mid + 1 # left = 2 + 1 = 3
+# def binary(array, target):
+#     left, right = 0, len(array) - 1 # left = 0, right = 4
+#     print(left, right)
+#     while left <= right: # 0 <= 4
+#         mid = (left + right) // 2 # mid = (0 + 4) // 2 = 2
+#         if array[mid] == target: # if array[2] == 40 # False
+#             return mid
+#         elif array[mid] < target: # if array[2] < 40 # True
+#             left = mid + 1 # left = 2 + 1 = 3
+#         else:
+#             right = mid - 1
+#     return -1
+# print(binary(array = [10,20,30,40,50], target = 50))
+
+# import time
+# start = time.time()
+
+
+
+# end = time.time()
+# print(f"Time taken: {end - start:.4f} seconds")
+
+# def quicksort(arr):
+#     if len(arr) <= 1:
+#         return arr
+#     pivot = arr[len(arr) // 2]
+#     left = [x for x in arr if x < pivot]
+#     right = [y for y in arr if y > pivot]
+#     equal = [z for z in arr if z == pivot]
+#     return (quicksort(left) + equal + quicksort(right))
+# list1 = [9,2,8,3,6,6,5,1,2]
+# print(quicksort(list1))
+
+# def partition(arr, low, high):
+#     pivot = arr[high]
+#     i = low - 1
+#     for j in range(low, high):
+#         if arr[j] <= pivot:
+#             i += 1
+#             arr[i], arr[j] = arr[j], arr[i]
+#     arr[i + 1], arr[high] = arr[high], arr[i + 1]
+#     return i + 1
+
+# def quick_sort(arr, low, high):
+#     if low < high:
+#         p = partition(arr, low, high)
+#         quick_sort(arr, low, p - 1)
+#         quick_sort(arr, p + 1, high)
+
+# arr = [1, 7, 4, 1, 10, 9, -2]
+# quick_sort(arr, 0, len(arr) - 1)
+# print(arr)
+
+
+
+# def partition(arr, low, high): # (arr, 0, 3)
+#     pivot = arr[high]  # We pick 2 as the pivot
+#     i = low - 1        # 'i' is the boundary for small numbers
+#     # 'j' is the scanner looking at each number
+#     for j in range(low, high): # (0, 3)
+#         if arr[j] <= pivot: # if arr[0] <= 2
+#             i += 1
+#             # SWAP: Move the small number to the left of the boundary
+#             arr[i], arr[j] = arr[j], arr[i] 
+#     # Final SWAP: Put the pivot (2) in its permanent home
+#     arr[i + 1], arr[high] = arr[high], arr[i + 1]
+#     return i + 1
+# def quick_sort(arr, low, high): # ([1, 2, 4, 3], 0, 3)
+#     if low < high: # if 0 < 3 # True
+#         pi = partition(arr, low, high)
+#         quick_sort(arr, low, pi - 1)  # Sort the left side
+#         quick_sort(arr, pi + 1, high) # Sort the right side
+
+# # Test with simple positive numbers
+# nums = [3, 1, 4, 2]
+# quick_sort(nums, 0, len(nums) - 1)
+# print(f"Sorted List: {nums}")
+
+
+
+# def selection_sort(arr):
+#     for i in range(len(arr)): # 0 1 2 3 4
+#         # 1. Assume the first unsorted item is the smallest
+#         min_idx = i
+#         # 2. Look at the rest of the list to find the REAL smallest
+#         for j in range(i + 1, len(arr)): # 1 2 3 4
+#             if arr[j] < arr[min_idx]:
+#                 min_idx = j
+#         # 3. SWAP the smallest found with the first unsorted position
+#         arr[i], arr[min_idx] = arr[min_idx], arr[i]
+# data = [64, 25, 12, 22, 11]
+# selection_sort(data)
+# print(data)
+
+
+
+# for row in range(1,4):
+#     for col in range(1,4):
+#         print(f"({row}, {col})", end = " ")
+#     print()
+
+# for i in range(1,6):
+#     print("*" * i)
+
+# for i in range(5,0,-1):
+#     print("*" * i)
+
+# n = 0
+# for i in range(2,-1,-1):
+#     print(" " * i + "*" * (2 * n + 1))
+#     n += 1
+
+# for i in range(1,5):
+#     for j in range(1,i+1):
+#         print(j, end=' ')
+#     print()
+
+# for i in range(5,0,-1):
+#     for j in range(i,0,-1):
+#         print(j, end = ' ')
+#     print()
+
+# for i in range(1,5): # 1 2 3 4
+#     print(" " * (5-i), end='')
+#     for j in range(1,i+1):
+#         print(j, end='')
+#     for k in range(i-1,0,-1):
+#         print(k, end='')
+#     print()
+
+# rows = 5
+# for i in range(1,rows+1): # 1 2 3 4 5
+#     for j in range(i,rows):
+#         print(" ", end='')
+#     for k in range(1,(2*i - 1) + 1):
+#         print(i, end='')
+#     print()
+
+# rows = 5
+# for i in range(1,rows): # 1 2 3 4
+#     print(" " * (rows-i), end='')
+#     for j in range(2*i - 1):
+#         print(i, end='')
+#     print()
+
+# n = 4
+# for i in range(1,n+1): # 1 2 3 4
+#     print((" " * i) + ("*" * (n-i + 1)))
+
+# n = 3
+# for i in range(1,n+1): # 1 2 3
+#     print(" " * (n-i + 1) + "*" * i)
+
+# n = 3
+# for i in range(1,n+1): # 1 2 3
+#     print(" " * (n-i) + "*" * (2 * i - 1))
+
+# n = 5
+# for i in range(n):
+#     print("* " * n)
+
+rows = 5
+for i in range(rows): # 0 1 2 3 4
+    for j in range(rows): # 0 1 2 3 4
+        if i==0 or i==rows-1 or j==0 or j==rows-1:
+            print("*", end='')
         else:
-            right = mid - 1
-    return -1
-print(binary(array = [10,20,30,40,50], target = 50))
+            print(" ", end='')
+    print()
+
