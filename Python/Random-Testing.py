@@ -866,12 +866,212 @@
 # for i in range(n):
 #     print("* " * n)
 
-rows = 5
-for i in range(rows): # 0 1 2 3 4
-    for j in range(rows): # 0 1 2 3 4
-        if i==0 or i==rows-1 or j==0 or j==rows-1:
+# rows = 5
+# for i in range(rows): # 0 1 2 3 4
+#     for j in range(rows): # 0 1 2 3 4
+#         if i==0 or i==rows-1 or j==0 or j==rows-1:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#     print()
+
+# for num in range(2,10):
+#     for i in range(2,num):
+#         if num % i == 0:
+#             break
+#     else:
+#         print(num)
+
+# for i in range(1,6):
+#     for j in range(0,i):
+#         print("*", end='')
+#     print()
+
+# for i in [1,2,3]:
+#     for j in [4,5,6]:
+#         print(i,j)
+
+# rows = 4
+# for i in range(0,rows): # 0 1 2 3
+#     print(" " * (rows-i), end='')
+#     for j in range(1,i+1):
+#         print(j, end='')
+#     for k in range(i-1,0,-1):
+#         print(k, end='')
+#     print()
+
+# row = 4
+# for i in range(1,row+1): # 1 2 3 4
+#     print(" " * (row-i), end='')
+#     for j in range(1,i+1):
+#         print(j, end='')
+#     for k in range(i-1, 0, -1):
+#         print(k, end='')
+#     print()
+
+# space = 3
+# for i in range(space): # 0 1 2
+#     print(" " * (space - i - 1), end='')
+#     print(chr(i + 65) * (2 * i + 1), end='')
+#     print()
+
+# n = 6
+# for i in range(0,6): # 0 1 2 3 4 5
+#     print(" " * i, end='')
+#     print("*" * (2*(n-i)- 1), end='')
+    # for j in range(2 * (n-i) - 1):
+    #     print("*", end='')
+    # print()
+
+# n = 6
+# for i in range(0,n): # 0 1 2 3 4 5
+#     print(" " * (n-i - 1), end='')
+#     print("*" * (2*i + 1), end='')
+#     for j in range(2*i + 1):
+#         print("*", end='')
+#     print()
+
+# n = 5
+# for i in range(n): # 0 1 2 3 4
+#     print("z" * (n-i), end='')
+#     for j in range(2*i + 1):
+#         print("*", end='')
+#     print()
+
+# n = 4
+# for i in range(0,n): # 0 1 2 3
+    # print(" " * i + "*" * (2*(n-i) - 1), end='')
+    # for j in range(2*(n-i) -1):
+    #     print("*", end='')
+    # print()
+
+# n = 3
+# for i in range(n): # 0 1 2
+#     print(" " * (n-i-1) + "*" * (2*i + 1))
+# for j in range(1,n): # 1 2
+#     print(" " * j + "*" * (2* (n-j) -1))
+
+# n = 1
+# items = 4
+# for i in range(items): # 0 1 2 3
+#     print("*" * (n))
+#     n += 1
+# for j in range(items-1, 0, -1): # 3 2 1
+#     print("*" * j)
+
+# n = 4
+# for i in range(1,n+1): # 1 2 3 4
+#     print(" " * (n-i), end='')
+#     print("*" * i)
+
+# n = 3
+# for i in range(1,n+1): # 1 2 3 # rows
+#     for j in range(n-i): # 0,2=0,1 || 0,1=1 || 0,0=None # spaces
+#         print(" ", end='')
+#     for k in range(i): # 0,1=0 || 0,2=0,1 || 0,3=0,1,2 # stars
+#         print("*", end='')
+#     print()
+
+# rows = 4
+# for i in range(rows): # 0 1 2 3 # rows
+#     for spaces in range(rows-i-1): # 3 2 1 None # spaces
+#         print(" ", end='')
+#     for star in range(2*i+1): # Stars
+#         if star == 0 or star == (2*i) or i == rows-1:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#     print()
+
+
+# rows = 5
+# for i in range(rows): # 0 1 2 3 4
+#     for j in range(rows): # 0 1 2 3 4
+#         print("*", end='')
+#     print()
+
+# n = 5
+# for i in range(1,n+1): # 1 2 3 4 5
+#     for j in range(i):
+#         print("*", end='')
+#     print()
+
+
+# n = 5
+# for i in range(n):
+#     for j in range(n-i):
+#         print("*", end='')
+#     print()
+
+
+# n = 5
+# for i in range(n): # 0 1 2 3 4
+#     for j in range(n-i-1): # 0,4  0,3  0,2  0,1  0,None
+#         print(" ", end='')
+#     for k in range(i+1):
+#         print("*", end='')
+#     print()
+
+
+# n = 4
+# for i in range(1,n+1): # 1 2 3 4
+#     for j in range(i): # 0,1  0,2  0,3  0,4
+#         print(j, end='')
+#     print()
+
+# n = 4
+# for i in range(1,n+1): # 1 2 3 4
+#     for j in range(i): # 0,1  0,2  0,3  0,4
+#         print(i, end='')
+#     print()
+
+# n = 4
+# for i in range(n,0,-1): # 4,0,-1 = 4 3 2 1
+#     for j in range(i,0,-1):
+#         print(j, end='')
+#     print()
+
+# n = 4
+# for i in range(n-1,-1,-1): # 3 2 1 0
+#     for j in range(1,i+2):
+#         print(j, end='')
+#     print()
+
+
+# n = 4
+# for i in range(1,n+1): # 1,5 = 1 2 3 4
+#     print(" " * (n-i), end='')
+#     for j in range(1,i+1): # 1,2  1,3  1,4  1,5
+#         print(j, end='')
+#     print()
+
+
+# n = 4
+# for i in range(n): # 0 1 2 3
+#     for j in range(0,i):
+#         print(" ", end='')
+#     for k in range(1,n-i+1): # 1,5  1,4  1,3  1,2
+#         print(k, end='')
+#     print()
+
+
+# n = 5
+# for i in range(1,n+1): # 1,6 = 1 2 3 4 5
+#     for j in range(1,i+1):
+#         if i==1 or i==n or j==1 or j==i:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#     print()
+
+
+n = 5
+for i in range(n): # 0 1 2 3 4
+    for j in range(n-i-1): # 0,4=0123  0,3=012  0,2=01  0,1=0  0,0=None
+        print(" ", end='')
+    for k in range(1,i+2): # 1 2 3 4 5
+        if i==0 or i==n-1 or k==1 or k==i+1:
             print("*", end='')
         else:
             print(" ", end='')
     print()
-
