@@ -1,6 +1,10 @@
 # Pyramids
 
+# https://pythontutor.com/render.html#mode=display
+
+
 ##################################################################
+
 
 # *
 # **
@@ -46,9 +50,19 @@ for i in range(5,-1,-1):
 #   **
 #  ***
 
+# Method 1
 n = 3
 for i in range(1,n+1): # 1 2 3
     print(" " * (n-i + 1) + "*" * i)
+
+# Method 2
+n = 3
+for i in range(1,n+1): # 1 2 3 # rows
+    for j in range(n-i): # 0,2=0,1 || 0,1=1 || 0,0=None # spaces
+        print(" ", end='')
+    for k in range(i): # 0,1=0 || 0,2=0,1 || 0,3=0,1,2 # stars
+        print("*", end='')
+    print()
 
 ##################################################################
 
@@ -97,7 +111,75 @@ for i in range(2,-1,-1):
 # "" + "*****" = *****
 # _ denotes a whitespace
 
+
 ##################################################################
+
+
+#   *
+#  ***
+# *****
+#  ***
+#   *
+
+n = 3
+for i in range(n): # 0 1 2
+    print(" " * (n-i-1) + "*" * (2*i + 1))
+for j in range(1,n): # 1 2
+    print(" " * j + "*" * (2* (n-j) -1))
+
+# Breakdown
+
+#   *
+#  ***
+# *****
+# for i in range(n): # 0 1 2
+#     print(" " * (n-i-1) + "*" * (2*i + 1))
+
+#  ***
+#   *
+# for j in range(1,n): # 1 2
+#     print(" " * j + "*" * (2* (n-j) -1))
+
+
+##################################################################
+
+
+# *
+# **
+# ***
+# ****
+# ***
+# **
+# *
+
+n = 1
+items = 4
+for i in range(items): # 0 1 2 3
+    print("*" * (n))
+    n += 1
+for j in range(items-1, 0, -1): # 3 2 1
+    print("*" * j)
+
+# Breakdown
+
+# *
+# **
+# ***
+# ****
+# for i in range(items): # 0 1 2 3
+#     print("*" * (n))
+#     n += 1 # Incrementing 'n' by 1 # n=1 || n=2 || n=3 || n=4
+
+# ***
+# **
+# *
+# for j in range(items-1, 0, -1): # 3 2 1
+#     print("*" * j)
+
+
+##################################################################
+
+
 
 # 1
 # 12
@@ -120,7 +202,9 @@ for i in range(1,6):
 # i = 4 = j range (1, 5) => 1234
 # i = 5 = j range (1, 6) => 12345
 
+
 ##################################################################
+
 
 # 54321
 # 4321
@@ -173,11 +257,11 @@ for i in range(1, 6): # 1 2 3 4 5
 # 12345 => (1, 5+1) = (1, 6) = 12345
 
 # Print the second part of pyramid # range(i-1, 0, -1)
-# <none> => 1-1 =>   None
-# 1 => 2-1 = 1 =>    1
-# 21 => 3-1 = 2 =>   21
-# 321 => 4-1 = 3 =>  321
-# 4321 => 5-1 = 4 => 4321
+# <none> => 1-1 = 1,0 =>   None
+# 1 => 2-1 = 1,0 =>    1
+# 21 => 3-1 = 2,0 =>   21
+# 321 => 4-1 = 3,0 =>  321
+# 4321 => 5-1 = 4,0 => 4321
 # Add the second part of pyramid using end=''
 
 ##################################################################
@@ -218,3 +302,118 @@ for i in range(rows): # 0 1 2 3 4
         else:
             print(" ", end='')
     print()
+
+
+##################################################################
+
+
+#    *
+#   * *
+#  *   *
+# *******
+
+rows = 4
+for i in range(rows): # 0 1 2 3
+    for spaces in range(rows-i-1): # 3 2 1 None
+        print(" ", end='')
+    for star in range(2*i+1):
+        if star == 0 or star == (2*i) or i == rows-1:
+            print("*", end='')
+        else:
+            print(" ", end='')
+    print()
+
+# Steps
+
+# "i" in range => Define the number of rows
+# "space" in range => Trailing spaces
+# "star" in range => Visualize the triangle pyramid
+# if and else conditions to print the outward stars and fill gaps inside the triangle
+# "i == rows-1" prints the entire bottom row
+
+
+##################################################################
+
+
+# *
+# **
+# * *
+# *  *
+# *****
+
+n = 5
+for i in range(1,n+1): # 1,6 = 1 2 3 4 5
+    for j in range(1,i+1): # 1,2=1 || 1,3=1,2 || 1,4=1,2,3 || 1,5=1,2,3,4 || 1,6=1,2,3,4,5
+        if i==1 or i==n or j==1 or j==i:
+            print("*", end='')
+        else:
+            print(" ", end='')
+    print()
+
+# Steps
+
+# Rows
+# for i in range(1,n+1)
+# (1,n+1) = (1,5+1) = (1,6) = 1 2 3 4 5 = 5 rows
+
+# Columns
+# for j in range(1,i+1)
+# 1,2 = 1
+# 1,3 = 1 2
+# 1,4 = 1 2 3
+# 1,5 = 1 2 3 4
+# 1,6 = 1 2 3 4 5
+
+# i==1 => first row => all stars
+# i==n => i==5 => last row => all stars
+# j==1 => first star of every row
+# j==i => last star of every row
+
+
+##################################################################
+
+
+#     *
+#    **
+#   * *
+#  *  *
+# *****
+
+n = 5
+for i in range(n): # 0 1 2 3 4
+    for j in range(n-i-1): # 0,4=0123  0,3=012  0,2=01  0,1=0  0,0=None
+        print(" ", end='')
+    for k in range(1,i+2): # 1 2 3 4 5
+        if i==0 or i==n-1 or k==1 or k==i+1:
+            print("*", end='')
+        else:
+            print(" ", end='')
+    print()
+
+# Steps
+
+# n = 5 # Number of rows
+
+# for j in range(n-i-1)
+# 0,4=0123 => ____
+# 0,3=012  => ___
+# 0,2=01   => __
+# 0,1=0    => _
+# 0,0=None => None
+
+# for k in range(1,i+2)
+# 1,0+2 = 1,2 =     1 =     *
+# 1,1+2 = 1,3 =    12 =    **
+# 1,2+2 = 1,4 =   123 =   ***
+# 1,3+2 = 1,5 =  1234 =  ****
+# 1,4+2 = 1,6 = 12345 = *****
+
+# i==0 => top row
+# i==n-1 => bottom row
+# k==1 => left edge
+# k==i+1 => right edge
+
+
+##################################################################
+
+
