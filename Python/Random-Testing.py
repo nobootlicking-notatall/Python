@@ -1065,13 +1065,85 @@
 #     print()
 
 
+# n = 5
+# for i in range(n): # 0 1 2 3 4
+#     for j in range(n-i-1): # 0,4=0123  0,3=012  0,2=01  0,1=0  0,0=None
+#         print(" ", end='')
+#     for k in range(1,i+2): # 1 2 3 4 5
+#         if i==0 or i==n-1 or k==1 or k==i+1:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#     print()
+
+
+# n = 5
+# for i in range(n): # 0 1 2 3 4
+#     for j in range(n-i-1): # 0,4  0,3  0,2  0,1  0,0
+#         print(" ", end='')
+#     for k in range(1,i+2):
+#         if i==0 or i==n-1 or k==1 or k==i+1:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#     print()
+
+
+# rows = 3
+# for i in range(rows): # 0 1 2
+#     for j in range(1,i+2): # 1,2=1  1,3=1,2  1,4=1,2,3
+#         print(chr(j+64), end='')
+#     print()
+
+
+# from math import factorial
+# rows = 5
+# for n in range(rows): # 0 1 2 3 4
+#     for space in range(1,rows-n): # 1,5  1,4  1,3  1,2  1,1=None
+#         print(" ", end='')
+#     for r in range(n+1):
+#         print(factorial(n)//(factorial(r) * factorial(n-r)), end='')
+#     print()
+
+
+# for i in range(5): # 0 1 2 3 4
+#     for j in range(5): # 0 1 2 3 4
+#         print((i+j)%2, end=' ')
+#     print()
+
+
+# upper = 3
+# for i in range(1,upper+1): # 1,4 = 1 2 3
+#     for j in range(upper - i): # 0,2  0,1  0,0=None
+#         print(" ", end='')
+#     for k in range(2*i - 1): # 0,1  0,3  0,5
+#         if i==0 or k==0 or k==2*i-2:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#     print()
+# lower = 3
+# for m in range(lower-1,0,-1): # 2 1
+#     print(" " * (lower-m), end='')
+#     for n in range(2*m - 1): # 0,3  0,1
+#         if m==1 or n==0 or n==2*m-2:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#     print()
+
+
+# for i in range(1,6):
+#     for j in range(1,6):
+#         print(j%2, end=' ')
+#     print()
+
+
+from math import factorial
 n = 5
-for i in range(n): # 0 1 2 3 4
-    for j in range(n-i-1): # 0,4=0123  0,3=012  0,2=01  0,1=0  0,0=None
+for i in range(1,n+1): # 1 2 3 4 5
+    for space in range(n-i): # 4 3 2 1 None
         print(" ", end='')
-    for k in range(1,i+2): # 1 2 3 4 5
-        if i==0 or i==n-1 or k==1 or k==i+1:
-            print("*", end='')
-        else:
-            print(" ", end='')
+    for r in range(i):
+        print(factorial(n)//(factorial(r)*(factorial(n-r))), end='')
     print()
