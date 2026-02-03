@@ -417,3 +417,181 @@ for i in range(n): # 0 1 2 3 4
 ##################################################################
 
 
+# A
+# BB
+# CCC
+
+rows = 3
+for i in range(rows):
+    for j in range(1,i+2): # 1,2=1  1,3=1,2  1,4=1,2,3
+        print(chr(i+65), end='')
+    print()
+
+# Steps
+
+# for i in range(rows)
+# range => 0 1 2 = 3 rows
+
+# for j in range(1,i+2)
+# range => (1,2), (1,3), (1,4)
+
+# chr(i+65)
+# chr(0+65) = chr(65) = A || j in range => A (1,2) = A
+# chr(1+65) = chr(65) = B || j in range => B (1,3) = BB
+# chr(2+65) = chr(65) = C || j in range => C (1,4) = CCC
+
+
+##################################################################
+
+
+# A
+# AB
+# ABC
+
+rows = 3
+for i in range(rows):
+    for j in range(1,i+2):
+        print(chr(j+64), end='')
+    print()
+
+# Steps
+
+# for i in range(rows)
+# range => 0 1 2 = 3 rows
+
+# for j in range(1,i+2)
+# range => (1,2)=1 , (1,3)=1,2 , (1,4)=1,2,3
+
+# chr(j+64)
+# chr(1+64) = chr(65) = A || j in range => A 1st place = A
+# chr(1+64) chr(2+64) = chr(65) chr(66) = AB || j in range => A 1st place, B 2nd place = BC
+# chr(1+64) chr(2+64) chr(3+64) = chr(65) chr(66) chr(67) = ABC || j in range => A 1st place, B 2nd place, C 3rd place = ABC
+
+
+##################################################################
+
+
+# 0 1 0 1 0 
+# 1 0 1 0 1 
+# 0 1 0 1 0
+# 1 0 1 0 1
+# 0 1 0 1 0
+
+for i in range(5): # 0 1 2 3 4
+    for j in range(5): # 0 1 2 3 4
+        print((i+j)%2, end=' ')
+    print()
+
+# Concept:
+
+# If (row + column) % 2 == 0 → print 1
+# Else → print 0
+
+# For i=0, j=0,1,2,3,4
+# 0%2=0, 1%2=1, 2%2=0, 3%2=1, 4%2=0
+# and so on.
+
+
+##################################################################
+
+
+# 1 0 1 0 1 
+# 1 0 1 0 1 
+# 1 0 1 0 1
+# 1 0 1 0 1
+# 1 0 1 0 1
+
+for i in range(1,6):
+    for j in range(1,6):
+        print(j%2, end=' ')
+    print()
+
+# Concept:
+
+# If row % 2 == 0 → print 1
+# Else → print 0
+
+# For i=0, j=1,2,3,4,5
+# 1%2=1, 2%2=0, 3%2=1, 4%2=0, 5%2=1
+# and so on.
+
+
+##################################################################
+
+
+#     1
+#    11
+#   121
+#  1331
+# 14641
+
+from math import factorial
+rows = 5
+for n in range(rows): # 0 1 2 3 4
+    for space in range(1,rows-n): # 1,5  1,4  1,3  1,2  1,1=None
+        print(" ", end='')
+    for r in range(n+1):
+        print(factorial(n)//(factorial(r) * factorial(n-r)), end='')
+    print()
+
+# Concept Breakdown:
+
+# Outer loop (n) → controls the row number
+# First inner loop (space) → prints leading spaces for triangle shape
+# Second inner loop (r) → calculates and prints each value in the row
+# factorial() → used to compute combinations (nCr)
+# Values are printed without spaces to form the triangle
+
+
+##################################################################
+
+
+#   *
+#  * *
+# *   *
+#  * *
+#   *
+
+upper = 3
+for i in range(1,upper+1): # 1,4 = 1 2 3
+    for j in range(upper - i): # 0,2  0,1  0,0=None
+        print(" ", end='')
+    for k in range(2*i - 1): # 0,1  0,3  0,5
+        if i==0 or k==0 or k==2*i-2:
+            print("*", end='')
+        else:
+            print(" ", end='')
+    print()
+lower = 3
+for m in range(lower-1,0,-1): # 2 1
+    print(" " * (lower-m), end='')
+    for n in range(2*m - 1): # 0,3  0,1
+        if m==1 or n==0 or n==2*m-2:
+            print("*", end='')
+        else:
+            print(" ", end='')
+    print()
+
+# Upper Half Logic
+# Outer loop (i) controls the row number
+# First inner loop (j) prints leading spaces → centers the diamond
+# Second inner loop (k) controls the width: 2*i - 1
+# Print * only when:
+# k == 0 → left edge
+# k == 2*i - 2 → right edge
+# Print space for inner positions to keep it hollow
+
+# Lower Half Logic
+# Outer loop (m) runs in reverse to form the bottom
+# Leading spaces increase as rows go down
+# Width is 2*m - 1
+# Print * when:
+# n == 0 → left edge
+# n == 2*m - 2 → right edge
+# m == 1 → bottom tip
+# Else print space
+
+
+##################################################################
+
+
