@@ -1139,11 +1139,62 @@
 #     print()
 
 
-from math import factorial
-n = 5
-for i in range(1,n+1): # 1 2 3 4 5
-    for space in range(n-i): # 4 3 2 1 None
-        print(" ", end='')
-    for r in range(i):
-        print(factorial(n)//(factorial(r)*(factorial(n-r))), end='')
-    print()
+# num = 1
+# for i in range(1,5): # 1 2 3 4
+#     for j in range(i): # 0,1  0,2  0,3  0,4
+#         print(num, end=' ')
+#         num += 1
+#     print()
+
+
+# num = 1
+# for i in range(1,4): # 1 2 3
+#     print("*" * i + " " + "*" * i, end='')
+#     print()
+# print("*" * (i * 2 + 2))
+# for j in range(3,0,-1): # 3 2 1
+#     print("*" * j + " " + "*" * j, end='')
+#     print()
+
+
+# row = int(input("Enter a number greater than 0: "))
+# for i in range(1,row+1): # 1 2 3
+#     print("*" * i + " " * (2 * (row - i) + 1) + "*" * i, end='')
+#     print()
+# print("*" * (2 * row) + "*")
+# for j in range(row): # 0,3=0,1,2
+#     print("*" * (row - j) + " " * (2 * j + 1) + "*" * (row-j), end='')
+#     print()
+
+
+# rows = 5
+# for row in range(rows): # 0 1 2 3 4
+#     for col in range(rows): # 0,5 = 0 1 2 3 4
+#         if row==col or col==rows-(row+1):
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#     print()
+
+
+# max = 3
+# attempts = 0
+# while True:
+#     p = input("Enter password: ")
+#     if p == "pswd":
+#         print("Access Granted")
+#         break
+#     elif attempts == 2:
+#         print("Account Locked")
+#         break
+#     else:
+#         attempts += 1
+#         print(f"Try again. Attempts remaining: {max-attempts}")
+
+
+# n = 1
+# for i in range(1,5): # 1 2 3 4
+#     for j in range(i):
+#         print(n, end=' ')
+#         n += 1
+#     print()
