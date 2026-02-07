@@ -546,6 +546,36 @@ for n in range(rows): # 0 1 2 3 4
 ##################################################################
 
 
+# Floyd's Triangle
+
+# 1
+# 2 3
+# 4 5 6
+# 7 8 9 10
+
+num = 1
+for i in range(1,5): # 1 2 3 4
+    for j in range(i): # 0,1  0,2  0,3  0,4
+        print(num, end=' ')
+        num += 1
+    print()
+
+# Concept: Sequential counting in a triangular grid.
+
+# State Management: Uses a persistent counter (num) initialized outside the loops so it never resets.
+
+# Loop Roles:
+
+# Outer (i): Controls the number of rows (vertical).
+
+# Inner (j): Controls the count of elements per row (horizontal).
+
+# Key Logic: num += 1 increments the value every time a character is printed, regardless of the row or column index.
+
+
+##################################################################
+
+
 #   *
 #  * *
 # *   *
@@ -595,3 +625,64 @@ for m in range(lower-1,0,-1): # 2 1
 ##################################################################
 
 
+# *   *
+# ** **
+# *****
+# ** **
+# *   *
+
+row = int(input("Enter a number greater than 0: ")) # 2
+for i in range(1,row+1): # 1 2 3
+    print("*" * i + " " * (2 * (row - i) + 1) + "*" * i, end='')
+    print()
+print("*" * (2 * row) + "*")
+for j in range(row): # 0,3=0,1,2
+    print("*" * (row - j) + " " * (2 * j + 1) + "*" * (row-j), end='')
+    print()
+
+# User Input Integration: Using int(input()) transforms a static pattern into a dynamic program that scales based on user data.
+
+# A standalone print statement between two loops serves as a central anchor or "pivot," connecting the upper and lower halves of a symmetrical shape.
+
+# The expression 2 * (row - i) + 1 ensures that the internal gap shrinks at a constant, proportional rate as the "wings" grow.
+
+# In the lower half, using (row - j) allows the stars to decrease as the loop index increases, creating a perfect mirror effect of the top half.
+
+# Using range(row) instead of a variable from a previous loop (like i) makes the second loop self-sufficient and prevents "leaked variable" errors.
+
+
+##################################################################
+
+
+# *   *
+#  * * 
+#   *  
+#  * * 
+# *   *
+
+rows = 5
+for row in range(rows): # 0 1 2 3 4
+    for col in range(rows): # 0,5 = 0 1 2 3 4
+        if row==col or col==rows-(row+1):
+            print("*", end='')
+        else:
+            print(" ", end='')
+    print()
+
+# Using nested loops (row and col) creates a virtual coordinate system where every point is a specific address.
+# row==col => 0 checks each col (0 1 2 3 4), then 1 checks each col, and so on till 4
+
+# col==rows-(row+1)
+# 0 == 5 - (0+1) = 4 # False
+# 0 == 5 - (1+1) = 3 # False
+# 0 == 5 - (2+1) = 2 # False
+# 0 == 5 - (3+1) = 1 # False
+# 0 == 5 - (4+1) = 0 # True
+
+# 1 == 5 - (0+1) = 4 # False
+# Similarly for col (1,2,3,4)
+
+# IMP: Write 'else' loop immediately after writing the 'if' loop BEFORE EXECUTION
+
+
+##################################################################
