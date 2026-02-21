@@ -441,6 +441,94 @@ while i <= 5:
 ####################################################################
 
 
+#     *
+#    **
+#   * *
+#  *  *
+# *****
+
+i = 1
+rows = 5
+while i <= 5:
+    print(" " * (rows-i), end='')
+    j = 1
+    while j <= i:
+        if j==1 or j==i or i==rows:
+            print("*", end='')
+        else:
+            print(" ", end='')
+        j += 1
+    i += 1
+    print()
+
+
+####################################################################
+
+
+#   *
+#  * *
+# *   *
+#  * *
+#   *
+
+
+
+
+i = 1
+upper = 3
+while i <= upper:
+    print(" " * (upper-i), end='')
+    j = 1
+    while j <= 2 * i - 1:
+        if j==1 or j==2*i-1:
+            print("*", end='')
+        else:
+            print(" ", end='')
+        j += 1
+    print()
+    i += 1
+j = 0
+while j < upper-1:
+    print(" " * (j+1), end='')
+    k = 0
+    while k < upper - 2 * j:
+        if k==0 or k==upper-2*j-1:
+            print("*", end='')
+        else:
+            print(" ", end='')
+        k += 1
+    print()
+    j += 1
+
+
+####################################################################
+
+
+# *     *
+# **   **
+# *** ***
+# *******
+# *** ***
+# **   **
+# *     *
+
+i = 1
+rows = int(input("Enter a number greater than zero: "))
+while i <= rows:
+    print("*" * i + " " * (2 * (rows - i) + 1) + "*" * i, end='')
+    print()
+    i += 1
+print("*" * (2 * rows) + "*")
+j = 1
+while j <= rows:
+    print("*" * (rows-j+1) + " " * (2 * j - 1) + "*" * (rows-j+1), end='')
+    print()
+    j += 1
+
+
+####################################################################
+
+
 
 
 
