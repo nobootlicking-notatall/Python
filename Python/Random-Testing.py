@@ -919,9 +919,9 @@
 # for i in range(0,6): # 0 1 2 3 4 5
 #     print(" " * i, end='')
 #     print("*" * (2*(n-i)- 1), end='')
-    # for j in range(2 * (n-i) - 1):
-    #     print("*", end='')
-    # print()
+#     for j in range(2 * (n-i) - 1):
+#         print("*", end='')
+#     print()
 
 # n = 6
 # for i in range(0,n): # 0 1 2 3 4 5
@@ -940,10 +940,10 @@
 
 # n = 4
 # for i in range(0,n): # 0 1 2 3
-    # print(" " * i + "*" * (2*(n-i) - 1), end='')
-    # for j in range(2*(n-i) -1):
-    #     print("*", end='')
-    # print()
+#     print(" " * i + "*" * (2*(n-i) - 1), end='')
+#     for j in range(2*(n-i) -1):
+#         print("*", end='')
+#     print()
 
 # n = 3
 # for i in range(n): # 0 1 2
@@ -1198,3 +1198,1048 @@
 #         print(n, end=' ')
 #         n += 1
 #     print()
+
+
+# print(round(3.5)) # Answer: 4
+# print(round(4.5))
+
+
+# import math
+# print(abs(3+4j)) # 5.0
+# print(2.0/0.001) # 2000.0
+# print(2.0*0.1)
+# print(2.0/0.1)
+# print(0 % 2)
+
+
+# count = 1
+# total = 0
+# while count <= 5:
+#     total = total + count
+#     count = count + 1
+#     print(total)
+
+# count = 1
+# total = 0
+# while count < 5:
+#     total = total + count
+#     count = count + 1
+#     print(total)
+
+
+# x = 10
+# while x > 0:
+#     if x % 2 == 0:
+#         print(x)
+#     x -= 3
+
+
+# i = 1
+# total = 0
+# while True:
+#     total += i
+#     if total > 10:
+#         break
+#     i += 1
+# print(i, total)
+
+
+# n = 1
+# total = 0
+# while n < 10:
+#     n += 1
+#     if n % 2 == 0:
+#         continue
+#     total += n
+#     if total > 15:
+#         break
+# print(n, total)
+
+
+# a = 1
+# b = 1
+# total = 0
+# while a <= 7 and b <= 6:
+#     if a % 2 == 0:
+#         a += 1
+#         continue
+#     if b % 3 == 0:
+#         b += 1
+#         continue
+#     total += a * b
+#     b += 1
+#     if total > 50:
+#         break
+#     a += 1
+# print(a, b, total)
+
+
+# nums = [4, 7, -2, 5, 0, 8, -1, 3]
+# i = 0
+# total = 0
+# while i < len(nums):
+#     if nums[i] < 0:
+#         i += 1
+#         continue
+#     if nums[i] == 0:
+#         break
+#     total += nums[i]
+#     i += 1
+# print(i, total)
+
+
+# nums = [3, -1, 4, 0, 5, -2, 6, 1]
+# i = 0
+# total = 0
+
+# while i < len(nums):
+#     if nums[i] < 0:
+#         i += 1
+#         continue
+#     if nums[i] % 2 == 0:
+#         i += 1
+#         continue
+#     total += nums[i]
+#     if total >= 10:
+#         break
+#     i += 1
+
+# print(i, total)
+
+
+# x = 20
+# steps = 0
+# while x > 1:
+#     if x % 2 == 0:
+#         x = x // 2
+#     else:
+#         x = x - 3
+#     steps += 1
+#     print(x, steps)
+
+
+# found = False
+# nums = [6, 9, 3, 7, 2, 8]
+# i = 0
+# while not found and i < len(nums):
+#     if nums[i] % 2 == 0 and nums[i] > 5:
+#         found = True
+#     i += 1
+# print(found, i)
+
+
+# num = 1
+# total = 0
+# while total < 10:
+#     total += num
+#     num += 1
+#     num -= 1
+# print(num,total)
+
+
+# o = [1,2,3,4][0]; print(o)
+
+
+# n = 1
+# total = 0
+# while total + n**2 <= 50:
+#     total += n**2
+#     n += 1
+# print(n, total)
+
+
+# n = 1
+# total = 1
+# while total * 2 <= 50:
+#     total *= 2
+#     n += 1
+# print(n, total)
+
+
+# n = 1
+# total = 1
+# while total < 50:
+#     if n % 2 == 0:
+#         total *= 2
+#     else:
+#         total += n
+#     n += 1
+# print(n, total)
+
+
+# nums = [3, 4, -2, 5, 0, 6, 1]
+# i = 0
+# total = 0
+# count = 0
+# while i < len(nums):
+#     if nums[i] < 0:
+#         i += 1
+#         continue
+#     if nums[i] % 2 == 0:
+#         total *= 2
+#     else:
+#         total += nums[i]
+#     count += 1
+#     i += 1
+#     if total > 20:
+#         break
+# print(total, count, i)
+
+
+# a, b = 1, 1
+# total = 0
+# count = 0
+# while total <= 50:
+#     if b % 2 != 0:  # only odd Fibonacci numbers
+#         total += b
+#     a, b = b, a + b
+#     count += 1
+#     print(a,b,total, count)
+
+
+# i = 1
+# total = 0
+# count = 0
+# while i <= 4:            # outer loop
+#     j = 1
+#     while j <= 5:        # inner loop
+#         if (i + j) % 2 == 0:
+#             total += i * j
+#         else:
+#             count += 1
+#         if total > 20:
+#             break
+#         j += 1
+#     if total > 20:
+#         break
+#     i += 1
+# print(total, count, i, j)
+
+
+# i = 1
+# while i <= 4:
+#     j = 1
+#     while j <= 4:
+#         if j <= i:
+#             print("*", end=" ")
+#         else:
+#             print("-", end=" ")
+#         j += 1
+#     print()
+#     i += 1
+
+
+# matrix = [
+#     [1, 2, 3],
+#     [4, 5, 6],
+#     [7, 8, 9]
+# ]
+# i = 0
+# total = 0
+# while i < len(matrix):
+#     j = 0
+#     while j < len(matrix[i]):
+#         if matrix[i][j] % 2 == 0:
+#             total += matrix[i][j]
+#         j += 1
+#     i += 1
+# print(total)
+
+
+# matrix = [
+#     [2, 4, 6],
+#     [1, 3, 9],
+#     [5, 8, 7]
+# ]
+# i = 0
+# found = False
+# while i < len(matrix) and not found:
+#     j = 0
+#     while j < len(matrix[i]):
+#         if matrix[i][j] > 7:
+#             found = True
+#             break
+#         j += 1
+#     i += 1
+# print(found, i, j)
+
+
+# matrix = [
+#     [2, 4, 6],
+#     [1, 3, 9],
+#     [5, 8, 7]
+# ]
+# i = 0
+# found = False
+# while i < len(matrix) and not found:
+#     j = 0
+#     while j < len(matrix[i]):
+#         if matrix[i][j] > 7:
+#             found = True
+#             break
+#         j += 1
+#     if not found:
+#         i += 1
+# print(found, i, j)
+
+
+# matrix = [
+#     [3, 12, 5],
+#     [7, 1, 9],
+#     [4, 15, 2]
+# ]
+# i = 0
+# max_val = matrix[0][0]
+# max_row = 0
+# max_col = 0
+# while i < len(matrix):
+#     j = 0
+#     while j < len(matrix[i]):
+#         if matrix[i][j] > max_val:
+#             max_val = matrix[i][j]
+#             max_row = i
+#             max_col = j
+#         j += 1
+#     i += 1
+# print(max_val, max_row, max_col)
+
+
+# matrix = [
+#     [2, 8, 4],
+#     [6, 10, 12],
+#     [1, 3, 5]
+# ]
+# i = 0
+# total = 0
+# count = 0
+# while i < len(matrix):
+#     j = 0
+#     while j < len(matrix[i]):
+#         total += matrix[i][j]
+#         count += 1
+#         j += 1
+#     i += 1
+# average = total / count
+# i = 0
+# greater_count = 0
+# while i < len(matrix):
+#     j = 0
+#     while j < len(matrix[i]):
+#         if matrix[i][j] > average:
+#             greater_count += 1
+#         j += 1
+#     i += 1
+# print(average, greater_count)
+
+
+# matrix = [
+#     [1, 2, 3],
+#     [4, 5, 6],
+#     [7, 8, 9]
+# ]
+# i = 0
+# total = 0
+# while i < len(matrix):
+#     j = len(matrix[i]) - 1
+#     while j >= 0:
+#         if i == j:
+#             total += matrix[i][j]
+#         elif (i + j) % 2 == 0:
+#             total -= matrix[i][j]
+#         j -= 1
+#     i += 1
+# print(total)
+
+
+# i = 0
+# total = 0
+# while i < 5:
+#     j = 0
+#     while j < 5:
+#         if j == 2:
+#             break
+#         total += j
+#         j += 1
+#     i += 1
+# print(total)
+
+
+# i = 1
+# total = 0
+# while i <= 3:
+#     j = 1
+#     while j <= 3:
+#         total += i
+#         i += 1
+#         j += 1
+#     i -= 1
+# print(total)
+
+
+# i = 1
+# total = 0
+# while i < 4:
+#     j = i
+#     while j > 0:
+#         total += j
+#         i += 1
+#         j -= 2
+#     i += 1
+# print(i, j, total)
+
+
+# i = 0
+# total = 0
+# while i < 5:
+#     j = 0
+#     while j < 5:
+#         total += i + j
+#         if total > 10:
+#             break
+#         i += 1
+#         j += 1
+#     i += 1
+# print(i,j,total)
+
+
+# i = 1
+# total = 0
+# while i < 5:
+#     j = 1
+#     while j <= i:
+#         total += i * j
+#         if total > 20:
+#             break
+#         j += 1
+#     i += 1
+# print(total, i, j)
+
+
+# i = 1
+# total = 0
+# while i < 6:
+#     j = 1
+#     while j < 6:
+#         if (i + j) % 3 == 0:
+#             j += 1
+#             continue
+#         total += i * j
+#         if total > 30:
+#             break
+#         i += 1
+#         j += 1
+#     i += 1
+#     print(total, i, j)
+
+
+# attempt = 0
+# max_attempts = 3
+# success = False
+# while attempt < max_attempts and not success:
+#     print("Trying...")
+#     if attempt == 2:
+#         success = True
+#     else:
+#         attempt += 1
+# if success:
+#     print("Connected!")
+# else:
+#     print("Failed after retries.")
+
+
+# jobs = ["email", "report", "backup", "cleanup"]
+# index = 0
+# while True:
+#     if index >= len(jobs):
+#         print("No more jobs. Worker sleeping...")
+#         break
+#     current_job = jobs[index]
+#     print("Processing:", current_job)
+#     index += 1
+# print("Worker stopped.")
+
+
+# i = 0
+# while i < 3:
+#     print("A", i)
+#     i += 1
+# else:
+#     print("B")
+
+
+# i = 0
+# while i < 3:
+#     if i == 1:
+#         break
+#     print(i)
+#     i += 1
+# else:
+#     print("Done")
+
+
+# for i in range(3):
+#     for j in range(2):
+#         if j == 1:
+#             continue
+#         print(i, j)
+
+
+# for i in range(2):
+#     for j in range(3):
+#         print(i,j, end=' / ')
+#     print()
+
+
+# for num in range(2,6):
+#     for i in range(2,num):
+#         if num % i == 0:
+#             break
+#     else:
+#         print(num)
+
+
+# i = 1
+# total = 0
+# while i <= 3:
+#     j = 1
+#     while j <= 3:
+#         total += i
+#         i += 1
+#         j += 1
+#     i -= 1
+# print(i,j,total)
+
+
+# i = 0
+# while i < 5:
+#     print("Outer", i)
+#     j = 0
+#     while j < 3:
+#         if j == 1:
+#             break
+#         print("Inner", j)
+#         j += 1
+#     i += 2
+
+
+# i = 0
+# total = 0
+# while i < 4:
+#     j = 0
+#     while j < 4:
+#         if (i + j) % 2 == 0:
+#             total += i + j
+#         else:
+#             total -= 1
+#         if total > 5:
+#             break
+#         j += 1
+#     i += 1
+# print(i,j,total)
+
+
+# i = 1
+# while i < 4:
+#     print("Start", i)
+#     if i == 2:
+#         i = 5
+#         continue
+#     i += 1
+#     print("End", i)
+# print(i)
+
+
+# i = 0
+# count = 0
+# while i < 5:
+#     if i == 3:
+#         i += 2
+#         continue
+
+#     count += i
+#     i += 1
+# print(count)
+
+
+# i = 1
+# total = 0
+# while i <= 4:
+#     j = 1
+#     while j <= 3:
+#         total += j
+#         if i == 2:
+#             break
+#         j += 1
+#     i += 1
+# print(i,j,total)
+
+
+# word = "python"
+# for letter in word:
+#     letter = letter.upper()
+#     print(letter, end='')
+# print()
+# up = word.upper(); print(up)
+
+
+# n = [1,2,3]
+# i = 0
+# while i < len(n):
+#     if n[i] == 2:
+#         n.pop(i)
+#     i += 1
+#     print(n)
+
+
+# i = 0
+# total = 0
+# nums = [1, 2, 3]
+# while i < len(nums):
+#     j = 0
+#     while j < len(nums):
+#         if nums[j] == 2:
+#             nums.pop(j)
+#             continue
+#         total += nums[j]
+#         if total > 6:
+#             break
+#         j += 1
+#     i += 1
+# print(total, nums)
+
+
+# i = 0
+# x = [0, 1, 2]
+# while i < len(x):
+#     if x[i] == 1:
+#         x.append(i)
+#         i += 1
+#         continue
+#     if x[i] == 2:
+#         x.pop(0)
+#     i += 1
+# print(x)
+
+
+# i = 0
+# x = [1, 2]
+# while i < 4:
+#     x.append(x[i])
+#     x[i] = 0
+#     i += 1
+# print(x)
+
+
+# i = 0
+# s = 0
+# while i < 3:
+#     j = i
+#     while j < 3:
+#         s += j
+#         j += 1
+#     i += 1
+# print(s)
+
+
+# i = 1
+# x = 0
+# while i <= 3:
+#     k = 1
+#     while k <= i:
+#         x += k
+#         k += 1
+#     i += 1
+# print(x)
+
+
+# i = 0
+# x = [1, 2, 3]
+# while i < len(x):
+#     x.append(i)
+#     i += x[i]
+# print(x)
+
+
+# x = [1, 2, 3, 4]
+# i = 0
+# while i < len(x):
+#     if x[i] % 2 == 0:
+#         x.insert(0, x[i])
+#         i += 2
+#     else:
+#         i += 1
+# print(x)
+
+
+# x = [1, 2, 3]
+# i = 0
+# while i < len(x):
+#     if x[i] % 2 == 1:
+#         x.append(x[i] + i)
+#     else:
+#         x.insert(0, i)
+#     i += 1
+# print(x)
+
+
+# i = 1
+# while i <= 3:
+#     print("*" * i, end='')
+#     i += 1
+#     print()
+
+
+# star = 5
+# while star >= 1:
+#     star -= 1
+#     print(" " * star + "*" * (5-star), end='')
+#     print()
+
+
+# i = 1
+# space = 5
+# while i <= space:
+#     print(" " * (space-i), end='')
+#     star = i
+#     while star <= i:
+#         print("*" * star, end='')
+#         star += 1
+#     i += 1
+#     print()
+
+
+# i = 1
+# space = 5
+# while i <= 5:
+#     print(" " * (space-i), end='')
+#     star = i
+#     while star <= i:
+#         print("*" * (2 * (star) - 1), end='')
+#         star += 1
+#     i += 1
+#     print()
+
+
+# i = 1
+# rows = 5
+# while i <= rows:
+#     print(" " * (rows - i) + "*" * (2 *i - 1), end='')
+#     i += 1
+#     print()
+
+
+# i = 5
+# while i > 0:
+#     print("*" * i, end='')
+#     i -= 1
+#     print()
+
+# i = 0
+# rows = 5
+# while i <= rows-1:
+#     print(" " * i, end='')
+#     stars = rows - i
+#     while stars > 0:
+#         print("*", end='')
+#         stars -= 1
+#     i += 1
+#     print()
+
+
+# rows = 5
+# for i in range(rows): # 0 1 2 3 4
+#     print(" " * i, end='')
+#     for j in range(rows-i): # 5 4 3 2 1
+#         print("*", end='')
+#     print()
+
+
+# i = 0
+# rows = 5
+# while i <= rows-1:
+#     print(" " * i + "*" * (rows - i), end='')
+#     i += 1
+#     print()
+
+
+# i = 0
+# rows = 3
+# while i < rows:
+#     print(" " * (rows-i-1), end='')
+#     upper = 2 * i + 1
+#     while upper > 0:
+#         print("*", end='')
+#         upper -= 1
+#     i += 1
+#     print()
+# j = 1
+# while j < rows:
+#     print(" " * j, end='')
+#     lower = 2 * (rows - j) - 1
+#     while lower > 0:
+#         print("*", end='')
+#         lower -= 1
+#     j += 1
+#     print()
+
+
+# i = 0
+# rows = 3
+# while i < rows:
+#     print(" " * (rows-i-1) + "*" * (2 * i + 1), end='')
+#     i += 1
+#     print()
+# j = 0
+# while j+1 < rows:
+#     print(" " * (j+1) + "*" * (rows - 2 * j), end='')
+#     j += 1
+#     print()
+
+
+# i = 1
+# rows = 4
+# while i <= rows:
+#     print("*" * i, end='')
+#     i += 1
+#     print()
+# j = 1
+# while j < rows:
+#     print("*" * (rows - j), end='')
+#     j += 1
+#     print()
+
+
+# i = 1
+# rows = 3
+# while i <= rows:
+#     j = 1
+#     while j <= i:
+#         print(j, end=' ')
+#         j += 1
+#     i += 1
+#     print()
+
+
+# i = 5
+# while i >= 1:
+#     j = i
+#     while j >= 1:
+#         print(j, end='')
+#         j -= 1
+#     i -= 1
+#     print()
+
+
+# i = 1
+# rows = 5
+# while i <= rows:
+#     print(" " * (rows-i), end='')
+#     j = 1
+#     while j <= 2 * i - 1:
+#         print(i, end='')
+#         j += 1
+#     i += 1
+#     print()
+
+
+# i = 0
+# rows = 5
+# while i < rows:
+#     j = 0
+#     while j <= i:
+#         print(chr(j+65), end='')
+#         j += 1
+#     i += 1
+#     print()
+
+
+# i = 1
+# columns = 5
+# while i <= columns: # 1 2 3 4 5
+#     j = 0
+#     while j < columns: # 0 1 2 3 4
+#         if (i+j)%2==0:
+#             print(0, end=' ')
+#         else:
+#             print(1, end=' ')
+#         j += 1
+#     i += 1
+#     print()
+
+
+# i = 0
+# rows = 5
+# while i < rows:
+#     print(" " * (rows-i-1), end='')
+#     j = 1
+#     while j <= i+1:
+#         print(i+1, end='')
+#         j += 1
+#     i += 1
+#     print()
+
+
+# i = 1
+# rows = 3
+# num = 1
+# while i <= rows:
+#     j = 1
+#     while j <= i:
+#         print(num, end=' ')
+#         num += 1
+#         j += 1
+#     i += 1
+#     print()
+
+
+# i = 1
+# rows = 5
+# while i <= rows:
+#     j = 1
+#     while j <= rows:
+#         if j==1 or j==rows or i==1 or i==rows:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#         j += 1
+#     i += 1
+#     print()
+
+
+# i = 1
+# rows = 5
+# while i <= 5:
+#     j = 1
+#     while j <= i:
+#         if i==1 or i==rows or j==1 or j==i:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#         j += 1
+#     i += 1
+#     print()
+
+
+# i = 1
+# rows = 5
+# while i <= 5:
+#     print(" " * (rows-i), end='')
+#     j = 1
+#     while j <= i:
+#         if j==1 or j==i or i==rows:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#         j += 1
+#     i += 1
+#     print()
+
+
+# i = 1
+# upper = 3
+# while i <= upper:
+#     print(" " * (upper-i), end='')
+#     j = 1
+#     while j <= 2 * i - 1:
+#         if j==1 or j==2*i-1:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#         j += 1
+#     print()
+#     i += 1
+# j = 0
+# while j < upper-1:
+#     print(" " * (j+1), end='')
+#     k = 0
+#     while k < upper - 2 * j:
+#         if k==0 or k==upper-2*j-1:
+#             print("*", end='')
+#         else:
+#             print(" ", end='')
+#         k += 1
+#     print()
+#     j += 1
+
+
+# i = 1
+# rows = int(input("Enter a number greater than zero: "))
+# while i <= rows:
+#     print("*" * i + " " * (2 * (rows - i) + 1) + "*" * i, end='')
+#     print()
+#     i += 1
+# print("*" * (2 * rows) + "*")
+# j = 1
+# while j <= rows:
+#     print("*" * (rows-j+1) + " " * (2 * j - 1) + "*" * (rows-j+1), end='')
+#     print()
+#     j += 1
+
+
+# import numpy as np
+# a = np.array([[1,2,3,4], [5,6,7,8]])
+# print(a)
+
+# a = np.array([1,2])
+# b = np.array([3,4])
+# print(a,b)
+# print(a+b)
+# print(a*b)
+# print(a)
+# e = [lambda n: n**2, a]
+# result = e[0](e[1])
+# print(result)
+
+
+# import numpy as np
+# a = np.array([[1,2,3], [4,5,6]])
+# print(a.shape) # (rows,columns) (2,3)
+# print(a.size)
+# print(a.ndim)
+# b = np.array([1,2,3,4,5])
+# print(b[:])
+# b += 1
+# print(b)
+# c = b
+# print(c)
+
+
+# import numpy as np
+# # arr = np.array([[-1, 2, 0, 4],[4, -0.5, 6, 0],[2.6, 0, 7, 8],[3, -7, 4, 2.0]])
+# print(arr[:2, ::3])
+# print(arr)
+# a = np.array([[1,2], [3,4]])
+# b = sum(a)
+# print(b)
+# c = a.sum(); print(c)
+# c = b.sum(); print(c)
+
+# num1 = np.array([1,2,3,4,5])
+# num2 = np.array([6,7,8,9,10])
+# print(num1[num1 <= 3])
+# print(num2[num2 < num1])
+# print(num1[num1 > 2][0])
+# num1[-1:] = 11; print(num1)
+# num1[1:-2] = [99]; print(num1)
+# num1[1::2] = [55]; print(num1)
+# num1[3:] = [20,30]; print(num1)
+# print(num1[num1 % 2 == 0])
+# num1[[2,3,0]] = 99; print(num1)
+
+
+import numpy as np
+num1 = np.array([1,2,3,4,5])
+num2 = np.array([6,7,8,9,10])
+
+# print(num1 + 1)
+# num1 += 1; print(num1)
+# num1 *= 2; print(num1)
+# print(num1 * 2)
+# n1 = np.where(num1 > 3, 100, num1); print(n1)
+# num1[num1 == 2] = 22; print(num1)
+# num1[:] = num1[::-1]; print(num1)
+# num1[::2] = 0; print(num1)
+# num1[num1 >= 4] *= 11; print(num1)
+# num1[num1 % 2 != 0] = 0; print(num1)
+# print(np.clip(num1, 3, 4))
+# num1[0], num1[1] = num1[1], num1[0]; print(num1)
