@@ -2227,9 +2227,9 @@
 # num1[[2,3,0]] = 99; print(num1)
 
 
-import numpy as np
-num1 = np.array([1,2,3,4,5])
-num2 = np.array([6,7,8,9,10])
+# import numpy as np
+# num1 = np.array([1,2,3,4,5])
+# num2 = np.array([6,7,8,9,10])
 
 # print(num1 + 1)
 # num1 += 1; print(num1)
@@ -2243,3 +2243,19 @@ num2 = np.array([6,7,8,9,10])
 # num1[num1 % 2 != 0] = 0; print(num1)
 # print(np.clip(num1, 3, 4))
 # num1[0], num1[1] = num1[1], num1[0]; print(num1)
+
+import numpy as np
+num1 = np.array([1,2,3,4,5])
+num2 = np.array([6,7,8,9,10])
+
+# n1 = np.array([True,False,False,False,False])
+# num1[n1] = 100; print(num1)
+# print(len(num1))
+# num1[(num1 >= 4) & (num1==5)] = 777; print(num1)
+# np.put(num1, [1], [99]); print(num1)
+# np.place(num1, num1 < 3, 00); print(num1)
+
+for i in range(len(num1)):
+    if num1[i] % 2 == 0:
+        num1[i] += 1
+print(num1)
