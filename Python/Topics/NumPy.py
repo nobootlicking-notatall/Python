@@ -10,6 +10,8 @@ num1 = np.array([1,2,3,4,5])
 num2 = np.array([6,7,8,9,10])
 
 
+print(len(num1)) # Prints the length of a numpy array
+
 print(num1[0], num2[-1]) # 1 10 # Type: numpy.int64
 print(num1[:4][::-2]) # [4 2] # Type: numpy.ndarray
 
@@ -48,12 +50,40 @@ n1 = np.where(num1 > 3, 100, num1); print(n1)
 # Else, print the num1 elements
 num1[num1 == 2] = 22; print(num1) # Replace a specific element by it's value # Output: [1 22 3 4 5]
 
+np.put(num1, [1], [99]); print(num1) # Replaces the element in an array. numpy. .put(<array>, <element>, <new_element>)
+
+np.place(num1, num1 < 3, 00); print(num1) # Replaces the element in an array provided a condition. .place(<array>, <condition>, <new_element>)
+
+print(np.clip(num1, 3, 4)) # Clip Value: All values under 3 becomes 3, and all the values above 4 becomes 4. Works based upon elements # Output: [3 3 3 4 4]
+
 num1 = num1[::-1]; print(num1) # Reverses the array
 num1[:] = num1[::-1]; print(num1) # Works the same as above
 
 num1[::2] = 0; print(num1) # Replaces every alternate element # Output: [0 2 0 4 0]
 
-print(np.clip(num1, 3, 4)) # Clip Value: All values under 3 becomes 3, and all the values above 4 becomes 4 # Output: [3 3 3 4 4]
-
 num1[0], num1[1] = num1[1], num1[0]; print(num1) # Swapping the values # Output: [2 1 3 4 5]
+
+n1 = np.array([True,False,False,False,False])
+num1[n1] = 100; print(num1) # Modify an existing array # Output: [100 2 3 4 5]
+
+# Modify an array using logical operators
+num1[(num1 >= 4) & (num1==5)] = 777; print(num1) # Uses '&' (AND) operator. Both conditions are required to met in order to change the value. # Output: [1 2 3 4 777]
+
+num1[(num1 == 4) | (num1==5)] = 777; print(num1) # Uses '|' (OR) operator. If either condition is met, num1 will be returned with modified value(s). # Output: [1 2 3 777 777]
+
+
+# Iteration
+# ---------
+
+for i in range(len(num1)):
+    if num1[i] % 2 == 0:
+        num1[i] += 1
+print(num1)
+# Output: [1 3 3 5 5]
+# Steps: -
+# [1 2 3 4 5]
+# [1 3 3 4 5]
+# [1 3 3 4 5]
+# [1 3 3 5 5]
+# [1 3 3 5 5]
 
