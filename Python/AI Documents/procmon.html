@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Process Monitor for Microsoft Intune - Complete Guide</title>
+<style>
+  @page { size: A4; margin: 20mm 18mm 20mm 18mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10.5pt; color: #1a1a1a; line-height: 1.55; background: #fff; }
+  .cover { page-break-after: always; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(160deg, #0d3a6b 0%, #1565c0 60%, #1e88e5 100%); color: #fff; padding: 60px 50px; }
+  .cover h1 { font-size: 32pt; font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
+  .cover h2 { font-size: 18pt; font-weight: 400; opacity: .85; margin-bottom: 30px; }
+  .cover .subtitle { font-size: 11pt; opacity: .75; border-top: 1px solid rgba(255,255,255,.3); padding-top: 20px; margin-top: 20px; }
+  .cover .desc { font-size: 11pt; margin-top: 20px; opacity: .9; max-width: 520px; line-height: 1.65; }
+  .cover .badge { display: inline-block; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35); padding: 4px 12px; border-radius: 20px; font-size: 9pt; margin-top: 30px; }
+  .toc { page-break-after: always; padding: 10px 0 30px; }
+  .toc h2 { font-size: 16pt; color: #0d3a6b; border-bottom: 2px solid #1565c0; padding-bottom: 8px; margin-bottom: 20px; }
+  .toc ul { list-style: none; column-count: 2; column-gap: 30px; }
+  .toc li { padding: 4px 0; font-size: 10pt; border-bottom: 1px dotted #ccc; display: flex; justify-content: space-between; }
+  .toc li span { color: #555; }
+  .toc .section-num { color: #1565c0; font-weight: 600; margin-right: 6px; }
+  .chapter { page-break-before: always; }
+  .chapter:first-of-type { page-break-before: avoid; }
+  h1.ch { font-size: 15pt; font-weight: 800; color: #fff; background: #1565c0; padding: 10px 16px; border-radius: 4px; margin-bottom: 18px; letter-spacing: .3px; }
+  h2.sec { font-size: 12pt; font-weight: 700; color: #0d3a6b; border-left: 4px solid #1565c0; padding-left: 10px; margin: 18px 0 8px; }
+  h3.sub { font-size: 10.5pt; font-weight: 700; color: #333; margin: 12px 0 5px; }
+  p { margin-bottom: 8px; }
+  ul.bul { margin: 6px 0 10px 18px; }
+  ul.bul li { margin-bottom: 5px; padding-left: 4px; list-style-type: disc; }
+  ul.bul li::marker { color: #1565c0; }
+  .code { font-family: 'Consolas', 'Courier New', monospace; font-size: 9pt; background: #f0f4ff; border: 1px solid #c5d5f0; border-left: 3px solid #1565c0; padding: 5px 10px; border-radius: 3px; margin: 5px 0 8px; word-break: break-all; color: #1a2a6b; }
+  .note { background: #fff8e1; border-left: 4px solid #f9a825; padding: 8px 12px; margin: 8px 0; border-radius: 3px; font-size: 9.5pt; }
+  .note strong { color: #e65100; }
+  .tip { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 8px 12px; margin: 8px 0; border-radius: 3px; font-size: 9.5pt; }
+  .tip strong { color: #1b5e20; }
+  .warn { background: #fce4ec; border-left: 4px solid #c62828; padding: 8px 12px; margin: 8px 0; border-radius: 3px; font-size: 9.5pt; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 9.5pt; }
+  th { background: #1565c0; color: #fff; padding: 7px 10px; text-align: left; font-weight: 600; }
+  td { padding: 6px 10px; border-bottom: 1px solid #e0e0e0; }
+  tr:nth-child(even) td { background: #f5f8ff; }
+  .footer-note { font-size: 8pt; color: #777; border-top: 1px solid #ddd; margin-top: 40px; padding-top: 8px; }
+  @media print { .chapter { page-break-before: always; } .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <h1>Process Monitor<br>(ProcMon)</h1>
+  <h2>for Microsoft Intune-Managed Devices</h2>
+  <p class="desc">A complete beginner-to-advanced guide for capturing, filtering, and analysing every file system, registry, network, and process event on a Windows device managed by Microsoft Intune. Each chapter targets a specific real-world troubleshooting scenario.</p>
+  <div class="badge">Version 1.0 &nbsp;|&nbsp; Sysinternals ProcMon v4.x &nbsp;|&nbsp; March 2026</div>
+  <p class="subtitle">Covers: Installation · UI walkthrough · Filters · Enrollment issues · Win32 app deployment · PowerShell scripts · MDM policies · Autopilot/ESP · Boot logging · Saving &amp; sharing traces · Quick-reference cheat sheet</p>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ul>
+    <li><span><span class="section-num">Ch 1</span> What Is ProcMon and What Does It Capture?</span><span>1</span></li>
+    <li><span><span class="section-num">Ch 2</span> Downloading, Installing &amp; Launching ProcMon</span><span>2</span></li>
+    <li><span><span class="section-num">Ch 3</span> Understanding the ProcMon User Interface</span><span>3</span></li>
+    <li><span><span class="section-num">Ch 4</span> Mastering ProcMon Filters</span><span>4</span></li>
+    <li><span><span class="section-num">Ch 5</span> Troubleshooting Device Enrollment</span><span>5</span></li>
+    <li><span><span class="section-num">Ch 6</span> Troubleshooting Win32 App Deployment</span><span>6</span></li>
+    <li><span><span class="section-num">Ch 7</span> Tracking PowerShell Script Execution</span><span>7</span></li>
+    <li><span><span class="section-num">Ch 8</span> Tracking MDM Policy &amp; Registry Changes</span><span>8</span></li>
+    <li><span><span class="section-num">Ch 9</span> MDM Certificate &amp; Compliance</span><span>9</span></li>
+    <li><span><span class="section-num">Ch 10</span> Windows Autopilot &amp; ESP Troubleshooting</span><span>10</span></li>
+    <li><span><span class="section-num">Ch 11</span> Boot-Time Logging</span><span>11</span></li>
+    <li><span><span class="section-num">Ch 12</span> Saving, Analysing &amp; Sharing Captures</span><span>12</span></li>
+    <li><span><span class="section-num">Ch 13</span> Quick-Reference Filter Cheat Sheet</span><span>13</span></li>
+  </ul>
+</div>
+
+<!-- CH 1 -->
+<div class="chapter">
+<h1 class="ch">Chapter 1 — What Is Process Monitor and What Does It Capture?</h1>
+
+<h2 class="sec">1.1 Overview</h2>
+<p>Process Monitor (ProcMon) is a free tool from Microsoft Sysinternals. It runs on Windows and captures a real-time stream of every file-system access, registry read or write, network connection attempt, and process/thread creation that happens on the machine. Unlike a simple log viewer, ProcMon records the exact call stack, the result code (SUCCESS, ACCESS DENIED, NAME NOT FOUND, etc.), and the timestamp down to the millisecond for every single operation.</p>
+<p>ProcMon replaced two older Sysinternals tools — Filemon (file activity) and Regmon (registry activity) — and merged them into a far more powerful utility with non-destructive filtering, process-tree views, and boot-time logging.</p>
+
+<h2 class="sec">1.2 What ProcMon DOES Capture</h2>
+<ul class="bul">
+  <li><strong>File System:</strong> Every CreateFile, ReadFile, WriteFile, DeleteFile, QueryDirectory, SetRenameInformationFile, and more.</li>
+  <li><strong>Registry:</strong> Every RegOpenKey, RegQueryValue, RegSetValue, RegDeleteKey, RegCreateKey, and more.</li>
+  <li><strong>Process &amp; Thread:</strong> Every process create/exit, thread create/exit, image/DLL load event.</li>
+  <li><strong>Network (TCP/UDP):</strong> Connection attempts, sends, receives, disconnections — identified by process, IP, and port.</li>
+  <li><strong>Profiling Events (optional):</strong> CPU usage sampling per thread. Usually disabled due to the massive noise it generates.</li>
+</ul>
+
+<h2 class="sec">1.3 What ProcMon Does NOT Capture</h2>
+<div class="warn"><strong>Important:</strong> ProcMon is NOT a packet sniffer. It sees network connections at the Windows socket level (which process connected to which IP/port) but does NOT capture packet payload content. Use Wireshark or Fiddler for payload-level network capture.</div>
+<ul class="bul">
+  <li>Encrypted contents of HTTPS responses.</li>
+  <li>Hardware-level interrupts below the Windows kernel.</li>
+  <li>Events that occurred before ProcMon's driver loaded — unless Boot Logging is used (see Chapter 11).</li>
+</ul>
+
+<h2 class="sec">1.4 Why ProcMon Is Invaluable for Intune Troubleshooting</h2>
+<p>Intune manages devices by pushing MDM policies, deploying Win32 apps, running PowerShell scripts, and maintaining compliance through background services. When something silently fails — an app that never installs, a policy that never applies, an enrollment that stalls halfway — there is often NO visible error to the end user.</p>
+<p>ProcMon lets you watch exactly what the Intune agent processes are doing: which registry keys they read, which files they access, which network endpoints they contact, and exactly where they fail and why. This turns a frustrating "it just doesn't work" situation into a precise, diagnosable event sequence.</p>
+<div class="tip"><strong>Tip:</strong> Always cross-reference ProcMon captures with the Intune Management Extension log at:<br><code>C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\IntuneManagementExtension.log</code></div>
+
+<h2 class="sec">1.5 Key Intune Processes You Will See in ProcMon</h2>
+<table>
+  <tr><th>Process Name</th><th>What It Does</th></tr>
+  <tr><td>IntuneManagementExtension.exe</td><td>Main Intune Management Extension agent. Manages Win32 apps, PowerShell scripts, health scripts, compliance.</td></tr>
+  <tr><td>AgentExecutor.exe</td><td>Child of IME. Executes PowerShell detection and remediation scripts.</td></tr>
+  <tr><td>deviceenroller.exe</td><td>Handles MDM enrollment registration with Azure AD and Intune.</td></tr>
+  <tr><td>omadmclient.exe / svchost.exe</td><td>OMA-DM client. Performs policy sync sessions with the Intune service.</td></tr>
+  <tr><td>dsregcmd.exe</td><td>Azure AD Join command-line tool.</td></tr>
+  <tr><td>msiexec.exe</td><td>Windows Installer. Often invoked by IME to install .msi packages.</td></tr>
+  <tr><td>powershell.exe / pwsh.exe</td><td>PowerShell host. Used for script execution and detection rules.</td></tr>
+</table>
+</div>
+
+<!-- CH 2 -->
+<div class="chapter">
+<h1 class="ch">Chapter 2 — Downloading, Installing &amp; Launching ProcMon</h1>
+
+<h2 class="sec">2.1 Downloading ProcMon</h2>
+<p>ProcMon requires no installation. It is a portable standalone executable. Three options:</p>
+<ul class="bul">
+  <li><strong>Option A (Recommended):</strong> Download the ZIP from the official Microsoft Sysinternals page:</li>
+</ul>
+<div class="code">https://learn.microsoft.com/en-us/sysinternals/downloads/procmon</div>
+<ul class="bul">
+  <li><strong>Option B:</strong> Run directly from Sysinternals Live (requires internet on the target machine):</li>
+</ul>
+<div class="code">\\live.sysinternals.com\tools\procmon.exe</div>
+<ul class="bul">
+  <li><strong>Option C:</strong> Install via winget (Windows Package Manager):</li>
+</ul>
+<div class="code">winget install --id Microsoft.Sysinternals.ProcessMonitor</div>
+
+<h2 class="sec">2.2 Which Executable to Use</h2>
+<ul class="bul">
+  <li><strong>Procmon.exe</strong> — Smart launcher that automatically selects the correct bitness. Safest default.</li>
+  <li><strong>Procmon64.exe</strong> — Explicitly 64-bit. Use this on all modern Windows 10/11 x64 devices.</li>
+  <li><strong>Procmon64a.exe</strong> — ARM64. Use on Surface Pro X and similar ARM-based devices.</li>
+</ul>
+<div class="warn"><strong>Critical:</strong> Always run ProcMon as Administrator. Without elevation it cannot load its kernel-mode driver (PROCMON24.SYS) and will capture nothing.</div>
+
+<h2 class="sec">2.3 Accepting the EULA (First Launch)</h2>
+<p>On first run ProcMon shows a EULA dialog. For automated or scripted use, bypass it with:</p>
+<div class="code">procmon64.exe /accepteula</div>
+<p>This flag silently accepts the EULA and is required for all non-interactive scenarios.</p>
+
+<h2 class="sec">2.4 Running ProcMon Non-Interactively (Remote / Autopilot Scenarios)</h2>
+<p>For headless devices, Autopilot provisioning, or remote captures via PsExec:</p>
+<div class="code">procmon64.exe /accepteula /backingfile C:\Traces\capture.pml /quiet /minimized</div>
+<ul class="bul">
+  <li><code>/backingfile &lt;path&gt;</code> — Streams events to disk instead of RAM. Essential for long captures.</li>
+  <li><code>/quiet</code> — Suppresses the filter dialog at startup.</li>
+  <li><code>/minimized</code> — Starts minimised in the system tray.</li>
+  <li><code>/terminate</code> — Stops the currently-running ProcMon instance and saves the file (run from a separate command prompt).</li>
+</ul>
+<p>Stop the capture from a separate window:</p>
+<div class="code">procmon64.exe /terminate</div>
+
+<h2 class="sec">2.5 Remote Capture via PsExec</h2>
+<p>Useful when you cannot sit at the device. Copy ProcMon to the remote device first, then:</p>
+<div class="code">psexec.exe -sd \\DEVICE_NAME C:\Tools\procmon64.exe /accepteula /backingfile C:\Traces\cap.pml /quiet /minimized</div>
+<p>To stop it remotely:</p>
+<div class="code">psexec.exe -sd \\DEVICE_NAME C:\Tools\procmon64.exe /terminate</div>
+<div class="tip"><strong>Tip:</strong> Store ProcMon in a consistent path on all managed devices via an Intune Win32 app deployment. Then you can always reach it via PsExec or PowerShell remoting without first copying the binary.</div>
+
+<h2 class="sec">2.6 Verifying the Driver Loaded</h2>
+<p>After starting ProcMon, confirm the driver is running:</p>
+<div class="code">sc query procmon24</div>
+<p>You should see STATE: 4 RUNNING. If not, ProcMon is not capturing kernel events.</p>
+</div>
+
+<!-- CH 3 -->
+<div class="chapter">
+<h1 class="ch">Chapter 3 — Understanding the ProcMon User Interface</h1>
+
+<h2 class="sec">3.1 The Main Event List — Columns Explained</h2>
+<p>Every row in ProcMon's main window is a single OS event. Default columns:</p>
+<table>
+  <tr><th>Column</th><th>What It Shows</th><th>Why It Matters for Intune</th></tr>
+  <tr><td>Time of Day</td><td>Exact time (millisecond precision)</td><td>Correlate events with IME log timestamps</td></tr>
+  <tr><td>Process Name</td><td>Name of the executable causing the event</td><td>Identify which Intune component is acting</td></tr>
+  <tr><td>PID</td><td>Process ID</td><td>Distinguish multiple instances of svchost.exe</td></tr>
+  <tr><td>Operation</td><td>What was done: ReadFile, RegSetValue, TCP Connect, etc.</td><td>Know if it's a file, registry, or network event</td></tr>
+  <tr><td>Path</td><td>File path, registry key, or IP:port</td><td>Find exactly which resource is being accessed</td></tr>
+  <tr><td>Result</td><td>SUCCESS, ACCESS DENIED, NAME NOT FOUND, etc.</td><td>Instantly spot failures</td></tr>
+  <tr><td>Detail</td><td>Data read/written, file size, connection state, etc.</td><td>See the actual values, not just the operation</td></tr>
+</table>
+
+<h2 class="sec">3.2 Toolbar Controls</h2>
+<ul class="bul">
+  <li><strong>Capture toggle (Ctrl+E):</strong> Starts or stops event recording. The icon shows a magnifying glass with a red dot when active.</li>
+  <li><strong>Filter (Ctrl+L):</strong> Opens the filter rule editor.</li>
+  <li><strong>Highlight (Ctrl+H):</strong> Colour-codes matching events without hiding others.</li>
+  <li><strong>Clear (Ctrl+X):</strong> Removes all currently displayed events from the list.</li>
+  <li><strong>Auto-scroll (Ctrl+A):</strong> Keeps the view locked to the latest event.</li>
+  <li><strong>Event type toggles (R, F, N, P, Pr):</strong> Show/hide Registry, File, Network, Process, and Profiling events.</li>
+</ul>
+<div class="tip"><strong>Always disable Profiling events (Pr button)</strong> before capturing. They generate thousands of CPU-sampling rows per second and will drown your capture with noise unrelated to Intune.</div>
+
+<h2 class="sec">3.3 Right-Click Context Menu on Any Event</h2>
+<ul class="bul">
+  <li><strong>Include/Exclude Process Name:</strong> Instantly create a filter rule for this executable.</li>
+  <li><strong>Include/Exclude Path:</strong> Filter on this exact file or registry key.</li>
+  <li><strong>Jump To:</strong> Open the file location in Explorer or the registry key in Regedit.</li>
+  <li><strong>Properties:</strong> Full event details including the complete call stack (the chain of function calls that led to this event).</li>
+  <li><strong>Search Online:</strong> Web-search the path/DLL name — useful for unknown files.</li>
+</ul>
+
+<h2 class="sec">3.4 Process Tree (Ctrl+T)</h2>
+<p>The Process Tree view shows every process captured in the trace, with its parent-child relationships, PID, start time, exit time, and command line. For Intune troubleshooting this is invaluable: you can immediately see that IntuneManagementExtension.exe spawned AgentExecutor.exe, which spawned powershell.exe — and check the exit code of each one.</p>
+
+<h2 class="sec">3.5 Tools Menu — Count Occurrences</h2>
+<p>Go to Tools &gt; Count Occurrences, select the "Result" column, and click Count. ProcMon will summarise how many times each result code appeared. A spike in ACCESS DENIED immediately signals a permissions problem. This is the fastest way to diagnose large captures without manually scrolling through millions of rows.</p>
+
+<h2 class="sec">3.6 Understanding Result Codes</h2>
+<table>
+  <tr><th>Result Code</th><th>Meaning</th><th>Common Intune Cause</th></tr>
+  <tr><td>SUCCESS</td><td>Operation completed as expected</td><td>Normal; no action needed</td></tr>
+  <tr><td>ACCESS DENIED</td><td>Permissions refused</td><td>AppLocker, antivirus, or ACL blocking IMECache or a script</td></tr>
+  <tr><td>NAME NOT FOUND</td><td>File or registry key does not exist</td><td>Missing prerequisite, wrong detection rule path</td></tr>
+  <tr><td>BUFFER OVERFLOW</td><td>Buffer too small; will be retried automatically</td><td>Normal Windows behaviour; safe to ignore</td></tr>
+  <tr><td>SHARING VIOLATION</td><td>File locked by another process</td><td>Antivirus scanning IMECache while IME is extracting</td></tr>
+  <tr><td>PATH NOT FOUND</td><td>Parent directory does not exist</td><td>Installer trying to write to a non-existent temp folder</td></tr>
+  <tr><td>END OF FILE</td><td>Read reached end of file</td><td>Normal for sequential reads; safe to ignore in most cases</td></tr>
+</table>
+</div>
+
+<!-- CH 4 -->
+<div class="chapter">
+<h1 class="ch">Chapter 4 — Mastering ProcMon Filters</h1>
+
+<h2 class="sec">4.1 Why Filtering Is the Most Important Skill</h2>
+<p>ProcMon can capture 50,000 to 500,000 events per minute on an active Intune device. Without filters you are looking at millions of rows of raw OS activity — most of it completely unrelated to your problem. Filters in ProcMon are <strong>non-destructive</strong>: the raw events are always retained in memory or in the backing file. A filter only controls what is <em>displayed</em>. You can add, remove, or change filters at any time without losing any captured data.</p>
+
+<h2 class="sec">4.2 The Filter Dialog (Ctrl+L)</h2>
+<p>Each filter rule is defined by four fields:</p>
+<table>
+  <tr><th>Field</th><th>Options</th><th>Example</th></tr>
+  <tr><td>Column (Category)</td><td>Process Name, Path, Operation, Result, PID, Architecture, Company, and 15+ more</td><td>Process Name</td></tr>
+  <tr><td>Relation</td><td>is, is not, contains, excludes, begins with, ends with, less than, more than</td><td>is</td></tr>
+  <tr><td>Value</td><td>Text or number to match</td><td>IntuneManagementExtension.exe</td></tr>
+  <tr><td>Action</td><td>Include (show) or Exclude (hide)</td><td>Include</td></tr>
+</table>
+<div class="note"><strong>Note:</strong> Rules are evaluated in order. If an event matches ANY Include rule it is shown — unless an Exclude rule also matches it with higher specificity. Build your ruleset starting with broad includes and narrowing with specific excludes.</div>
+
+<h2 class="sec">4.3 Standard Operating Procedure for Every Capture</h2>
+<ul class="bul">
+  <li>1. Open ProcMon as Administrator.</li>
+  <li>2. Press <strong>Ctrl+E</strong> to STOP capture immediately.</li>
+  <li>3. Press <strong>Ctrl+X</strong> to CLEAR all existing events.</li>
+  <li>4. Press <strong>Ctrl+L</strong> to open Filters and set your scenario-specific rules.</li>
+  <li>5. Press <strong>Ctrl+E</strong> to START capture.</li>
+  <li>6. Reproduce the issue (trigger the enrollment, install the app, force a policy sync, etc.).</li>
+  <li>7. Press <strong>Ctrl+E</strong> to STOP capture.</li>
+  <li>8. Analyse the filtered results.</li>
+  <li>9. Press <strong>Ctrl+S</strong> to save the PML file.</li>
+</ul>
+
+<h2 class="sec">4.4 Essential Filter Recipes for Intune</h2>
+
+<h3 class="sub">A — Show ALL Intune Management Extension Activity</h3>
+<div class="code">Process Name | is | IntuneManagementExtension.exe | Include<br>Process Name | is | AgentExecutor.exe             | Include</div>
+
+<h3 class="sub">B — Show ALL Device Enrollment Activity</h3>
+<div class="code">Process Name | is | deviceenroller.exe | Include<br>Process Name | is | omadmclient.exe    | Include<br>Process Name | is | dsregcmd.exe       | Include</div>
+
+<h3 class="sub">C — Find ALL Access Denied Failures</h3>
+<div class="code">Result | contains | ACCESS DENIED | Include</div>
+
+<h3 class="sub">D — Focus on a Specific Registry Path</h3>
+<div class="code">Path | contains | IntuneManagementExtension | Include<br>Path | contains | PolicyManager             | Include<br>Path | contains | Enrollments               | Include</div>
+
+<h3 class="sub">E — Find Event Log Files Being Written (to spot relevant .evtx logs)</h3>
+<div class="code">Path | ends with | .evtx | Include</div>
+
+<h3 class="sub">F — Suppress ProcMon's Own Noise (Always Add These)</h3>
+<div class="code">Process Name | is | Procmon.exe   | Exclude<br>Process Name | is | Procmon64.exe | Exclude</div>
+
+<h2 class="sec">4.5 Saving and Loading Filter Sets</h2>
+<p>After building a filter set for a specific scenario, save it for re-use: <strong>Filter menu &gt; Organize Filters &gt; Save</strong>. You can maintain separate named filter sets for enrollment, app deployment, policy, and compliance issues, and switch between them instantly. Saved filters persist across ProcMon sessions.</p>
+
+<h2 class="sec">4.6 Highlighting Instead of Hiding</h2>
+<p>Pressing Ctrl+H opens the Highlight dialog, which works identically to the Filter dialog but colours matching rows instead of hiding non-matching ones. Use this when you want context around a failure — for example, highlight all ACCESS DENIED events in red while still being able to see what the process was doing immediately before and after.</p>
+</div>
+
+<!-- CH 5 -->
+<div class="chapter">
+<h1 class="ch">Chapter 5 — Troubleshooting Intune Device Enrollment with ProcMon</h1>
+
+<h2 class="sec">5.1 What Happens During Enrollment</h2>
+<p>When a Windows device enrolls into Intune (via Azure AD Join, Hybrid Join, or Group Policy-triggered auto-enrollment), the following sequence occurs:</p>
+<ul class="bul">
+  <li><strong>deviceenroller.exe</strong> registers the device with Azure AD and the Intune MDM service.</li>
+  <li><strong>omadmclient.exe / svchost.exe (DmEnrollmentSvc)</strong> establishes OMA-DM sync sessions to download initial policies.</li>
+  <li><strong>dsregcmd.exe</strong> writes the Azure AD Join state.</li>
+  <li>The Windows <strong>Task Scheduler</strong> (under Microsoft &gt; Windows &gt; EnterpriseMgmt) triggers auto-enrollment every 5 minutes if enrollment is not yet complete.</li>
+</ul>
+<p>Key registry keys written during enrollment:</p>
+<div class="code">HKLM\SOFTWARE\Microsoft\Enrollments\&lt;GUID&gt;<br>HKLM\SOFTWARE\Microsoft\PolicyManager\Providers\&lt;GUID&gt;<br>HKLM\SOFTWARE\Microsoft\EnterpriseResourceManager\Tracked\&lt;GUID&gt;</div>
+
+<h2 class="sec">5.2 Step-by-Step Capture Procedure for Enrollment</h2>
+<ul class="bul">
+  <li><strong>Step 1:</strong> Open ProcMon as Administrator → press Ctrl+E to stop capture → press Ctrl+X to clear.</li>
+  <li><strong>Step 2:</strong> Set filters (see Section 5.3).</li>
+  <li><strong>Step 3:</strong> Press Ctrl+E to start capture.</li>
+  <li><strong>Step 4:</strong> Trigger enrollment by running in an elevated command prompt:</li>
+</ul>
+<div class="code">%SystemRoot%\System32\deviceenroller.exe /c /AutoEnrollMDM</div>
+<ul class="bul">
+  <li><strong>Step 5:</strong> Wait 2–3 minutes for the enrollment cycle to complete.</li>
+  <li><strong>Step 6:</strong> Press Ctrl+E to stop capture. Save the PML file.</li>
+</ul>
+
+<h2 class="sec">5.3 Filters for Enrollment Capture</h2>
+<div class="code">Process Name | is | deviceenroller.exe | Include<br>Process Name | is | omadmclient.exe    | Include<br>Process Name | is | dsregcmd.exe       | Include<br>Result | contains | DENIED             | Include<br>Path   | contains | Enrollments        | Include<br>Path   | contains | DMClient           | Include</div>
+
+<h2 class="sec">5.4 What to Look For</h2>
+<ul class="bul">
+  <li><strong>ACCESS DENIED on Enrollments registry keys:</strong> Permissions problem on the enrollment registry hive — often caused by a stale previous enrollment leaving protected keys behind.</li>
+  <li><strong>NAME NOT FOUND on MDM certificate stores:</strong> The device's MDM certificate is missing or was never created.</li>
+  <li><strong>Network TCP Connect failures to enrollment endpoints:</strong> Firewall or proxy blocking <code>login.microsoftonline.com</code>, <code>enrollment.manage.microsoft.com</code>, or <code>fef.msua06.manage.microsoft.com</code>.</li>
+  <li><strong>deviceenroller.exe Process Exit with no registry write:</strong> The enrollment started but failed before writing the enrollment GUID — look for the error in the Detail column of the last event before Process Exit.</li>
+  <li><strong>Repeated RegQueryValue on old enrollment GUIDs:</strong> Stale enrollment entries in <code>HKLM\SOFTWARE\Microsoft\Enrollments</code> are confusing the enrollment engine.</li>
+</ul>
+
+<h2 class="sec">5.5 Diagnosing Stale Enrollment Entries</h2>
+<p>After a capture, filter for:</p>
+<div class="code">Path | contains | Enrollments | Include<br>Operation | is | RegQueryValue | Include</div>
+<p>If you see deviceenroller.exe querying GUIDs that are no longer valid (cross-check against <code>dsregcmd /status</code> output), those stale keys must be cleaned up before enrollment will succeed.</p>
+
+<h2 class="sec">5.6 Auto-Enrollment Event IDs to Correlate with ProcMon</h2>
+<table>
+  <tr><th>Event ID</th><th>Source</th><th>Meaning</th></tr>
+  <tr><td>75</td><td>DeviceManagement-Enterprise-Diagnostics-Provider</td><td>Auto MDM Enroll: Succeeded</td></tr>
+  <tr><td>76</td><td>DeviceManagement-Enterprise-Diagnostics-Provider</td><td>Auto MDM Enroll: Failed</td></tr>
+  <tr><td>107</td><td>Task Scheduler / Operational</td><td>Auto-enrollment task triggered</td></tr>
+  <tr><td>102</td><td>Task Scheduler / Operational</td><td>Auto-enrollment task completed</td></tr>
+  <tr><td>208</td><td>DeviceManagement-Enterprise-Diagnostics-Provider</td><td>OMA-DM session started</td></tr>
+</table>
+</div>
+
+<!-- CH 6 -->
+<div class="chapter">
+<h1 class="ch">Chapter 6 — Troubleshooting Win32 App Deployment with ProcMon</h1>
+
+<h2 class="sec">6.1 How Win32 App Deployment Works</h2>
+<p>Win32 apps are deployed by the Intune Management Extension (IME). The full process flow is:</p>
+<ul class="bul">
+  <li><strong>1. Check-in:</strong> IntuneManagementExtension.exe polls Intune every hour (or immediately on service restart) for new Win32 app assignments.</li>
+  <li><strong>2. Applicability check:</strong> IME evaluates requirements rules (OS version, architecture, disk space, etc.).</li>
+  <li><strong>3. Download:</strong> The .intunewin package is downloaded and written to <code>C:\Windows\IMECache\&lt;AppGUID&gt;\</code>.</li>
+  <li><strong>4. Decrypt &amp; extract:</strong> IME decrypts and decompresses the package to a working folder.</li>
+  <li><strong>5. Install:</strong> IME runs the install command (usually msiexec.exe, a setup.exe, or a PowerShell script).</li>
+  <li><strong>6. Detect:</strong> IME runs the detection rule (file, registry, or PowerShell-based) to confirm success.</li>
+  <li><strong>7. Report:</strong> IME sends the success or failure status back to the Intune service.</li>
+</ul>
+
+<h2 class="sec">6.2 Key Log Files to Check Alongside ProcMon</h2>
+<div class="code">C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\IntuneManagementExtension.log<br>C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\AppWorkload.log<br>C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\AgentExecutor.log</div>
+<div class="tip"><strong>Tip:</strong> Open these logs in CMTrace.exe (part of the SCCM/Configuration Manager tools) for colour-coded, real-time log viewing. The timestamp format matches ProcMon's, making cross-referencing straightforward.</div>
+
+<h2 class="sec">6.3 Antivirus Exclusions Required</h2>
+<p>Many Win32 app failures are caused by antivirus products (including Windows Defender) scanning and locking files in the IME working directories. Add these paths to your antivirus exclusions policy in Intune:</p>
+<div class="code">C:\Program Files (x86)\Microsoft Intune Management Extension\Content<br>C:\Windows\IMECache</div>
+
+<h2 class="sec">6.4 Filters for Win32 App Deployment</h2>
+<div class="code">Process Name | is | IntuneManagementExtension.exe | Include<br>Process Name | is | msiexec.exe                   | Include<br>Process Name | is | AgentExecutor.exe             | Include<br>Path   | contains | IMECache                      | Include<br>Path   | contains | IntuneManagementExtension     | Include<br>Result | contains | ACCESS DENIED                 | Include<br>Result | contains | SHARING VIOLATION             | Include<br>Result | contains | NAME NOT FOUND                | Include</div>
+
+<h2 class="sec">6.5 What to Look For — Phase by Phase</h2>
+<h3 class="sub">Download Phase</h3>
+<ul class="bul">
+  <li>Look for <strong>WriteFile</strong> events by IntuneManagementExtension.exe to a path containing <code>IMECache</code> — this confirms the package arrived on disk.</li>
+  <li>If no WriteFile events appear, the download never started. Check for network failures (TCP Connect to <code>euap.manage.microsoft.com</code> or Azure Storage CDN endpoints).</li>
+</ul>
+<h3 class="sub">Extraction Phase</h3>
+<ul class="bul">
+  <li>Look for a CreateFile followed by ReadFile on the .intunewin file, then WriteFile operations creating the extracted installer files.</li>
+  <li>A <strong>SHARING VIOLATION</strong> on the .intunewin file at this stage indicates antivirus is holding the file open.</li>
+</ul>
+<h3 class="sub">Install Phase</h3>
+<ul class="bul">
+  <li>Look for a <strong>Process Create</strong> event where IntuneManagementExtension spawns msiexec.exe or your setup.exe.</li>
+  <li>Check the Detail column of the Process Create event — it shows the full command line, including the /i flag and MSI path.</li>
+  <li>Then watch for the child process's file and registry activity.</li>
+</ul>
+<h3 class="sub">Detection Phase</h3>
+<ul class="bul">
+  <li>Look for AgentExecutor.exe spawning powershell.exe to run a .ps1 file from the <code>DetectionScripts</code> folder.</li>
+  <li>The exit code of powershell.exe (visible in the Process Exit event Detail) determines success or failure.</li>
+</ul>
+
+<h2 class="sec">6.6 Antivirus Interference — Exact Pattern in ProcMon</h2>
+<div class="code">MsMpEng.exe | ReadFile | C:\Windows\IMECache\&lt;GUID&gt;\*.intunewin | SUCCESS<br>IntuneManagementExtension.exe | ReadFile | C:\Windows\IMECache\&lt;GUID&gt;\*.intunewin | SHARING VIOLATION</div>
+<p>If you see this pattern, the antivirus is locking the file. Apply the exclusions in Section 6.3 and re-test.</p>
+
+<h2 class="sec">6.7 Win32 App Registry Status Keys</h2>
+<p>After deployment, IME stores the app's deployment status here — useful for verifying ProcMon findings:</p>
+<div class="code">HKLM\SOFTWARE\Microsoft\IntuneManagementExtension\Win32Apps\&lt;UserSID or S-0-0-0-00&gt;\&lt;AppGUID&gt;</div>
+
+<h2 class="sec">6.8 Common Error Codes</h2>
+<table>
+  <tr><th>Hex Code</th><th>Meaning</th><th>What ProcMon Shows</th></tr>
+  <tr><td>0x87D1041C</td><td>Previous install requires reboot</td><td>msiexec exits with code 3010; no error in file system</td></tr>
+  <tr><td>0x80070002</td><td>File not found (download incomplete)</td><td>NAME NOT FOUND on the installer path in IMECache</td></tr>
+  <tr><td>0x87D00324</td><td>App not applicable (requirements not met)</td><td>IME reads requirements registry/file checks and exits early</td></tr>
+  <tr><td>0x80070005</td><td>Access denied</td><td>ACCESS DENIED on the installer file or registry key</td></tr>
+</table>
+</div>
+
+<!-- CH 7 -->
+<div class="chapter">
+<h1 class="ch">Chapter 7 — Tracking PowerShell Script Execution via Intune</h1>
+
+<h2 class="sec">7.1 How Intune Runs PowerShell Scripts</h2>
+<p>PowerShell scripts deployed by Intune are executed by <strong>AgentExecutor.exe</strong>, which is a child process of IntuneManagementExtension.exe. Before execution, IME writes the script file to a temp path under the IME Content folder, then spawns powershell.exe (or pwsh.exe for PowerShell 7+) with the <code>/ExecutionPolicy Bypass</code> flag.</p>
+<ul class="bul">
+  <li><strong>Device-targeted scripts</strong> run under the SYSTEM account.</li>
+  <li><strong>User-targeted scripts</strong> run under the logged-in user account.</li>
+  <li><strong>Detection scripts</strong> run as SYSTEM regardless of targeting, because they are called by the IME service.</li>
+</ul>
+
+<h2 class="sec">7.2 Filters for PowerShell Script Capture</h2>
+<div class="code">Process Name | is | AgentExecutor.exe  | Include<br>Process Name | is | powershell.exe     | Include<br>Process Name | is | pwsh.exe           | Include<br>Path | contains | DetectionScripts    | Include<br>Path | contains | RemediationScripts  | Include<br>Path | contains | AgentExecutor       | Include<br>Result | contains | ACCESS DENIED      | Include</div>
+
+<h2 class="sec">7.3 Reading the Script Execution Flow in ProcMon</h2>
+<ul class="bul">
+  <li><strong>Script written to disk:</strong> WriteFile by AgentExecutor.exe creating a .ps1 file in the DetectionScripts or RemediationScripts folder under the IME Content directory.</li>
+  <li><strong>Output files created:</strong> AgentExecutor creates companion text files (<code>*quotedResultFilePath.txt</code>, <code>*quotedExitCodeFilePath.txt</code>) to capture the script's output.</li>
+  <li><strong>PowerShell spawned:</strong> Process Create event where AgentExecutor.exe is the parent and powershell.exe is the child. Check the Detail column for the full command line.</li>
+  <li><strong>Script runs:</strong> All file and registry events by powershell.exe reflect what the script is doing.</li>
+  <li><strong>Exit code captured:</strong> Process Exit event for powershell.exe. Exit code 0 = success; any non-zero code = failure.</li>
+  <li><strong>Output file read:</strong> AgentExecutor reads the exit code file and result file.</li>
+  <li><strong>Cleanup:</strong> AgentExecutor deletes the temporary script files.</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> Use the Process Tree (Ctrl+T) to visually confirm that powershell.exe was spawned by AgentExecutor.exe and not by something unexpected like a malicious process injection.</div>
+
+<h2 class="sec">7.4 Common PowerShell Script Failures in ProcMon</h2>
+<table>
+  <tr><th>Symptom in ProcMon</th><th>Likely Cause</th><th>Fix</th></tr>
+  <tr><td>No WriteFile for the .ps1 script</td><td>IME did not receive the script assignment</td><td>Check Intune assignment groups; restart IME service</td></tr>
+  <tr><td>Script file written but no powershell.exe Process Create</td><td>AgentExecutor failed to spawn PowerShell</td><td>Check AppLocker / WDAC policies blocking powershell.exe</td></tr>
+  <tr><td>powershell.exe exits with code 1</td><td>Script threw an unhandled error</td><td>Test the script manually; check AgentExecutor.log for the error text</td></tr>
+  <tr><td>ACCESS DENIED on the .ps1 file</td><td>File created with wrong ACLs</td><td>Verify the SYSTEM account has read access to IME Content folder</td></tr>
+  <tr><td>ExecutionPolicy returns Restricted</td><td>GPO overriding the Bypass flag</td><td>Check GPO / Intune policy for ExecutionPolicy; script runs in-process so bypass should still apply</td></tr>
+</table>
+</div>
+
+<!-- CH 8 -->
+<div class="chapter">
+<h1 class="ch">Chapter 8 — Tracking MDM Policy Application and Registry Changes</h1>
+
+<h2 class="sec">8.1 How MDM Policies Write to the Registry</h2>
+<p>When Intune pushes a configuration policy (e.g., disabling USB storage, configuring Windows Update, enforcing BitLocker), the OMA-DM client receives the SyncML payload and writes the values to the PolicyManager registry hive. This happens under the SYSTEM account via svchost.exe hosting the DMEnrollmentSvc service.</p>
+<p>Primary registry hives involved:</p>
+<div class="code">HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\&lt;AreaName&gt;<br>HKLM\SOFTWARE\Microsoft\PolicyManager\Providers\&lt;EnrollmentGUID&gt;\default\Device<br>HKLM\SOFTWARE\Microsoft\PolicyManager\Providers\&lt;EnrollmentGUID&gt;\default\User</div>
+
+<h2 class="sec">8.2 Finding Your Enrollment GUID</h2>
+<p>The enrollment GUID is a key filter value. Find it in three ways:</p>
+<ul class="bul">
+  <li>File system: Browse to <code>C:\ProgramData\Microsoft\DMClient\</code> and note the GUID-named subfolder.</li>
+  <li>Task Scheduler: Open <strong>Microsoft &gt; Windows &gt; EnterpriseMgmt</strong> and note the task folder named with a GUID.</li>
+  <li>Registry: <code>HKLM\SOFTWARE\Microsoft\Enrollments\</code> — look for the subkey where <code>EnrollmentType</code> = 6 (full MDM enrollment).</li>
+</ul>
+
+<h2 class="sec">8.3 Filters for Policy Tracking</h2>
+<div class="code">Path | contains | PolicyManager    | Include<br>Path | contains | DMClient         | Include<br>Operation | is | RegSetValue      | Include<br>Operation | is | RegCreateKey     | Include<br>Operation | is | RegDeleteValue   | Include</div>
+
+<h2 class="sec">8.4 Verifying a Specific Policy Was Applied</h2>
+<p>Example: Confirming a "Disable USB Storage" policy was written to the device.</p>
+<div class="code">Path | contains | RemovableStorageDevices | Include</div>
+<p>Look for a <strong>RegSetValue</strong> event where the Path contains <code>RemovableStorageDevices</code> and the Detail column shows the policy value (e.g., DWORD 1 = Deny). If you see the RegSetValue with SUCCESS, the policy was written. If the Windows feature ignores it, the problem is in enforcement — not delivery.</p>
+
+<h2 class="sec">8.5 Policy Sync Session Identification</h2>
+<p>Force a manual policy sync from Settings &gt; Accounts &gt; Access Work or School &gt; Info &gt; Sync, then look in ProcMon for:</p>
+<ul class="bul">
+  <li>An outbound TCP Connect from svchost.exe to the Intune endpoint (<code>fef.msua06.manage.microsoft.com</code> or similar).</li>
+  <li>Subsequent RegSetValue events as policies are written.</li>
+</ul>
+<p>The absence of any RegSetValue after a sync means the device did not receive any new policy — either nothing changed, or the device is not in the correct assignment group.</p>
+
+<h2 class="sec">8.6 Common Policy Failure Patterns</h2>
+<ul class="bul">
+  <li><strong>Sync starts but no RegSetValue for the expected policy:</strong> The SyncML response contains a conflict (another MDM source is managing the same CSP node). Look for network activity with no corresponding registry write.</li>
+  <li><strong>RegSetValue succeeds but the feature ignores it:</strong> Verify you are writing to the correct hive (HKCU vs HKLM) and the correct policy area name. ProcMon shows the exact path written.</li>
+  <li><strong>RegSetValue fails with ACCESS DENIED:</strong> A Group Policy Object or AppLocker policy is protecting the registry key. Look for Group Policy-applied keys marked with ACL restrictions.</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> Cross-reference ProcMon's RegSetValue timestamps with Event Viewer &gt; Applications and Services &gt; Microsoft &gt; Windows &gt; DeviceManagement-Enterprise-Diagnostic-Provider &gt; Admin &gt; Event ID 813 (CSP policy applied successfully).</div>
+</div>
+
+<!-- CH 9 -->
+<div class="chapter">
+<h1 class="ch">Chapter 9 — MDM Certificate and Compliance Troubleshooting</h1>
+
+<h2 class="sec">9.1 The Intune MDM Client Certificate</h2>
+<p>Every Intune-managed device holds an MDM client certificate in the Windows Personal (MY) certificate store. This certificate authenticates the device to the Intune service during every OMA-DM sync session. The certificate is issued by the Intune MDM certificate authority and has a validity period of typically one year. If it expires, is deleted, or becomes corrupted, the device loses management and stops receiving any policies or apps.</p>
+
+<h2 class="sec">9.2 Watching Certificate Operations in ProcMon</h2>
+<div class="code">Process Name | is | omadmclient.exe        | Include<br>Path | contains | MY\                    | Include<br>Path | contains | Enrollments             | Include<br>Path | contains | IsRecoveryAllowed       | Include</div>
+<p>During a normal sync, you will see omadmclient.exe open the MY store (CryptAcquireContext), select the MDM certificate, and use it for TLS mutual authentication in the outbound TCP connection. This is healthy and expected.</p>
+
+<h2 class="sec">9.3 Diagnosing a Missing or Expired MDM Certificate</h2>
+<p>When the MDM certificate is missing, omadmclient.exe will:</p>
+<ul class="bul">
+  <li>Attempt to open the MY store and search for a certificate matching the MDM enrollment thumbprint.</li>
+  <li>Find nothing — ProcMon shows NAME NOT FOUND for the certificate query.</li>
+  <li>Query <code>HKLM\SOFTWARE\Microsoft\Enrollments\&lt;GUID&gt;\IsRecoveryAllowed</code> to check if automatic recovery is permitted.</li>
+  <li>If recovery is allowed (value = 1): initiate a new outbound TCP connection to <code>enrollment.manage.microsoft.com</code> to re-register and obtain a new certificate.</li>
+  <li>On success: a WriteFile to the MY certificate store creating the new certificate.</li>
+</ul>
+<p>If recovery fails (e.g., firewall blocks the enrollment endpoint), the device is stuck. ProcMon will show repeated failed TCP Connect attempts.</p>
+
+<h2 class="sec">9.4 Compliance Policy Evaluation</h2>
+<p>Compliance policies are evaluated by the Intune service and by local Windows Security Center / Defender status. On the device side, the compliance state is reported by IntuneManagementExtension.exe. To track compliance evaluation:</p>
+<div class="code">Process Name | is | IntuneManagementExtension.exe | Include<br>Path | contains | ComplianceState               | Include<br>Path | contains | DeviceHealth                  | Include<br>Path | contains | ClientHealth                  | Include</div>
+
+<h2 class="sec">9.5 Key Compliance-Related Log</h2>
+<div class="code">C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\ClientHealth.log</div>
+<p>This log tracks sidecar agent health activities and certificate checks. Cross-reference its timestamps with ProcMon registry events for a complete picture.</p>
+</div>
+
+<!-- CH 10 -->
+<div class="chapter">
+<h1 class="ch">Chapter 10 — Windows Autopilot and Enrollment Status Page (ESP)</h1>
+
+<h2 class="sec">10.1 Why ProcMon Is Useful During Autopilot</h2>
+<p>Autopilot provisioning can fail silently or hang indefinitely at the Enrollment Status Page (ESP) while policies or apps are being applied. ProcMon (started early in the process via a provisioning package or a pre-created scheduled task) can reveal exactly which step is blocking progress — something that Event Viewer and Intune logs alone often cannot identify.</p>
+
+<h2 class="sec">10.2 How to Start ProcMon During Autopilot (Before User Login)</h2>
+<p>Because Autopilot runs before a user logs in, ProcMon must run non-interactively. Options:</p>
+<ul class="bul">
+  <li><strong>Option A — Scheduled Task:</strong> Pre-stage a scheduled task via a provisioning package that fires at system startup and launches ProcMon with a backing file.</li>
+  <li><strong>Option B — Win32 App:</strong> Deploy ProcMon via Intune as a Required Win32 app that auto-starts with the /quiet flag during ESP's Device Setup phase.</li>
+</ul>
+<div class="code">procmon64.exe /accepteula /backingfile C:\Traces\autopilot.pml /quiet /minimized</div>
+<p>After provisioning completes or the device is recovered, retrieve the PML file from <code>C:\Traces\autopilot.pml</code> for analysis.</p>
+
+<h2 class="sec">10.3 Filters for ESP Tracking</h2>
+<div class="code">Process Name | is | IntuneManagementExtension.exe | Include<br>Process Name | is | deviceenroller.exe            | Include<br>Process Name | is | CloudExperienceHostBroker.exe | Include<br>Path | contains | EnrollmentStatusTracking       | Include<br>Path | contains | ExpectedPolicies               | Include<br>Path | contains | FirstSync                      | Include<br>Path | contains | IsServerProvisioningDone       | Include<br>Result | contains | ACCESS DENIED                  | Include</div>
+
+<h2 class="sec">10.4 ESP Tracking Registry Keys</h2>
+<p>The ESP tracks progress in:</p>
+<div class="code">HKLM\SOFTWARE\Microsoft\Windows\Autopilot\EnrollmentStatusTracking\ESPTrackingInfo\Diagnostics\ExpectedPolicies<br>HKLM\SOFTWARE\Microsoft\Enrollments\&lt;GUID&gt;\FirstSync\IsServerProvisioningDone</div>
+<p>The ESP waits until <code>IsServerProvisioningDone</code> is set to 1 before advancing. If this key is never written, the ESP hangs forever. ProcMon will show the process repeatedly querying this key. Simultaneously look at the network events — if there are no outbound TCP connections to Intune endpoints during this phase, the device has a connectivity problem (firewall, proxy, no internet).</p>
+
+<h2 class="sec">10.5 The EntDMID Key — Why ESP Hangs on "Identifying"</h2>
+<p>A specific and common ESP hang occurs during the "Identifying" phase. The ESP waits for the <code>EntDMID</code> (Enterprise Device Management ID) value to be written to the FirstSync registry node. Filter for:</p>
+<div class="code">Path | contains | EntDMID | Include</div>
+<p>If you never see a RegSetValue writing EntDMID, the initial MDM sync session has not completed. Check network connectivity to the Intune service endpoint.</p>
+
+<h2 class="sec">10.6 IME Not Starting During ESP — Installation Tracking</h2>
+<p>The Intune Management Extension must be installed during the Device Setup phase of the ESP before apps and scripts can run. Filter for:</p>
+<div class="code">Path | contains | Microsoft Intune Management Extension | Include<br>Operation | is | Process Create | Include</div>
+<p>You should see IntuneManagementExtension.exe's Process Create event within the first few minutes of the Device Setup phase. If it never appears, IME was not assigned as a Required app, or it failed to download.</p>
+</div>
+
+<!-- CH 11 -->
+<div class="chapter">
+<h1 class="ch">Chapter 11 — Boot-Time Logging</h1>
+
+<h2 class="sec">11.1 When to Use Boot Logging</h2>
+<p>Some Intune-related problems only happen during system startup — before a user logs in and before ProcMon can be launched manually. Examples include:</p>
+<ul class="bul">
+  <li>A startup script deployed via Intune that silently fails at boot.</li>
+  <li>Device compliance checks that run at boot before the user signs in.</li>
+  <li>Autopilot provisioning steps that occur in the very early boot phase.</li>
+  <li>Driver-level conflicts affecting the Intune Management Extension service startup.</li>
+</ul>
+<p>Boot Logging solves this by pre-installing ProcMon's kernel driver entry so it begins capturing events before Windows fully starts — from the very first moments of the boot sequence.</p>
+
+<h2 class="sec">11.2 Enabling Boot Logging — Step by Step</h2>
+<ul class="bul">
+  <li><strong>Step 1:</strong> Launch ProcMon as Administrator.</li>
+  <li><strong>Step 2:</strong> Go to <strong>Options &gt; Enable Boot Logging</strong>.</li>
+  <li><strong>Step 3:</strong> ProcMon prompts for the boot log save location. Choose a path on a fixed drive — NOT a USB drive or network path. Example: <code>C:\BootTrace\bootlog.pml</code></li>
+  <li><strong>Step 4:</strong> Click OK. ProcMon installs the driver registry entry (<code>PROCMON24.SYS</code>) as a boot-start driver.</li>
+  <li><strong>Step 5:</strong> Reboot the device. The driver loads and begins capturing immediately.</li>
+  <li><strong>Step 6:</strong> After reboot, launch ProcMon again. It detects the boot log and asks if you want to convert and load it.</li>
+</ul>
+<div class="note"><strong>Note:</strong> Boot logs can be very large — often 2–10 GB before filtering. Ensure the target drive has at least 10 GB of free space before enabling boot logging.</div>
+
+<h2 class="sec">11.3 Filtering a Boot Log</h2>
+<p>Boot logs capture everything from the moment the kernel starts. The volume is extreme. Apply filters immediately after loading:</p>
+<div class="code">Process Name | is | IntuneManagementExtension.exe | Include<br>Process Name | is | deviceenroller.exe            | Include<br>Process Name | is | services.exe                  | Include<br>Process Name | is | svchost.exe                   | Include</div>
+<p>Then further narrow by time range to focus on the startup window where the problem occurs. Use the Date &amp; Time filter column to specify a start and end time.</p>
+
+<h2 class="sec">11.4 Disabling Boot Logging</h2>
+<p>Always disable boot logging after you are done. If you leave it enabled, every reboot will generate a massive log file.</p>
+<ul class="bul">
+  <li>Launch ProcMon as Administrator.</li>
+  <li>Go to <strong>Options &gt; Enable Boot Logging</strong> (the menu item acts as a toggle; click it again to uncheck).</li>
+  <li>Verify that the PROCMON24.SYS boot-start driver registry entry has been removed.</li>
+</ul>
+</div>
+
+<!-- CH 12 -->
+<div class="chapter">
+<h1 class="ch">Chapter 12 — Saving, Analysing &amp; Sharing ProcMon Captures</h1>
+
+<h2 class="sec">12.1 File Formats</h2>
+<table>
+  <tr><th>Format</th><th>Preserves All Events?</th><th>Best Use</th></tr>
+  <tr><td>PML (Process Monitor Log)</td><td>Yes — native binary format</td><td>Always save this first. Share with support teams. Reload for further analysis at any time.</td></tr>
+  <tr><td>CSV</td><td>No — only currently visible (filtered) events</td><td>Import into Excel, Power BI, or scripts for custom analysis.</td></tr>
+  <tr><td>XML</td><td>No — only currently visible events</td><td>Scripted processing; machine-readable structured data.</td></tr>
+</table>
+<div class="warn"><strong>Critical:</strong> Always save a PML file FIRST. CSV and XML only export what is currently visible after filters. If you export CSV before setting filters, you export everything and it will be enormous.</div>
+
+<h2 class="sec">12.2 Using a Backing File to Avoid RAM Exhaustion</h2>
+<p>By default, ProcMon keeps all captured events in RAM. On a busy Intune device this can exhaust memory in under five minutes. <strong>Always use a backing file for any capture lasting more than 30 seconds:</strong></p>
+<ul class="bul">
+  <li><strong>Interactively:</strong> File menu &gt; Backing Files &gt; Use a file on disk — choose a local path.</li>
+  <li><strong>Command line:</strong> Use the <code>/backingfile</code> flag (see Chapter 2).</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> Set a maximum backing file size to prevent disk fill: File &gt; Backing Files &gt; Maximum backing file size. 2 GB is usually enough for a 5-minute Intune troubleshooting capture.</div>
+
+<h2 class="sec">12.3 Compressing PML Files for Transfer</h2>
+<p>PML files compress extremely well — often to 10% of their original size.</p>
+<div class="code">Compress-Archive -Path C:\Traces\capture.pml -DestinationPath C:\Traces\capture.zip</div>
+<p>Or via Windows Explorer: right-click the PML file &gt; Send to &gt; Compressed (zipped) folder.</p>
+
+<h2 class="sec">12.4 Analysing Captures on a Different Machine</h2>
+<p>PML files are self-contained. Copy the PML and the ProcMon executable to any Windows machine and open the PML in ProcMon for analysis. You do NOT need to be on the original device. This means you can send a PML file captured by a remote user to your workstation for analysis — no special viewer needed beyond ProcMon itself.</p>
+
+<h2 class="sec">12.5 Using Tools &gt; Count Occurrences for Fast Triage</h2>
+<p>When given a large capture from a colleague, this is the first thing to do:</p>
+<ul class="bul">
+  <li>Tools menu &gt; Count Occurrences.</li>
+  <li>Set Column to <strong>Result</strong>, click Count.</li>
+  <li>A table shows every unique result code and how many times it occurred.</li>
+  <li>Double-click <strong>ACCESS DENIED</strong> to instantly jump to a filtered view of only those events.</li>
+</ul>
+<p>This is significantly faster than scrolling through millions of rows looking for red entries.</p>
+
+<h2 class="sec">12.6 Integrating ProcMon with Intune Diagnostic Collection</h2>
+<p>Intune's built-in "Collect Diagnostics" device action in the Intune admin center collects log files and event logs but does NOT automatically include a ProcMon trace. To supplement it:</p>
+<ul class="bul">
+  <li>Run ProcMon capture on the device at the time of the issue.</li>
+  <li>Save the PML to <code>C:\Users\Public\Documents\</code> or another accessible path.</li>
+  <li>Trigger Collect Diagnostics from the Intune admin center — it will also collect files from accessible public paths if you specify them.</li>
+  <li>Alternatively, deploy a Win32 app or Remediation script that runs ProcMon and uploads the PML to a blob storage account.</li>
+</ul>
+</div>
+
+<!-- CH 13 -->
+<div class="chapter">
+<h1 class="ch">Chapter 13 — Quick-Reference Filter Cheat Sheet</h1>
+
+<h2 class="sec">Universal Starting Filters (Add to Every Capture)</h2>
+<div class="code">Process Name | is | Procmon.exe   | Exclude<br>Process Name | is | Procmon64.exe | Exclude</div>
+
+<h2 class="sec">Intune Management Extension — All Activity</h2>
+<div class="code">Process Name | is | IntuneManagementExtension.exe | Include<br>Process Name | is | AgentExecutor.exe             | Include</div>
+
+<h2 class="sec">Device Enrollment</h2>
+<div class="code">Process Name | is | deviceenroller.exe | Include<br>Process Name | is | omadmclient.exe    | Include<br>Process Name | is | dsregcmd.exe       | Include<br>Path | contains | Enrollments         | Include<br>Path | contains | DMClient            | Include</div>
+
+<h2 class="sec">Win32 App Installation</h2>
+<div class="code">Process Name | is | IntuneManagementExtension.exe | Include<br>Process Name | is | msiexec.exe                   | Include<br>Path | contains | IMECache                      | Include<br>Result | contains | ACCESS DENIED                 | Include<br>Result | contains | SHARING VIOLATION             | Include</div>
+
+<h2 class="sec">PowerShell Script Execution</h2>
+<div class="code">Process Name | is | AgentExecutor.exe   | Include<br>Process Name | is | powershell.exe      | Include<br>Path | contains | DetectionScripts     | Include<br>Path | contains | RemediationScripts   | Include</div>
+
+<h2 class="sec">MDM Policy Registry Writes</h2>
+<div class="code">Path | contains | PolicyManager       | Include<br>Operation | is | RegSetValue         | Include<br>Operation | is | RegCreateKey        | Include</div>
+
+<h2 class="sec">MDM Certificate Operations</h2>
+<div class="code">Process Name | is | omadmclient.exe     | Include<br>Path | contains | IsRecoveryAllowed    | Include<br>Path | contains | Enrollments          | Include</div>
+
+<h2 class="sec">Autopilot / ESP</h2>
+<div class="code">Path | contains | EnrollmentStatusTracking | Include<br>Path | contains | FirstSync                | Include<br>Path | contains | EntDMID                  | Include<br>Path | contains | IsServerProvisioningDone | Include</div>
+
+<h2 class="sec">Access Denied Hunt (Any Scenario)</h2>
+<div class="code">Result | contains | ACCESS DENIED     | Include<br>Result | contains | SHARING VIOLATION | Include<br>Result | contains | NAME NOT FOUND    | Include</div>
+
+<h2 class="sec">Find Relevant Event Log Files Being Written</h2>
+<div class="code">Path | ends with | .evtx | Include</div>
+
+<h2 class="sec">Keyboard Shortcuts Summary</h2>
+<table>
+  <tr><th>Shortcut</th><th>Action</th></tr>
+  <tr><td>Ctrl+E</td><td>Start / Stop capture</td></tr>
+  <tr><td>Ctrl+X</td><td>Clear current events</td></tr>
+  <tr><td>Ctrl+L</td><td>Open filter dialog</td></tr>
+  <tr><td>Ctrl+H</td><td>Open highlight dialog</td></tr>
+  <tr><td>Ctrl+A</td><td>Toggle auto-scroll</td></tr>
+  <tr><td>Ctrl+T</td><td>Open Process Tree</td></tr>
+  <tr><td>Ctrl+S</td><td>Save capture</td></tr>
+  <tr><td>Ctrl+F</td><td>Find (search event list)</td></tr>
+  <tr><td>Ctrl+B</td><td>Bookmarks</td></tr>
+</table>
+
+<h2 class="sec">The Golden Rule of Every ProcMon Session</h2>
+<div class="tip"><strong>Always follow this sequence:</strong> (1) Open ProcMon as Admin → (2) Stop capture (Ctrl+E) → (3) Clear events (Ctrl+X) → (4) Set filters (Ctrl+L) → (5) Start capture (Ctrl+E) → (6) Reproduce the issue → (7) Stop capture (Ctrl+E) → (8) Analyse → (9) Save PML (Ctrl+S).</div>
+
+<div class="footer-note">
+<p>This guide covers ProcMon v4.x (June 2024 release) on Windows 10/11 with Microsoft Intune. ProcMon is a free tool from Microsoft Sysinternals — download from learn.microsoft.com/en-us/sysinternals/downloads/procmon. All filter syntax is case-insensitive. Always obtain appropriate authorisation before capturing OS-level event data on corporate devices.</p>
+</div>
+</div>
+
+</body>
+</html>
