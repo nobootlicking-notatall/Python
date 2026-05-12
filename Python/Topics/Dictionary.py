@@ -159,3 +159,21 @@ sum = defaultdict(float) # Initializes 'sum' as a defaultdict with a float as th
 for i in transactions: # "i" iterates over the dictionary in "transactions"
     sum[i["category"]] += i["price"] # Adds the value of "price" to the float associated with the key "category". "category" gets added as a key first and the values associated with it gets added later on, without creating a second entry for the same element in "category".
 print(dict(sum)) # Output: {'Electronics': 524.99, 'Books': 25.5}
+
+
+# Using recursive function to convert a nested dictionary into a flattened list
+
+def flatten(data):
+    result = []
+    if isinstance(data, dict):
+        for key,value in data.items():
+            result.append(key)
+            result.extend(flatten(value))
+    elif isinstance(data, (list, tuple, set)):
+        for item in data:
+            result.extend(flatten(item))
+    else:
+        result.append(data)
+    return result
+print(flatten(d2))
+# Output: ['key1', 'value-1', 'key2', 'value-01', 'nested_key1', 'nested_value1', 'nested_value2']
