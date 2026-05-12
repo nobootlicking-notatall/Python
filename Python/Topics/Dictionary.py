@@ -163,6 +163,15 @@ print(dict(sum)) # Output: {'Electronics': 524.99, 'Books': 25.5}
 
 # Using recursive function to convert a nested dictionary into a flattened list
 
+dict1 = {
+    "key1": "value-1",
+    "key2": {
+        "value-01": {
+            "nested_key1": ["nested_value1", "nested_value2"]
+            }
+        }
+}
+
 def flatten(data):
     result = []
     if isinstance(data, dict):
@@ -175,5 +184,5 @@ def flatten(data):
     else:
         result.append(data)
     return result
-print(flatten(d2))
+print(flatten(dict1))
 # Output: ['key1', 'value-1', 'key2', 'value-01', 'nested_key1', 'nested_value1', 'nested_value2']
