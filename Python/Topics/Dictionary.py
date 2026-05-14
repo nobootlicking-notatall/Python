@@ -148,6 +148,10 @@ for ip_entry in raw_logs: # "ip_entry" iterates over the list in "raw_logs"
     ip_address[ip_entry['ip']].append(ip_entry['path']) # Appends the value of "path" to the list associated with the key "ip"
 for ip,p in ip_address.items():
     print(f"{p} is currently accessed in {ip}") # Prints the list associated with the key "ip"
+# ALTERNATIVELY use the below method to print "p" (path) separately
+    for ip,p in ip_address.items():
+    for dir in p:
+        print(f"{dir} is currently accessed by {ip}")
 
 transactions = [
     {"category": "Electronics", "price": 499.99},
