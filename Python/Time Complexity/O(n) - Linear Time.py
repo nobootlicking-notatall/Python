@@ -63,7 +63,24 @@ print(count_items(["abc", "bcd", "abc"]))
 
 # Example 6: Copy a list
 
+import copy
+l1 = [1,2,[3],4]
+l2 = copy.deepcopy(l1) # .deepcopy() creates a complete separate inpedendent copy of the list including all nested items. Usually, the .copy() (Shallow copy) would reference changes to the nested items as well
+print(l1,l2)
+l1[2][0] = 33
+print(l1,l2)
 
+
+################################################################
+
+
+# Example 7: Finding factorial using recursion
+
+def factorial(n):
+    if n == 1:
+        return 1
+    return n * factorial(n-1)
+print(factorial(5))
 
 
 ################################################################
