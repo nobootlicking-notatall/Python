@@ -84,3 +84,51 @@ print(factorial(5))
 
 
 ################################################################
+
+
+# Example 8: Two-pointer technique (Converging)
+
+def palindrome(obj):
+    left, right = 0, len(obj)-1
+    while left < right:
+        if obj[left] != obj[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+print(palindrome("NamaN"))
+
+
+################################################################
+
+
+# Example 9: Sliding window algorithm
+
+def sliding(nums, size):
+    n = len(nums)
+    if size > n:
+        return None
+    window_sum = sum(nums[:size])
+    max_sum = window_sum
+    for i in range(n-size):
+        window_sum = window_sum - nums[i] + nums[i+size]
+        max_sum = max(window_sum, max_sum)
+    return max_sum
+print(sliding([11,22,33,44,55], 2))
+
+
+################################################################
+
+
+def manual(list1):
+    freq_map = {}
+    for item in list1:
+        if item not in freq_map:
+            freq_map[item] = 1
+        elif item in freq_map:
+                freq_map[item] += 1
+    return freq_map
+print(manual(["donu", "ponu", "tonu", "donu"]))
+
+
+################################################################
