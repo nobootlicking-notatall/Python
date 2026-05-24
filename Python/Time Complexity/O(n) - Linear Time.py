@@ -120,6 +120,8 @@ print(sliding([11,22,33,44,55], 2))
 ################################################################
 
 
+# Example 10: Hash Map/Dictionary Construction
+
 def manual(list1):
     freq_map = {}
     for item in list1:
@@ -129,6 +131,58 @@ def manual(list1):
                 freq_map[item] += 1
     return freq_map
 print(manual(["donu", "ponu", "tonu", "donu"]))
+
+
+################################################################
+
+
+# Example 11: Dictionary Comprehension
+
+items = ['apple', 'banana', 'cherry']
+fruits_length = {fruit: len(fruit) for fruit in items}; print(fruits_length)
+
+
+################################################################
+
+
+# Example 12: Grouping Values in Python Dicts
+
+from collections import defaultdict
+list_of_pairs = [('a', 1), ('b', 2), ('c', 3)]
+my_dict = defaultdict(list)
+for k,v in list_of_pairs:
+    my_dict["ok"].append(v)
+print(dict(my_dict))
+
+list_of_pairs = [('a', 1), ('b', 2), ('c', 3)]
+my_dict = {}
+for k,v in list_of_pairs:
+    if "ok" not in my_dict.keys():
+        my_dict["ok"] = []
+    my_dict["ok"].append(v)
+print(dict(my_dict))
+
+
+################################################################
+
+
+# Example 13: Iterating with a 'for' loop
+
+text = "abracadabra"
+freq_dict = {}
+for char in text:
+    freq_dict[char] = freq_dict.get(char, 0) + 1
+print(freq_dict)
+
+
+################################################################
+
+
+# Example 14: Removing Duplicate Elements
+
+items = [1, 2, 2, 3, 1]
+unique_items = list(dict.fromkeys(items))
+print(unique_items)
 
 
 ################################################################
