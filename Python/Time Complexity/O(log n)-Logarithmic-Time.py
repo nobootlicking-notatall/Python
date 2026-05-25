@@ -31,6 +31,14 @@ def count_halves(n):
     return count
 print(count_halves(5))
 
+# Using Recursive Function
+
+def count_halves(n):
+    if n <= 1:
+        return 0
+    return 1 + count_halves(n//2)
+print(count_halves(8))
+
 
 ################################################################
 
@@ -82,6 +90,19 @@ def fast_power(base, exp):
     elif exp % 2 != 0:
         return base * fast_power(base, exp-1)
 print(fast_power(2,6))
+
+# To Handle Negative Exponent
+
+def fast_power(base, exp):
+    if exp == 0:
+        return 1
+    if exp % 2 == 0:
+        half = fast_power(base, exp//2)
+        return half * half
+    elif exp < 0:
+        return 1/fast_power(base, -exp)
+    return base * fast_power(base, exp-1)
+print(fast_power(2, -2))
 
 
 ################################################################

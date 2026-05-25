@@ -186,3 +186,18 @@ print(unique_items)
 
 
 ################################################################
+
+
+# Example 15: Zipping Arrays Parallel Insertion
+
+def add_arrays(l1, l2):
+    result = []
+    for a,b in zip(l1,l2):
+        result.append(a+b)
+    return result
+ex1 = [1,2,3]
+ex2 = [10,20,30]
+print(add_arrays(ex1,ex2))
+
+
+################################################################
