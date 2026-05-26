@@ -106,3 +106,29 @@ print(fast_power(2, -2))
 
 
 ################################################################
+
+
+# Example 5: Jump Search
+
+import math
+
+def jump_search(arr, target):
+    n = len(arr)
+    step = int(math.sqrt(n))
+    prev = 0
+    while arr[min(step,n)-1] < target:
+        prev = step
+        step += int(math.sqrt(n))
+        if prev >= n:
+            return -1
+    for i in range(prev, min(step,n)):
+        if arr[i] == target:
+            return i
+    return -1
+arr = [x for x in range(101) if x%2==0]
+print(jump_search(arr, 2))
+
+
+################################################################
+
+
