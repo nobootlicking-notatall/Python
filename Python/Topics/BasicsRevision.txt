@@ -1,0 +1,1509 @@
+# =============================================================================
+#  PYTHON COMPLETE CHEAT SHEET — Dhruv's Quick Revision Guide
+#  Covers: Strings, Lists, Tuples, Sets, Dicts, Numbers, Built-ins,
+#          Control Flow, Comprehensions, Lambda, Functions, OOP,
+#          Exception Handling, File I/O, requests (API), os & sys
+# =============================================================================
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 0. VARIABLES & DATA TYPES
+# ─────────────────────────────────────────────────────────────────────────────
+
+x        = 10          # int
+y        = 3.14        # float
+name     = "Dhruv"     # str
+flag     = True        # bool
+nothing  = None        # NoneType
+
+# Type checking
+type(x)                # <class 'int'>
+isinstance(x, int)     # True
+isinstance(x, (int, float))  # True — checks multiple types
+
+# Type conversion (casting)
+int("42")              # 42
+float("3.14")          # 3.14
+str(100)               # "100"
+bool(0)                # False  (0, "", [], {}, None → False)
+bool(1)                # True
+list("abc")            # ['a', 'b', 'c']
+tuple([1, 2])          # (1, 2)
+set([1, 1, 2])         # {1, 2}
+
+# Operators
+# Arithmetic: +  -  *  /  //  %  **
+10 // 3    # 3    (floor division)
+10 % 3     # 1    (modulus / remainder)
+2 ** 8     # 256  (power)
+
+# Comparison: ==  !=  >  <  >=  <=
+# Logical:    and  or  not
+# Identity:   is  is not
+# Membership: in  not in
+x is None          # False
+"a" in "abc"       # True
+5 not in [1, 2]    # True
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 1. STRINGS
+# ─────────────────────────────────────────────────────────────────────────────
+
+s = "  Hello, World!  "
+
+# ── Case ──────────────────────────────────────────────────────────────────────
+s.upper()          # "  HELLO, WORLD!  "
+s.lower()          # "  hello, world!  "
+s.title()          # "  Hello, World!  "
+s.capitalize()     # "  hello, world!  " (only first char of string)
+s.swapcase()       # "  hELLO, wORLD!  "
+s.casefold()       # aggressive lowercase (for locale-safe comparison)
+
+# ── Whitespace ────────────────────────────────────────────────────────────────
+s.strip()          # "Hello, World!"     (removes both sides)
+s.lstrip()         # "Hello, World!  "   (left only)
+s.rstrip()         # "  Hello, World!"   (right only)
+s.strip("!")       # strip specific character
+
+# ── Search & Check ────────────────────────────────────────────────────────────
+s.find("World")    # returns index (first occurrence), -1 if not found
+s.rfind("l")       # returns index of LAST occurrence
+s.index("World")   # like find() but raises ValueError if not found
+s.count("l")       # counts occurrences
+s.startswith("  Hello")   # True
+s.endswith("!  ")         # True
+s.startswith(("Hi","He")) # True — check multiple prefixes
+
+# ── Check Content ─────────────────────────────────────────────────────────────
+"abc".isalpha()    # True  — only letters
+"123".isdigit()    # True  — only digits
+"abc123".isalnum() # True  — letters or digits
+"   ".isspace()    # True  — only whitespace
+"HELLO".isupper()  # True
+"hello".islower()  # True
+"Hello World".istitle() # True
+
+# ── Replace & Split ───────────────────────────────────────────────────────────
+"Hello World".replace("World", "Python")   # "Hello Python"
+"Hello World".replace("l", "L", 1)        # "HeLlo World" — max 1 replacement
+
+"a,b,c".split(",")        # ['a', 'b', 'c']
+"a,b,c".split(",", 1)     # ['a', 'b,c'] — max 1 split
+"line1\nline2".splitlines() # ['line1', 'line2']
+",".join(["a", "b", "c"]) # "a,b,c"
+" ".join(["Hello", "World"]) # "Hello World"
+
+# ── Padding & Alignment ───────────────────────────────────────────────────────
+"hi".center(10)         # "    hi    "
+"hi".center(10, "-")    # "----hi----"
+"hi".ljust(10)          # "hi        "
+"hi".rjust(10)          # "        hi"
+"42".zfill(5)           # "00042" — zero-pad left
+
+# ── Formatting ────────────────────────────────────────────────────────────────
+# f-strings (Python 3.6+) — PREFERRED
+name = "Dhruv"; score = 95.678
+f"Name: {name}, Score: {score:.2f}"    # "Name: Dhruv, Score: 95.68"
+f"{score:>10.2f}"                      # right-align in 10 chars
+f"{1000000:,}"                         # "1,000,000"
+f"{0.25:.0%}"                          # "25%"
+
+# .format()
+"Name: {}, Score: {}".format("Dhruv", 95)
+"Name: {name}".format(name="Dhruv")
+
+# % formatting (old style)
+"Hello %s, you scored %d" % ("Dhruv", 95)
+
+# ── Encoding ──────────────────────────────────────────────────────────────────
+"hello".encode("utf-8")        # b'hello'
+b"hello".decode("utf-8")       # "hello"
+
+# ── Slicing ───────────────────────────────────────────────────────────────────
+s = "Hello"
+s[0]       # 'H'
+s[-1]      # 'o'
+s[1:4]     # 'ell'
+s[:3]      # 'Hel'
+s[2:]      # 'llo'
+s[::-1]    # 'olleH'  (reverse)
+s[::2]     # 'Hlo'    (every 2nd char)
+
+# ── Misc ──────────────────────────────────────────────────────────────────────
+len("Hello")           # 5
+"*" * 20               # "********************"
+"ab" in "abc"          # True
+ord("A")               # 65  (character → ASCII)
+chr(65)                # "A" (ASCII → character)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 2. LISTS
+# ─────────────────────────────────────────────────────────────────────────────
+
+lst = [3, 1, 4, 1, 5, 9, 2, 6]
+
+# ── Adding ────────────────────────────────────────────────────────────────────
+lst.append(7)             # adds 7 at end → [..., 7]
+lst.insert(0, 99)         # inserts 99 at index 0
+lst.extend([10, 11])      # adds all items from iterable
+lst + [12, 13]            # creates new list (doesn't mutate)
+
+# ── Removing ──────────────────────────────────────────────────────────────────
+lst.remove(1)             # removes FIRST occurrence of value 1
+lst.pop()                 # removes & returns last item
+lst.pop(0)                # removes & returns item at index 0
+lst.clear()               # empties the list
+del lst[0]                # delete by index
+del lst[1:3]              # delete slice
+
+# ── Searching ─────────────────────────────────────────────────────────────────
+lst.index(5)              # index of first occurrence of 5
+lst.count(1)              # count of 1 in list
+
+# ── Sorting ───────────────────────────────────────────────────────────────────
+lst.sort()                       # in-place ascending
+lst.sort(reverse=True)           # in-place descending
+lst.sort(key=len)                # sort by length (for strings)
+lst.sort(key=lambda x: x[1])    # sort by second element
+sorted(lst)                      # returns NEW sorted list
+sorted(lst, reverse=True)
+sorted(lst, key=lambda x: -x)   # descending with lambda
+lst.reverse()                    # reverses in-place
+list(reversed(lst))              # returns reversed iterator as list
+
+# ── Copying ───────────────────────────────────────────────────────────────────
+lst.copy()                # shallow copy
+lst[:]                    # also a shallow copy
+import copy
+copy.deepcopy(lst)        # deep copy (for nested lists)
+
+# ── Other ─────────────────────────────────────────────────────────────────────
+len(lst)                  # number of items
+min(lst)                  # smallest value
+max(lst)                  # largest value
+sum(lst)                  # sum of all numbers
+lst * 3                   # repeat list 3 times
+
+# ── Slicing (same as strings) ─────────────────────────────────────────────────
+lst[1:4]                  # sublist index 1 to 3
+lst[::-1]                 # reversed copy
+
+# ── Unpacking ─────────────────────────────────────────────────────────────────
+a, b, c = [1, 2, 3]
+first, *rest = [1, 2, 3, 4]      # first=1, rest=[2, 3, 4]
+*start, last = [1, 2, 3, 4]      # start=[1, 2, 3], last=4
+
+# ── List Comprehension ────────────────────────────────────────────────────────
+squares     = [x**2 for x in range(10)]
+evens       = [x for x in range(20) if x % 2 == 0]
+pairs       = [(x, y) for x in [1,2] for y in [3,4]]
+flat        = [num for sublist in [[1,2],[3,4]] for num in sublist]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 3. TUPLES
+# ─────────────────────────────────────────────────────────────────────────────
+
+t = (1, 2, 3, 2, 5)
+
+# Tuples are IMMUTABLE — no add/remove methods
+t.count(2)         # 2  (occurrences of value 2)
+t.index(3)         # 2  (index of value 3)
+len(t)             # 5
+min(t)             # 1
+max(t)             # 5
+sum(t)             # 13
+sorted(t)          # returns a list
+t[1:3]             # (2, 3)  — slicing works same way
+t + (6, 7)         # (1, 2, 3, 2, 5, 6, 7)  — concatenation
+
+# Single element tuple — MUST have trailing comma
+single = (42,)     # without comma: just parentheses, not a tuple
+type((42))         # <class 'int'>
+type((42,))        # <class 'tuple'>
+
+# Unpacking
+a, b, *rest = (1, 2, 3, 4, 5)
+
+# Named tuple — adds field names
+from collections import namedtuple
+Point = namedtuple("Point", ["x", "y"])
+p = Point(3, 4)
+p.x           # 3
+p.y           # 4
+p._asdict()   # OrderedDict([('x', 3), ('y', 4)])
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 4. SETS
+# ─────────────────────────────────────────────────────────────────────────────
+
+s1 = {1, 2, 3, 4}
+s2 = {3, 4, 5, 6}
+
+# ── Adding / Removing ─────────────────────────────────────────────────────────
+s1.add(5)              # adds single element
+s1.update([6, 7, 8])   # adds multiple elements (from any iterable)
+s1.remove(5)           # removes 5; raises KeyError if not found
+s1.discard(99)         # removes 99 if present; NO error if absent
+s1.pop()               # removes & returns arbitrary element
+s1.clear()             # empties the set
+
+# ── Set Operations ────────────────────────────────────────────────────────────
+s1 | s2                # Union          {1,2,3,4,5,6}
+s1.union(s2)           # same as |
+
+s1 & s2                # Intersection   {3,4}
+s1.intersection(s2)    # same as &
+
+s1 - s2                # Difference     {1,2}  (in s1 but not s2)
+s1.difference(s2)      # same as -
+
+s1 ^ s2                # Symmetric diff {1,2,5,6} (in one but not both)
+s1.symmetric_difference(s2)
+
+# ── Subset / Superset ─────────────────────────────────────────────────────────
+{1,2}.issubset({1,2,3})    # True
+{1,2,3}.issuperset({1,2})  # True
+{1,2}.isdisjoint({3,4})    # True (no common elements)
+
+# ── Frozen Set ────────────────────────────────────────────────────────────────
+fs = frozenset([1, 2, 3])  # immutable set — can be used as dict key
+
+# ── Set Comprehension ─────────────────────────────────────────────────────────
+unique_squares = {x**2 for x in range(-5, 6)}
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 5. DICTIONARIES
+# ─────────────────────────────────────────────────────────────────────────────
+
+d = {"name": "Dhruv", "age": 30, "role": "IT Engineer"}
+
+# ── Access ────────────────────────────────────────────────────────────────────
+d["name"]                      # "Dhruv"  — KeyError if missing
+d.get("name")                  # "Dhruv"  — None if missing
+d.get("salary", 0)             # 0        — default if missing
+d.setdefault("city", "Lucknow") # inserts key with default if not present
+
+# ── Adding / Updating ─────────────────────────────────────────────────────────
+d["email"] = "dhruv@example.com"  # add new key
+d["age"] = 31                     # update existing key
+d.update({"age": 32, "city": "Lucknow"})  # merge dict (mutates)
+d.update(age=33)                  # using keyword args
+
+# Python 3.9+ merge operators
+merged = d | {"key": "val"}    # creates new merged dict
+d |= {"key": "val"}            # updates d in place
+
+# ── Removing ──────────────────────────────────────────────────────────────────
+d.pop("age")             # removes & returns value; KeyError if absent
+d.pop("missing", None)   # removes; returns None if absent (safe)
+d.popitem()              # removes & returns last inserted (key, value) pair
+del d["role"]            # delete by key
+d.clear()                # empty the dict
+
+# ── Views (live, reflect changes) ─────────────────────────────────────────────
+d.keys()         # dict_keys(['name', 'age', ...])
+d.values()       # dict_values(['Dhruv', 30, ...])
+d.items()        # dict_items([('name', 'Dhruv'), ...])
+
+list(d.keys())   # convert to list for indexing/slicing
+
+# ── Iterating ─────────────────────────────────────────────────────────────────
+for key in d:
+    print(key, d[key])
+
+for key, val in d.items():
+    print(f"{key} → {val}")
+
+# ── Copying ───────────────────────────────────────────────────────────────────
+d.copy()                    # shallow copy
+import copy
+copy.deepcopy(d)            # deep copy (for nested dicts)
+
+# ── Checking ──────────────────────────────────────────────────────────────────
+"name" in d          # True  — checks keys
+"name" not in d      # False
+len(d)               # number of key-value pairs
+
+# ── Dict Comprehension ────────────────────────────────────────────────────────
+squared  = {x: x**2 for x in range(6)}
+filtered = {k: v for k, v in d.items() if v != "Dhruv"}
+inverted = {v: k for k, v in d.items()}   # swap keys & values
+
+# ── Sorting a Dict ────────────────────────────────────────────────────────────
+sorted(d)                                     # list of sorted keys
+sorted(d.items())                             # list of (key, val) sorted by key
+sorted(d.items(), key=lambda x: x[1])         # sorted by value
+dict(sorted(d.items()))                       # sorted dict
+
+# ── Nested Dict ───────────────────────────────────────────────────────────────
+config = {"db": {"host": "localhost", "port": 5432}}
+config["db"]["host"]    # "localhost"
+
+# ── defaultdict ───────────────────────────────────────────────────────────────
+from collections import defaultdict
+dd = defaultdict(list)    # missing key auto-creates empty list
+dd["users"].append("Alice")
+
+# ── Counter ───────────────────────────────────────────────────────────────────
+from collections import Counter
+Counter("banana")                   # Counter({'a': 3, 'n': 2, 'b': 1})
+Counter([1,2,2,3,3,3])              # Counter({3: 3, 2: 2, 1: 1})
+c = Counter("aab"); c.most_common(1)  # [('a', 2)]
+
+# ── OrderedDict (Python 3.7+ regular dicts preserve insertion order too) ──────
+from collections import OrderedDict
+od = OrderedDict([("b", 2), ("a", 1)])
+od.move_to_end("b")        # move "b" to end
+od.move_to_end("a", last=False)  # move "a" to front
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6. NUMBERS (int & float)
+# ─────────────────────────────────────────────────────────────────────────────
+
+import math
+
+abs(-5)            # 5    — absolute value
+round(3.567, 2)    # 3.57 — round to 2 decimal places
+round(3.5)         # 4
+pow(2, 10)         # 1024 (same as 2**10)
+divmod(10, 3)      # (3, 1) — (quotient, remainder)
+
+math.floor(3.9)    # 3  — round down
+math.ceil(3.1)     # 4  — round up
+math.sqrt(16)      # 4.0
+math.factorial(5)  # 120
+math.log(100, 10)  # 2.0  — log base 10
+math.log2(8)       # 3.0
+math.pi            # 3.14159...
+math.e             # 2.71828...
+math.inf           # infinity
+math.isnan(float("nan"))  # True
+math.isinf(math.inf)      # True
+
+# Bitwise operators
+0b1010 & 0b1100    # AND  → 8  (0b1000)
+0b1010 | 0b1100    # OR   → 14 (0b1110)
+0b1010 ^ 0b1100    # XOR  → 6  (0b0110)
+~0b1010            # NOT  → -11
+0b1010 << 2        # left shift → 40
+0b1010 >> 1        # right shift → 5
+
+# Number bases
+bin(255)           # '0b11111111'
+oct(255)           # '0o377'
+hex(255)           # '0xff'
+int("ff", 16)      # 255 — parse hex string
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 7. BUILT-IN FUNCTIONS (THE ESSENTIALS)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Output / Input ────────────────────────────────────────────────────────────
+print("Hello", "World", sep=", ", end="!\n")
+name = input("Enter your name: ")   # returns string
+
+# ── Iterables ─────────────────────────────────────────────────────────────────
+range(5)            # 0,1,2,3,4
+range(2, 10, 2)     # 2,4,6,8
+list(range(5))      # [0,1,2,3,4]
+
+enumerate(["a","b","c"])                # (0,'a'),(1,'b'),(2,'c')
+enumerate(["a","b","c"], start=1)       # (1,'a'),(2,'b'),(3,'c')
+for i, val in enumerate(["a","b"]):
+    print(i, val)
+
+zip([1,2,3], ["a","b","c"])             # (1,'a'),(2,'b'),(3,'c')
+list(zip([1,2,3], ["a","b","c"]))       # [(1,'a'),(2,'b'),(3,'c')]
+dict(zip(["x","y"], [1, 2]))            # {'x': 1, 'y': 2}
+
+# zip with unequal lengths — stops at shortest
+# zip_longest for equal lengths:
+from itertools import zip_longest
+list(zip_longest([1,2,3], ["a","b"], fillvalue="?"))
+
+# ── map / filter / reduce ─────────────────────────────────────────────────────
+list(map(str, [1, 2, 3]))             # ['1', '2', '3']
+list(map(lambda x: x**2, [1,2,3]))   # [1, 4, 9]
+list(map(lambda x,y: x+y, [1,2],[3,4]))  # [4, 6]
+
+list(filter(None, [0, 1, False, 2, "", 3]))    # [1, 2, 3] — truthy only
+list(filter(lambda x: x > 2, [1,2,3,4]))      # [3, 4]
+
+from functools import reduce
+reduce(lambda x, y: x + y, [1,2,3,4])   # 10 (cumulative sum)
+reduce(lambda x, y: x * y, [1,2,3,4])   # 24 (factorial of 4)
+
+# ── Aggregation ───────────────────────────────────────────────────────────────
+len([1,2,3])                    # 3
+sum([1,2,3])                    # 6
+sum([1,2,3], start=10)          # 16
+min(3, 1, 2)                    # 1
+min([3, 1, 2])                  # 1
+min(["apple","kiwi"], key=len)  # "kiwi" (shortest)
+max([3, 1, 2])                  # 3
+max(["apple","kiwi"], key=len)  # "apple" (longest)
+any([False, 0, 1])              # True  — at least one truthy
+all([1, True, "yes"])           # True  — all truthy
+all([1, True, ""])              # False
+
+# ── Sorting ───────────────────────────────────────────────────────────────────
+sorted([3,1,2])                          # [1,2,3]
+sorted([3,1,2], reverse=True)            # [3,2,1]
+sorted(["banana","apple","cherry"])      # alphabetical
+sorted(["banana","apple"], key=len)      # by length
+sorted([(1,'b'),(2,'a')], key=lambda x: x[1])  # by second element
+reversed([1,2,3])                        # returns iterator, use list()
+
+# ── Object Inspection ─────────────────────────────────────────────────────────
+dir([])           # list all methods/attributes of list
+help(str.upper)   # show documentation
+vars()            # local variable dict
+globals()         # global variable dict
+locals()          # local variable dict
+id(x)             # memory address of object
+hash("hello")     # hash value (for immutable objects)
+
+# ── Misc Built-ins ────────────────────────────────────────────────────────────
+callable(print)           # True — is it callable?
+repr([1,2,3])             # '[1, 2, 3]' — official string representation
+hex(255)                  # '0xff'
+oct(255)                  # '0o377'
+bin(255)                  # '0b11111111'
+format(255, 'b')          # '11111111'
+format(3.14, '.1f')       # '3.1'
+
+# iter / next
+it = iter([1, 2, 3])
+next(it)           # 1
+next(it)           # 2
+next(it, "done")   # "done" when exhausted (no StopIteration)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 8. CONTROL FLOW
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── if / elif / else ─────────────────────────────────────────────────────────
+score = 85
+if score >= 90:
+    grade = "A"
+elif score >= 75:
+    grade = "B"
+else:
+    grade = "C"
+
+# Ternary (one-liner)
+grade = "Pass" if score >= 50 else "Fail"
+
+# match-case (Python 3.10+ — like switch)
+match score:
+    case 100:
+        print("Perfect")
+    case x if x >= 90:
+        print(f"Excellent: {x}")
+    case _:
+        print("Keep trying")
+
+# ── for loop ──────────────────────────────────────────────────────────────────
+for i in range(5):              # 0,1,2,3,4
+    print(i)
+
+for i in range(1, 10, 2):      # 1,3,5,7,9 — start,stop,step
+    print(i)
+
+for char in "Hello":           # iterate string
+    print(char)
+
+for item in [1, 2, 3]:         # iterate list
+    print(item)
+
+for key in {"a": 1, "b": 2}:  # iterate dict keys
+    print(key)
+
+for k, v in {"a": 1}.items(): # iterate dict key-value pairs
+    print(k, v)
+
+for i, val in enumerate(["x","y","z"], start=1):
+    print(i, val)
+
+for a, b in zip([1,2], ["a","b"]):
+    print(a, b)
+
+# Nested for
+for i in range(3):
+    for j in range(3):
+        print(i, j)
+
+# ── for with else ─────────────────────────────────────────────────────────────
+# else block runs only if loop completed WITHOUT break
+for n in [2, 3, 4]:
+    if n % 2 == 0:
+        break
+else:
+    print("No even found")   # won't print (loop broke)
+
+# ── while loop ────────────────────────────────────────────────────────────────
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+
+# Infinite loop with break
+while True:
+    user_input = input("Type 'quit': ")
+    if user_input == "quit":
+        break
+
+# while with else
+count = 0
+while count < 3:
+    count += 1
+else:
+    print("Done!")   # runs when condition becomes False (no break)
+
+# ── break / continue / pass ───────────────────────────────────────────────────
+for i in range(10):
+    if i == 3:
+        continue    # skip 3, keep looping
+    if i == 7:
+        break       # stop at 7
+    print(i)
+
+def placeholder():
+    pass   # no-op; prevents IndentationError in empty blocks
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 9. LAMBDA FUNCTIONS
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Syntax: lambda arguments: expression
+# Single-use anonymous function — no def, no return keyword
+
+add       = lambda x, y: x + y
+add(3, 4)           # 7
+
+square    = lambda x: x ** 2
+square(5)           # 25
+
+is_even   = lambda x: x % 2 == 0
+is_even(4)          # True
+
+full_name = lambda f, l: f"{f} {l}"
+full_name("Dhruv", "Kumar")   # "Dhruv Kumar"
+
+# ── Lambda with sorted ────────────────────────────────────────────────────────
+people = [{"name": "Zara", "age": 25}, {"name": "Alice", "age": 22}]
+sorted(people, key=lambda p: p["age"])          # sort by age
+sorted(people, key=lambda p: p["name"])         # sort by name
+sorted(people, key=lambda p: (-p["age"]))       # descending age
+
+pairs = [(1, 'z'), (3, 'a'), (2, 'm')]
+sorted(pairs, key=lambda x: x[1])              # sort by second element
+
+# ── Lambda with map ───────────────────────────────────────────────────────────
+list(map(lambda x: x * 2, [1, 2, 3]))          # [2, 4, 6]
+list(map(lambda x: x.upper(), ["a","b","c"]))   # ['A', 'B', 'C']
+list(map(lambda x, y: x + y, [1,2],[3,4]))      # [4, 6]
+
+# ── Lambda with filter ────────────────────────────────────────────────────────
+list(filter(lambda x: x > 0, [-1, 0, 1, 2]))   # [1, 2]
+list(filter(lambda x: x % 2 == 0, range(10)))  # [0, 2, 4, 6, 8]
+
+# ── Lambda with reduce ────────────────────────────────────────────────────────
+from functools import reduce
+reduce(lambda x, y: x + y, [1,2,3,4,5])        # 15 (sum)
+reduce(lambda x, y: x if x > y else y, [1,5,3]) # 5 (max)
+
+# ── Lambda inside dict (dispatch table) ───────────────────────────────────────
+ops = {
+    "+": lambda a, b: a + b,
+    "-": lambda a, b: a - b,
+    "*": lambda a, b: a * b,
+    "/": lambda a, b: a / b,
+}
+ops["+"](10, 3)    # 13
+ops["*"](4, 5)     # 20
+
+# ── When NOT to use lambda ────────────────────────────────────────────────────
+# Complex logic → use def (more readable, debuggable)
+# Lambda: short throwaway expressions only
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 10. FUNCTIONS
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Basic ─────────────────────────────────────────────────────────────────────
+def greet(name):
+    """Docstring: explains what function does."""
+    return f"Hello, {name}!"
+
+greet("Dhruv")   # "Hello, Dhruv!"
+
+# ── Default Parameters ────────────────────────────────────────────────────────
+def connect(host="localhost", port=5432):
+    return f"{host}:{port}"
+
+connect()                        # "localhost:5432"
+connect("prod.db.com")           # "prod.db.com:5432"
+connect(port=3306)               # "localhost:3306"
+connect("mydb.com", 3306)        # "mydb.com:3306"
+
+# !! GOTCHA: Never use mutable defaults (list, dict)
+def bad(items=[]):    # BUG — list persists across calls
+    items.append(1)
+    return items
+
+def good(items=None): # CORRECT
+    if items is None:
+        items = []
+    items.append(1)
+    return items
+
+# ── *args (variable positional args) ─────────────────────────────────────────
+def add_all(*args):
+    return sum(args)           # args is a tuple
+
+add_all(1, 2, 3, 4)           # 10
+
+# ── **kwargs (variable keyword args) ─────────────────────────────────────────
+def show_info(**kwargs):
+    for k, v in kwargs.items():
+        print(f"{k}: {v}")     # kwargs is a dict
+
+show_info(name="Dhruv", role="IT")
+
+# ── Combined signature ────────────────────────────────────────────────────────
+def full_func(a, b, *args, key="default", **kwargs):
+    pass
+# Order: regular → *args → keyword-only → **kwargs
+
+# ── Unpacking into function ───────────────────────────────────────────────────
+def add(a, b, c): return a + b + c
+nums = [1, 2, 3]
+add(*nums)          # unpacks list as positional args
+config = {"a": 1, "b": 2, "c": 3}
+add(**config)       # unpacks dict as keyword args
+
+# ── Return multiple values ────────────────────────────────────────────────────
+def min_max(lst):
+    return min(lst), max(lst)   # returns tuple
+
+lo, hi = min_max([3,1,4,1,5])   # unpacking return
+
+# ── Type hints (Python 3.5+) ──────────────────────────────────────────────────
+def greet(name: str, times: int = 1) -> str:
+    return name * times
+
+# ── Closures ──────────────────────────────────────────────────────────────────
+def multiplier(factor):
+    def multiply(n):
+        return n * factor      # "closes over" factor
+    return multiply
+
+double = multiplier(2)
+double(5)    # 10
+triple = multiplier(3)
+triple(5)    # 15
+
+# ── Decorators ────────────────────────────────────────────────────────────────
+def logger(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__}")
+        result = func(*args, **kwargs)
+        print(f"Done")
+        return result
+    return wrapper
+
+@logger
+def say(name):
+    print(f"Hello {name}")
+
+say("Dhruv")    # prints "Calling say", "Hello Dhruv", "Done"
+
+# Built-in decorators:
+# @staticmethod, @classmethod, @property — see OOP section
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 11. COMPREHENSIONS (QUICK REFERENCE)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# List Comprehension
+[expr for item in iterable]
+[expr for item in iterable if condition]
+[expr if condition else other for item in iterable]
+
+# Dict Comprehension
+{k: v for k, v in iterable}
+{k: v for k, v in d.items() if v > 0}
+
+# Set Comprehension
+{expr for item in iterable}
+
+# Generator Expression (lazy — doesn't build in memory)
+gen = (x**2 for x in range(1000000))
+next(gen)        # 0
+sum(gen)         # sum without storing entire list
+list(gen)        # force evaluate all
+
+# Nested comprehension
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+flat   = [n for row in matrix for n in row]        # [1,2,3,4,5,6,7,8,9]
+transposed = [[row[i] for row in matrix] for i in range(3)]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 12. EXCEPTION HANDLING
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Basic ─────────────────────────────────────────────────────────────────────
+try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Can't divide by zero")
+
+# ── Multiple exceptions ───────────────────────────────────────────────────────
+try:
+    x = int(input())
+    y = 10 / x
+except ValueError:
+    print("Not a number")
+except ZeroDivisionError:
+    print("Division by zero")
+except (TypeError, AttributeError):
+    print("Type or attr error")
+except Exception as e:
+    print(f"Unexpected: {e}")   # catch-all
+else:
+    print("No error occurred")  # runs if no exception
+finally:
+    print("Always runs")        # cleanup code
+
+# ── Raising exceptions ────────────────────────────────────────────────────────
+raise ValueError("Invalid value")
+raise TypeError(f"Expected str, got {type(x)}")
+
+# ── Custom exception ─────────────────────────────────────────────────────────
+class APIError(Exception):
+    def __init__(self, status_code, message):
+        self.status_code = status_code
+        super().__init__(f"API {status_code}: {message}")
+
+raise APIError(404, "Not Found")
+
+# ── Common exception types ────────────────────────────────────────────────────
+# ValueError       — invalid value ("abc" as int)
+# TypeError        — wrong type (int + str)
+# KeyError         — dict key not found
+# IndexError       — list index out of range
+# AttributeError   — object has no attribute
+# NameError        — variable not defined
+# ZeroDivisionError
+# FileNotFoundError
+# ImportError / ModuleNotFoundError
+# StopIteration    — iterator exhausted
+# RuntimeError     — general runtime error
+# OSError          — OS-level error
+# PermissionError
+# TimeoutError
+# ConnectionError
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 13. FILE I/O
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Reading ───────────────────────────────────────────────────────────────────
+with open("file.txt", "r", encoding="utf-8") as f:
+    content = f.read()          # entire file as string
+    lines   = f.readlines()     # list of lines (with \n)
+    line    = f.readline()      # one line at a time
+
+# Iterate line by line (memory efficient)
+with open("file.txt", "r") as f:
+    for line in f:
+        print(line.strip())
+
+# ── Writing ───────────────────────────────────────────────────────────────────
+with open("output.txt", "w") as f:    # overwrites
+    f.write("Hello\n")
+    f.writelines(["line1\n", "line2\n"])
+
+with open("output.txt", "a") as f:    # appends
+    f.write("Another line\n")
+
+# ── File modes ────────────────────────────────────────────────────────────────
+# "r"  — read (default)
+# "w"  — write (overwrite)
+# "a"  — append
+# "rb" — read binary
+# "wb" — write binary
+# "r+" — read and write
+# "x"  — create (fails if exists)
+
+# ── JSON ──────────────────────────────────────────────────────────────────────
+import json
+
+data = {"name": "Dhruv", "roles": ["IT", "Dev"]}
+json.dumps(data)                    # dict → JSON string
+json.dumps(data, indent=2)          # pretty print
+json_str = '{"key": "val"}'
+json.loads(json_str)                # JSON string → dict
+
+with open("data.json", "w") as f:
+    json.dump(data, f, indent=2)    # write JSON to file
+
+with open("data.json", "r") as f:
+    loaded = json.load(f)           # read JSON from file
+
+# ── CSV ───────────────────────────────────────────────────────────────────────
+import csv
+
+with open("data.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["name", "age"])
+    writer.writerows([["Dhruv", 30], ["Alice", 25]])
+
+with open("data.csv", "r") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row["name"], row["age"])
+
+# ── os / pathlib ──────────────────────────────────────────────────────────────
+import os
+from pathlib import Path
+
+os.getcwd()                    # current directory
+os.listdir(".")                # list files in directory
+os.path.exists("file.txt")     # does path exist?
+os.path.join("folder", "file.txt")   # safe path join
+os.path.basename("/a/b/c.txt") # "c.txt"
+os.path.dirname("/a/b/c.txt")  # "/a/b"
+os.path.splitext("file.txt")   # ("file", ".txt")
+os.makedirs("new/nested/dir", exist_ok=True)
+os.remove("file.txt")
+os.rename("old.txt", "new.txt")
+
+p = Path("folder/file.txt")
+p.exists()
+p.stem         # "file"
+p.suffix       # ".txt"
+p.parent       # Path("folder")
+p.read_text()
+p.write_text("hello")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 14. OOP — OBJECT ORIENTED PROGRAMMING
+# ─────────────────────────────────────────────────────────────────────────────
+
+class Device:
+    # Class variable (shared by ALL instances)
+    device_type = "Endpoint"
+
+    def __init__(self, name: str, os: str, compliant: bool = False):
+        # Instance variables (unique per instance)
+        self.name      = name
+        self.os        = os
+        self.compliant = compliant
+        self._policy   = None   # _ prefix = private by convention
+
+    # Instance method
+    def check_compliance(self) -> str:
+        status = "Compliant" if self.compliant else "Non-Compliant"
+        return f"{self.name}: {status}"
+
+    # Class method — works on the class, not instance
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(data["name"], data["os"], data.get("compliant", False))
+
+    # Static method — utility, no self or cls
+    @staticmethod
+    def is_valid_os(os_name: str) -> bool:
+        return os_name in ["Windows", "Linux", "macOS"]
+
+    # Property — getter
+    @property
+    def policy(self):
+        return self._policy
+
+    # Property — setter
+    @policy.setter
+    def policy(self, value):
+        if not isinstance(value, str):
+            raise TypeError("Policy must be a string")
+        self._policy = value
+
+    # String representation
+    def __str__(self):
+        return f"Device({self.name}, {self.os})"
+
+    def __repr__(self):
+        return f"Device(name={self.name!r}, os={self.os!r})"
+
+    # Comparison (enable ==)
+    def __eq__(self, other):
+        return isinstance(other, Device) and self.name == other.name
+
+# ── Inheritance ───────────────────────────────────────────────────────────────
+class MobileDevice(Device):
+    def __init__(self, name, os, enrolled=False):
+        super().__init__(name, os)  # call parent __init__
+        self.enrolled = enrolled
+
+    def check_compliance(self):
+        base = super().check_compliance()
+        enrolled_str = "Enrolled" if self.enrolled else "Not Enrolled"
+        return f"{base} | {enrolled_str}"
+
+# ── Usage ─────────────────────────────────────────────────────────────────────
+d = Device("LAPTOP-01", "Windows", compliant=True)
+d.check_compliance()         # "LAPTOP-01: Compliant"
+Device.from_dict({"name": "PC", "os": "Linux"})
+Device.is_valid_os("Windows")
+
+m = MobileDevice("iPhone-01", "iOS", enrolled=True)
+m.check_compliance()
+
+# ── Dunder (magic) methods quick ref ──────────────────────────────────────────
+# __init__     constructor
+# __str__      str(obj) — human readable
+# __repr__     repr(obj) — developer string
+# __len__      len(obj)
+# __eq__       obj == other
+# __lt__       obj < other
+# __add__      obj + other
+# __contains__ item in obj
+# __iter__     iter(obj) — make iterable
+# __next__     next(obj)
+# __enter__    with statement enter
+# __exit__     with statement exit
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 15. ITERTOOLS (POWER TOOLS FOR LOOPS)
+# ─────────────────────────────────────────────────────────────────────────────
+
+import itertools
+
+itertools.chain([1,2], [3,4], [5])       # [1,2,3,4,5] — chain iterables
+itertools.chain.from_iterable([[1,2],[3,4]])  # same, from list of lists
+itertools.product([1,2], [3,4])          # cartesian product [(1,3),(1,4),(2,3),(2,4)]
+itertools.permutations([1,2,3])          # all permutations
+itertools.combinations([1,2,3], 2)       # [(1,2),(1,3),(2,3)]
+itertools.combinations_with_replacement([1,2], 2)
+itertools.groupby(sorted([1,1,2,2,3]), key=lambda x: x)  # group consecutive
+itertools.islice(range(100), 5, 10)      # slice [5:10] of iterable
+itertools.count(start=1, step=2)         # 1, 3, 5, 7, ... (infinite)
+itertools.cycle([1,2,3])                 # 1,2,3,1,2,3,... (infinite)
+itertools.repeat(0, times=5)             # [0,0,0,0,0]
+list(itertools.takewhile(lambda x: x<5, [1,2,3,6,2]))  # [1,2,3]
+list(itertools.dropwhile(lambda x: x<5, [1,2,3,6,2]))  # [6,2]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 16. DATETIME
+# ─────────────────────────────────────────────────────────────────────────────
+
+from datetime import datetime, date, timedelta
+
+now = datetime.now()                   # current local datetime
+today = date.today()                   # current date
+dt = datetime(2024, 1, 15, 10, 30)    # specific datetime
+
+dt.year; dt.month; dt.day             # 2024, 1, 15
+dt.hour; dt.minute; dt.second
+
+dt.strftime("%Y-%m-%d %H:%M:%S")      # "2024-01-15 10:30:00"
+dt.strftime("%d/%m/%Y")               # "15/01/2024"
+datetime.strptime("2024-01-15", "%Y-%m-%d")  # parse string → datetime
+
+# timedelta
+delta = timedelta(days=7, hours=2)
+future = now + delta
+past   = now - timedelta(days=30)
+diff   = datetime(2024,12,31) - datetime(2024,1,1)
+diff.days          # 365
+diff.total_seconds()
+
+# UTC / timezone
+from datetime import timezone
+utc_now = datetime.now(timezone.utc)
+import pytz   # pip install pytz
+ist = pytz.timezone("Asia/Kolkata")
+ist_now = datetime.now(ist)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 17. REGULAR EXPRESSIONS
+# ─────────────────────────────────────────────────────────────────────────────
+
+import re
+
+text = "User dhruv@example.com called 9876543210 on 2024-01-15"
+
+re.search(r"\d+", text)               # first match object
+re.findall(r"\d+", text)              # ['9876543210', '2024', '01', '15']
+re.findall(r"\b[A-Z]\w+", text)       # words starting with uppercase
+re.sub(r"\d{10}", "REDACTED", text)   # replace phone number
+re.split(r"\s+", text)                # split on whitespace
+
+# Match object
+m = re.search(r"(\w+)@(\w+)\.(\w+)", text)
+m.group(0)    # "dhruv@example.com"
+m.group(1)    # "dhruv"
+m.start()     # start index
+m.end()       # end index
+
+# Compile for reuse
+pattern = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
+pattern.findall(text)   # ['2024-01-15']
+
+# Flags
+re.findall(r"dhruv", text, re.IGNORECASE)
+
+# Common patterns
+# \d     digit
+# \D     non-digit
+# \w     word char (letters, digits, _)
+# \W     non-word char
+# \s     whitespace
+# \S     non-whitespace
+# .      any char except newline
+# ^      start of string
+# $      end of string
+# *      0 or more
+# +      1 or more
+# ?      0 or 1
+# {n}    exactly n
+# {n,m}  between n and m
+# [abc]  any of a, b, c
+# [^abc] not a, b, c
+# (...)  group
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 18. PYTHON REQUESTS LIBRARY — API CHEAT SHEET
+# ─────────────────────────────────────────────────────────────────────────────
+
+import requests
+
+BASE_URL = "https://api.example.com"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GET — Retrieve data
+# ═══════════════════════════════════════════════════════════════════════════════
+
+response = requests.get(f"{BASE_URL}/users")
+response = requests.get(
+    f"{BASE_URL}/users",
+    params={"page": 1, "limit": 50, "$filter": "startswith(displayName,'D')"},
+    headers={"Authorization": "Bearer <token>", "Accept": "application/json"},
+    timeout=30   # seconds (ALWAYS set this)
+)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# POST — Create resource
+# ═══════════════════════════════════════════════════════════════════════════════
+
+new_user = {"displayName": "Dhruv", "userPrincipalName": "dhruv@tenant.com"}
+
+response = requests.post(
+    f"{BASE_URL}/users",
+    json=new_user,                            # dict → JSON body + sets Content-Type
+    headers={"Authorization": "Bearer <token>"},
+    timeout=30
+)
+# OR send as form data:
+requests.post(url, data={"key": "value"})     # form-encoded
+requests.post(url, data=raw_bytes)            # raw bytes
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PATCH — Partial update
+# ═══════════════════════════════════════════════════════════════════════════════
+
+response = requests.patch(
+    f"{BASE_URL}/users/user-id-123",
+    json={"jobTitle": "Senior IT Engineer"},
+    headers={"Authorization": "Bearer <token>"},
+    timeout=30
+)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PUT — Full replace
+# ═══════════════════════════════════════════════════════════════════════════════
+
+response = requests.put(
+    f"{BASE_URL}/users/user-id-123",
+    json={"displayName": "Dhruv Kumar", "jobTitle": "IT Engineer"},
+    headers={"Authorization": "Bearer <token>"},
+    timeout=30
+)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DELETE — Remove resource
+# ═══════════════════════════════════════════════════════════════════════════════
+
+response = requests.delete(
+    f"{BASE_URL}/users/user-id-123",
+    headers={"Authorization": "Bearer <token>"},
+    timeout=30
+)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# RESPONSE OBJECT — All properties & methods
+# ═══════════════════════════════════════════════════════════════════════════════
+
+response.status_code          # 200, 201, 204, 400, 401, 403, 404, 500
+response.ok                   # True if status_code < 400
+response.reason               # "OK", "Not Found", "Unauthorized"
+response.url                  # final URL after redirects
+response.headers              # dict of response headers
+response.headers["Content-Type"]
+
+response.text                 # response body as string
+response.content              # response body as bytes
+response.json()               # parse JSON body → dict/list (raises if not JSON)
+
+response.encoding             # detected encoding
+response.elapsed              # timedelta of request duration
+response.elapsed.total_seconds()
+
+response.raise_for_status()   # raises requests.HTTPError for 4xx/5xx
+response.history              # list of redirect responses
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# HEADERS — Common patterns
+# ═══════════════════════════════════════════════════════════════════════════════
+
+headers = {
+    "Authorization": "Bearer <access_token>",  # OAuth 2.0
+    "Authorization": "Basic <base64_creds>",   # Basic auth
+    "Content-Type": "application/json",        # (auto-set with json=)
+    "Accept": "application/json",
+    "User-Agent": "MyApp/1.0",
+    "x-api-key": "<key>",                      # API key header
+    "Ocp-Apim-Subscription-Key": "<key>",      # Azure APIM
+    "ConsistencyLevel": "eventual",            # MS Graph advanced queries
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AUTHENTICATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Basic Auth
+requests.get(url, auth=("username", "password"))
+
+# Bearer Token (manual)
+requests.get(url, headers={"Authorization": f"Bearer {token}"})
+
+# OAuth 2.0 Client Credentials (Microsoft Graph)
+import msal
+
+app = msal.ConfidentialClientApplication(
+    client_id="<CLIENT_ID>",
+    client_credential="<CLIENT_SECRET>",
+    authority="https://login.microsoftonline.com/<TENANT_ID>"
+)
+result = app.acquire_token_for_client(
+    scopes=["https://graph.microsoft.com/.default"]
+)
+access_token = result["access_token"]
+headers = {"Authorization": f"Bearer {access_token}"}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SESSION — Reuse connection & headers
+# ═══════════════════════════════════════════════════════════════════════════════
+
+session = requests.Session()
+session.headers.update({"Authorization": "Bearer <token>"})
+session.headers.update({"Accept": "application/json"})
+
+session.get(f"{BASE_URL}/users")            # headers auto-included
+session.post(f"{BASE_URL}/users", json={})
+session.close()
+
+# Better: context manager (auto-closes)
+with requests.Session() as s:
+    s.headers.update({"Authorization": "Bearer <token>"})
+    response = s.get(f"{BASE_URL}/users")
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PAGINATION — Microsoft Graph OData style
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def get_all_pages(url, headers):
+    all_items = []
+    while url:
+        response = requests.get(url, headers=headers, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+        all_items.extend(data.get("value", []))
+        url = data.get("@odata.nextLink")   # None if last page
+    return all_items
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+import requests
+
+def safe_api_call(url, headers, timeout=30):
+    try:
+        response = requests.get(url, headers=headers, timeout=timeout)
+        response.raise_for_status()   # raises for 4xx/5xx
+        return response.json()
+
+    except requests.exceptions.HTTPError as e:
+        print(f"HTTP Error {response.status_code}: {response.text}")
+    except requests.exceptions.ConnectionError:
+        print("Connection failed — check network/URL")
+    except requests.exceptions.Timeout:
+        print(f"Request timed out after {timeout}s")
+    except requests.exceptions.TooManyRedirects:
+        print("Too many redirects")
+    except requests.exceptions.RequestException as e:
+        print(f"Request error: {e}")   # catch-all
+    return None
+
+# ── HTTP Status Code Reference ────────────────────────────────────────────────
+# 200 OK              — success
+# 201 Created         — POST successful, resource created
+# 204 No Content      — DELETE / PATCH with no body response
+# 400 Bad Request     — malformed request body/params
+# 401 Unauthorized    — missing or invalid token
+# 403 Forbidden       — valid token, no permission
+# 404 Not Found       — resource doesn't exist
+# 405 Method Not Allowed — wrong HTTP method
+# 409 Conflict        — resource already exists
+# 422 Unprocessable Entity — validation error
+# 429 Too Many Requests — rate limited (check Retry-After header)
+# 500 Internal Server Error — server-side bug
+# 503 Service Unavailable — server down/overloaded
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# RATE LIMITING — Retry with backoff
+# ═══════════════════════════════════════════════════════════════════════════════
+
+import time
+
+def api_with_retry(url, headers, max_retries=3):
+    for attempt in range(max_retries):
+        response = requests.get(url, headers=headers, timeout=30)
+        if response.status_code == 429:
+            wait = int(response.headers.get("Retry-After", 2 ** attempt))
+            print(f"Rate limited. Waiting {wait}s...")
+            time.sleep(wait)
+            continue
+        response.raise_for_status()
+        return response.json()
+    raise Exception("Max retries exceeded")
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MICROSOFT GRAPH API — Common Endpoints
+# ═══════════════════════════════════════════════════════════════════════════════
+
+GRAPH = "https://graph.microsoft.com/v1.0"
+
+# Users
+f"{GRAPH}/users"                              # GET: all users
+f"{GRAPH}/users/{{user-id}}"                  # GET/PATCH/DELETE: specific user
+f"{GRAPH}/users?$filter=startswith(displayName,'D')"
+f"{GRAPH}/users?$select=displayName,mail&$top=50"
+
+# Groups
+f"{GRAPH}/groups"
+f"{GRAPH}/groups/{{group-id}}/members"
+
+# Devices (Intune)
+f"{GRAPH}/deviceManagement/managedDevices"
+f"{GRAPH}/deviceManagement/managedDevices?$filter=operatingSystem eq 'Windows'"
+f"{GRAPH}/deviceManagement/managedDevices/{{id}}"
+
+# Device compliance
+f"{GRAPH}/deviceManagement/deviceCompliancePolicies"
+f"{GRAPH}/deviceManagement/deviceCompliancePolicyDeviceStateSummary"
+
+# Sign-in logs
+f"{GRAPH}/auditLogs/signIns?$top=100"
+f"{GRAPH}/auditLogs/directoryAudits"
+
+# App assignments
+f"{GRAPH}/deviceAppManagement/mobileApps"
+f"{GRAPH}/deviceAppManagement/mobileApps/{{id}}/assignments"
+
+# OData query params (append to any endpoint)
+# $filter   — filter results
+# $select   — choose fields
+# $top      — limit results (max 999)
+# $skip     — skip N results
+# $orderby  — sort
+# $expand   — include related entities
+# $count    — include count in response
+# $search   — full-text search (requires ConsistencyLevel: eventual header)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FULL EXAMPLE — Intune Non-Compliant Devices Report
+# ═══════════════════════════════════════════════════════════════════════════════
+
+import requests, msal, csv, json
+from datetime import datetime
+
+# Config
+TENANT_ID     = "your-tenant-id"
+CLIENT_ID     = "your-app-client-id"
+CLIENT_SECRET = "your-client-secret"
+
+def get_token():
+    app = msal.ConfidentialClientApplication(
+        CLIENT_ID, CLIENT_SECRET,
+        authority=f"https://login.microsoftonline.com/{TENANT_ID}"
+    )
+    result = app.acquire_token_for_client(
+        scopes=["https://graph.microsoft.com/.default"]
+    )
+    if "access_token" not in result:
+        raise Exception(f"Token error: {result.get('error_description')}")
+    return result["access_token"]
+
+def get_noncompliant_devices(token):
+    url = (
+        "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices"
+        "?$filter=complianceState eq 'noncompliant'"
+        "&$select=deviceName,userPrincipalName,operatingSystem,complianceState,lastSyncDateTime"
+    )
+    headers = {"Authorization": f"Bearer {token}", "Accept": "application/json"}
+    all_devices = []
+
+    while url:
+        resp = requests.get(url, headers=headers, timeout=30)
+        resp.raise_for_status()
+        data = resp.json()
+        all_devices.extend(data.get("value", []))
+        url = data.get("@odata.nextLink")
+
+    return all_devices
+
+def save_report(devices):
+    filename = f"noncompliant_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    with open(filename, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=devices[0].keys())
+        writer.writeheader()
+        writer.writerows(devices)
+    print(f"Saved {len(devices)} devices to {filename}")
+
+if __name__ == "__main__":
+    token   = get_token()
+    devices = get_noncompliant_devices(token)
+    save_report(devices)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 19. OS & SYS MODULES
+# ─────────────────────────────────────────────────────────────────────────────
+
+import os, sys
+
+# os
+os.getcwd()                          # current working directory
+os.chdir("/path/to/dir")             # change directory
+os.listdir(".")                      # list directory contents
+os.path.exists("file.txt")           # check existence
+os.path.isfile("file.txt")           # is it a file?
+os.path.isdir("folder")              # is it a directory?
+os.makedirs("a/b/c", exist_ok=True)  # create nested dirs
+os.remove("file.txt")                # delete file
+os.rmdir("empty_dir")                # delete empty dir
+os.rename("old.txt", "new.txt")      # rename/move
+os.environ                           # all environment vars (dict-like)
+os.environ.get("PATH", "")           # safe env var read
+os.getenv("HOME")                    # same as above
+
+import subprocess
+result = subprocess.run(["ping", "-c", "1", "google.com"],
+                        capture_output=True, text=True)
+print(result.stdout)
+
+# sys
+sys.argv                             # command line args ['script.py', 'arg1']
+sys.argv[0]                          # script name
+sys.exit(0)                          # exit with code 0 (success)
+sys.exit(1)                          # exit with code 1 (error)
+sys.version                          # Python version string
+sys.path                             # list of import search paths
+sys.path.append("/custom/module/path")
+sys.platform                         # 'linux', 'win32', 'darwin'
+sys.stdin / sys.stdout / sys.stderr  # standard streams
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 20. USEFUL STANDARD LIBRARY MODULES
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── hashlib ───────────────────────────────────────────────────────────────────
+import hashlib
+hashlib.md5(b"hello").hexdigest()
+hashlib.sha256(b"secret").hexdigest()
+
+# ── uuid ──────────────────────────────────────────────────────────────────────
+import uuid
+str(uuid.uuid4())   # "550e8400-e29b-41d4-a716-446655440000"
+
+# ── random ────────────────────────────────────────────────────────────────────
+import random
+random.random()              # float 0.0 – 1.0
+random.randint(1, 100)       # int 1–100 inclusive
+random.choice([1,2,3,4])     # pick one
+random.choices([1,2,3], k=3) # pick k (with replacement)
+random.sample([1,2,3,4,5], 3) # pick k unique (without replacement)
+random.shuffle([1,2,3,4])    # in-place shuffle
+
+# ── time ──────────────────────────────────────────────────────────────────────
+import time
+time.time()          # Unix timestamp (float seconds)
+time.sleep(1)        # pause 1 second
+time.perf_counter()  # high-resolution timer for benchmarking
+
+start = time.perf_counter()
+# ... code to measure ...
+elapsed = time.perf_counter() - start
+print(f"Elapsed: {elapsed:.3f}s")
+
+# ── logging ───────────────────────────────────────────────────────────────────
+import logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+    handlers=[
+        logging.FileHandler("app.log"),
+        logging.StreamHandler()
+    ]
+)
+logging.debug("debug message")
+logging.info("info message")
+logging.warning("warning message")
+logging.error("error message")
+logging.critical("critical message")
+
+# ── collections ───────────────────────────────────────────────────────────────
+from collections import Counter, defaultdict, deque, namedtuple, OrderedDict
+
+deque_obj = deque([1,2,3])
+deque_obj.appendleft(0)    # O(1) prepend
+deque_obj.popleft()        # O(1) pop from left
+deque_obj.rotate(1)        # rotate right
+deque_obj.rotate(-1)       # rotate left
+deque(maxlen=5)            # fixed-size circular buffer
+
+# ─────────────────────────────────────────────────────────────────────────────
+# END OF CHEAT SHEET
+# Revision tip: read once top-to-bottom, then test each section in REPL
+# ─────────────────────────────────────────────────────────────────────────────
