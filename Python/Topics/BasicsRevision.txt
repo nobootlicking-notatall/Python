@@ -170,7 +170,13 @@ del lst[0]                # delete by index
 del lst[1:3]              # delete slice
 
 # ── Searching ─────────────────────────────────────────────────────────────────
+lst.index(element)
 lst.index(5)              # index of first occurrence of 5
+
+lst.index(element, start_index, end_index)
+l1 = [1,1,2,4,5,6,3,6,7,8,9,0,0,1]
+print(l1.index(6, 6, len(l1))) # Output: 7
+
 lst.count(1)              # count of 1 in list
 
 # ── Sorting ───────────────────────────────────────────────────────────────────
