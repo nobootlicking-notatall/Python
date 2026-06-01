@@ -115,6 +115,13 @@ f"{0.25:.0%}"                          # "25%"
 # % formatting (old style)
 "Hello %s, you scored %d" % ("Dhruv", 95)
 
+sentence = "Pythonic Craftsmanship - %s - %d - %f - %x"
+print(sentence % ("PowerShell", 100, 11.11, 0xff))
+
+# new style formatting
+new_style_formatting = "Endless Python {:s}"
+print(new_style_formatting.format("Possibilities"))
+
 # ── Encoding ──────────────────────────────────────────────────────────────────
 "hello".encode("utf-8")        # b'hello'
 b"hello".decode("utf-8")       # "hello"
