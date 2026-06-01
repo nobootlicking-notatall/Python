@@ -112,6 +112,11 @@ f"{0.25:.0%}"                          # "25%"
 "Name: {}, Score: {}".format("Dhruv", 95)
 "Name: {name}".format(name="Dhruv")
 
+%s   # string (or almost anything)
+%d   # integer
+%f   # float
+%x   # hexadecimal integer
+
 # % formatting (old style)
 "Hello %s, you scored %d" % ("Dhruv", 95)
 
