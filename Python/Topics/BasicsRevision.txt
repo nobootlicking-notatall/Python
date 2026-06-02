@@ -212,6 +212,15 @@ a, b, c = [1, 2, 3]
 first, *rest = [1, 2, 3, 4]      # first=1, rest=[2, 3, 4]
 *start, last = [1, 2, 3, 4]      # start=[1, 2, 3], last=4
 
+*args returns a tuple; empty or not
+**kwargs returns a dictionary and only accept values in "key=value" pair
+**kwargs does not work in a flat list; instead, it works in functions and returns the values as a dictionary
+
+def test(a,*args, **kwargs):
+    return a, type(a), args, type(args), kwargs, type(kwargs)
+print(test(1,2,3,4, x=10, y=20))
+Result: (1, <class 'int'>, (2, 3, 4), <class 'tuple'>, {'x': 10, 'y': 20}, <class 'dict'>)
+
 # ── List Comprehension ────────────────────────────────────────────────────────
 squares     = [x**2 for x in range(10)]
 evens       = [x for x in range(20) if x % 2 == 0]
