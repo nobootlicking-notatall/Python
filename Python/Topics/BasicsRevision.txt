@@ -302,6 +302,9 @@ fs = frozenset([1, 2, 3])  # immutable set — can be used as dict key
 
 # ── Set Comprehension ─────────────────────────────────────────────────────────
 unique_squares = {x**2 for x in range(-5, 6)}
+# Generates numbers: range(-5, 6) creates integers from -5 through 5 and iterates through all of them one by one
+# Every single number is squared and is funneled into a set
+# The set automatically drops duplicate values
 
 
 # ─────────────────────────────────────────────────────────────────────────────
