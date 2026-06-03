@@ -276,6 +276,8 @@ s1.remove(5)           # removes 5; raises KeyError if not found
 s1.discard(99)         # removes 99 if present; NO error if absent
 s1.pop()               # removes & returns arbitrary element
 s1.clear()             # empties the set
+s1.difference_update([2,3]) # Removes multiple values; NO error if absent
+s1 -= {7,8}            # Removes multiple values; NO error if absent
 
 # ── Set Operations ────────────────────────────────────────────────────────────
 s1 | s2                # Union          {1,2,3,4,5,6}
