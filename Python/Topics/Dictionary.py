@@ -131,6 +131,19 @@ print(d1.items()) # IMPORTANT: For reference
 d3 = {value: key for key, value in d1.items()} # Swapping keys and values
 
 
+# Dictionary Unpacking
+# --------------------
+
+def create_profile(name, age, role):
+    print(f"Employee: {name} | Age: {age} | Role: {role}")
+
+d1 = {"name": "Dhruv", "age": 22, "role": "IT Engineer"}
+d2 = {"title": "Him/His"}
+
+print(create_profile(**d1))
+# Result: Employee: Dhruv | Age: 22 | Role: IT Engineer
+
+
 # DefaultDict
 # -----------
 
