@@ -63,8 +63,14 @@ print(d1["key2"].keys()) # Prints "x", "y" # Type: dict_keys
 print(d1["key2"].values()) # Prints 11, 22 # Type: dict_values
 print(d1["key2"].items()) # Prints ('x', 11), ('y', 22) # Type: dict_items
 
-# Updating Elements
+# Update Elements
 d1.update(key2 = {"x": "Eleven"}) # Updates "key2" value to 'Eleven'
+
+# Update Key
+d1 = {"name": "Dhruv", "age": 30, "role": "IT Engineer"}
+d1["new_key"] = d1["name"] # d1["new_key"] = d1["old_key"]
+del d1["name"] # Delete the old key hence
+print(d1)
 
 # Adding Elements
 d1["key3"] = "Value Added" # Adds a new key-value pair to the dictionary
