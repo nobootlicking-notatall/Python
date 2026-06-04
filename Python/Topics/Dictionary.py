@@ -67,10 +67,16 @@ print(d1["key2"].items()) # Prints ('x', 11), ('y', 22) # Type: dict_items
 d1.update(key2 = {"x": "Eleven"}) # Updates "key2" value to 'Eleven'
 
 # Update Key
+# Method 1
 d1 = {"name": "Dhruv", "age": 30, "role": "IT Engineer"}
 d1["new_key"] = d1["name"] # d1["new_key"] = d1["old_key"]
 del d1["name"] # Delete the old key hence
 print(d1)
+# Update Key
+# Method 2
+user_profile = {"name": "Alice", "age": 30, "location": "New York"}
+user_profile["city"] = user_profile.pop('location')
+print(user_profile)
 
 # Adding Elements
 d1["key3"] = "Value Added" # Adds a new key-value pair to the dictionary
