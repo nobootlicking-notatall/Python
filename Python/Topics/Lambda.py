@@ -37,7 +37,7 @@ avg = lambda av: sum(av)/len(av); print(avg(num)) # In this method, argument 'av
 # Find Keywords
 l1 = ['a', 'b']
 l2 = ['a']
-check = lambda chk: all(x in chk for x in l2); print(check(l2)) # all() returns True if all elements of 'l2' are present in 'l1', else False. In this, 'x' is iterating through each element in l1 and checking if the passed argument exist in l1 or not.
+check = lambda chk: all(x in l1 for x in chk); print(check(l2)) # all() returns True if all elements of 'l2' are present in 'l1', else False. In this, 'x' is iterating through each element in l1 and checking if the passed argument exist in l1 or not.
 
 check = lambda chk: any(x in chk for x in l2); print(check(l1)) # In this case, 'any()' returns True if any element of 'l2' is present in 'l1', else False. In this, 'x' is iterating through each element in l1 and checking if the passed argument exist in l1 or not.
 
