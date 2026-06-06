@@ -80,6 +80,7 @@ ls = sorted(names, key = lambda l: len(l), reverse=True); print(ls)
 # Sort List
 name_id = ['003-Charlie', '002-Bob', '001-Alice']
 print(sorted(name_id, key = lambda item: item[:4])) # 'item' checks for the first 3 characters of each element in 'name_id'. Use 'reverse = True' to sort in descending order
+sort_name = lambda s: sorted(s[:4]); print(sort_name(name_id))
 
 # Nested List-Tuple Sorting
 servers = [("Web-01", 16), ("DB-01", 64), ("App-01", 32)]
