@@ -38,7 +38,6 @@ avg = lambda av: sum(av)/len(av); print(avg(num)) # In this method, argument 'av
 l1 = ['a', 'b']
 l2 = ['a']
 check = lambda chk: all(x in l1 for x in chk); print(check(l2)) # all() returns True if all elements of 'l2' are present in 'l1', else False. In this, 'x' is iterating through each element in l1 and checking if the passed argument exist in l1 or not.
-add_el = lambda n: sum(n); print(add_el(add)) # Similar and simpler than the above; requires no unpacking
 
 check = lambda chk: any(x in chk for x in l2); print(check(l1)) # In this case, 'any()' returns True if any element of 'l2' is present in 'l1', else False. In this, 'x' is iterating through each element in l1 and checking if the passed argument exist in l1 or not.
 
@@ -52,6 +51,8 @@ add = [1,2,3,4,5,6,7,8,9,10]
 add_el = lambda *nd: sum(nd); print(add_el(*add)) # *nd is used to handle undefined number of arguments. '*add' unpacks the values inside 'add' and passes them to 'nd'. 'nd' stores the values inside 'add' and 'sum' adds them up.
 
 add_el = lambda *args: sum(args); print(add_el(1,2,3,4,5)) # Output: 15 # *args is used to handle undefined number of arguments
+
+add_el = lambda n: sum(n); print(add_el(add)) # Similar and simpler than the above; requires no unpacking
 
 # Count Occurrences
 from collections import Counter
