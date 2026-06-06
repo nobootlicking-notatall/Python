@@ -85,6 +85,7 @@ sort_name = lambda s: sorted(s[:4]); print(sort_name(name_id))
 # Nested List-Tuple Sorting
 servers = [("Web-01", 16), ("DB-01", 64), ("App-01", 32)]
 servers.sort(key = lambda r: r[1]); print(servers) # 'r' iterates through the first element of each tuple of 'servers' and sorts them accordingly
+svr = sorted(servers, key = lambda s: s[1]); print(svr)
 
 # Filter List
 devices = ["UK-01", "US-01", "UK-02", "IN-05"]
