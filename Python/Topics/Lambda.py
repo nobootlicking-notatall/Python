@@ -101,7 +101,6 @@ total = reduce(lambda x,y: x+y, num) # 'x' stores the first element of 'num' and
 print(total)
 
 # Adding <any_number> to a list
-from functools import reduce
 num = [1,2,3,4,5]
 add_num = map(lambda an: an + 5, num); print(list(add_num))
 
