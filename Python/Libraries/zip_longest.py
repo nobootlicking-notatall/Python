@@ -78,3 +78,23 @@ chunks = lambda data,size: (list(zip_longest(*[iter(data)] * 3, fillvalue="Empty
 
 
 #############################################################
+
+
+# Three-Lists Operation
+
+from itertools import zip_longest
+
+nums = [1,2,3]
+alphabets = ["a", "b"]
+special = ["?"]
+for num,alpha,sp in zip_longest(nums,alphabets,special, fillvalue="Empty"):
+    print(f"{num} == {alpha} == {sp}")
+
+# Result
+
+# 1 == a == ?
+# 2 == b == Empty
+# 3 == Empty == Empty
+
+
+#############################################################
